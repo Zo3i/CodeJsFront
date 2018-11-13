@@ -176,10 +176,10 @@ export default {
     this.init();
     //获取随机问题
     var editor = this.editor;
-
+    console.log(this.$route.query.id)
      this.$ajax({
           method: 'post',
-          url: '/getRandomQuestion',
+          url: '/getQuestion/' + this.$route.query.id,
       }).then (res => {
           this.randomQuestion = res.data
           console.oldLog(res)
@@ -266,22 +266,6 @@ html {
 .result{
   color: white;
   background-color: #1f2020
-}
-
-::-webkit-scrollbar {
-  display: block;
-  width: 0.5em;
-  overflow: auto;
-  height: 2em;
-
-}
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(48,49,51, 0.3);
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  box-shadow: inset 0 0 6px rgba(242,242,242, 0.5);
 }
 .task{
   background-color: black;

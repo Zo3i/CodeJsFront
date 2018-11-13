@@ -1,16 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Index from '@/components/index'
+import First from './first'
+import Work from './work'
+
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'Index',
-      component: Index
-    },
+    First,
+    Work
   ]
 })
