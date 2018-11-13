@@ -1,11 +1,22 @@
 <template>
   <div id="app">
     <el-container style="overflow: auto;">
-      <el-header><img src="../static/image/header.png" alt="" width="40px"></el-header>
+      <el-header>
+        <el-row type="flex" justify="left">
+         <el-col :span="22">
+           <div> <img src="../static/image/header.png" alt="" width="40px"></div>
+         </el-col>
+         <el-col :span="2" class='user'>
+           <span>登录</span>
+           <span>·</span>
+           <span>注册</span>
+         </el-col>
+        </el-row>   
+        </el-header>
       <el-main>
         <router-view/>
       </el-main>
-      <el-footer>Copyright © 2018-2020 Powerd By: Jo</el-footer>
+      <el-footer><el-row type="flex" justify="center">Copyright © 2018-2020 Powerd By: Jo</el-row></el-footer>
     </el-container>
   </div>
 </template>
@@ -21,7 +32,6 @@ export default {
   .el-footer {
     background-color: #1f2020;
     color: #efefef;
-    text-align: center;
     line-height: 60px;
     height: 50px;
     font-weight: bold;
@@ -30,8 +40,8 @@ export default {
   .el-header {
     border: solid 1px black;
     width: auto;
-    border-top-color :red;
-    border-top-width: 3px;
+    /* border-top-color :#f300f3;
+    border-top-width: 3px; */
     background-color: black;
   }
 
@@ -40,6 +50,11 @@ export default {
     color: #333;
     text-align: left;
     min-height: calc(100vh - 160px);
+  }
+
+  .user{
+    font-size: 20px;
+    font-weight: lighter;
   }
 
   ::-webkit-scrollbar {

@@ -4,10 +4,11 @@
         <el-row type="flex" justify="center">
          <el-col :span="4">
            <div class="question-simple">
-             <p>Q :)</p>
-            <div class="question-simple-name" v-text="randomQuestion.name">
+            <div class="question-simple-q">
+              <p>Q :)</p>
+              <div class="question-simple-name" v-text="randomQuestion.name"></div>
             </div>
-            <hr style='border-top: 1px solid #3c3c3c;'/>
+            <hr style='border-top: 1px solid #3c3c3c; margin-bottom: 10px;'/>
             <div class="work-button">
               <button @click="go()" style="background-color:#3c7dba;width:80px;border-radius:6px;border-color:#3c7dba;color:#303133;font-size:20px">try</button>
               <button @click="skip()" style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab;font-size:20px">skip</button>
@@ -17,11 +18,14 @@
           </el-col>
           <el-col :span="8">
             <div class="question-des">
-              <p>M :)</p>
-              <div class="question-des-main" v-text="randomQuestion.description">
+              <div class="question-des-body">
+                <p>M :)</p>
+                <div class="question-des-main" v-text="randomQuestion.description"></div>
+              </div> 
+              <hr style='border-top: 1px solid #262729;margin-bottom: 10px;'/>
+              <div class="tip">
+                <p>TIP: 本题<span v-text="randomQuestion.score"></span>分</p>
               </div>
-              <hr style='border-top: 1px solid #262729;'/>
-              <p style="color:#75757f">TIP: 本题<span v-text="randomQuestion.score"></span>分</p>
             </div>
           </el-col>
         </el-row>
@@ -91,17 +95,6 @@ html {
   width: 100%;
   color: aliceblue;
   font-size: 30px;
-  overflow: hidden;
-}
-.question-simple-name {
-  text-align: center;
-  width: 100%;
-  height: 15%;
-  font-size: 22px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-top: 10%; 
 }
 
 .question-des {
@@ -113,17 +106,42 @@ html {
   color:antiquewhite;
 }
 
+.question-simple-q {
+  height: 50%;
+  width: 100%;
+}
+.question-des-body {
+  height: 50%;
+  width: 100%;
+}
+.question-simple-name {
+  text-align: center;
+  width: 100%;
+  height: 80%;
+  font-size: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 30px; 
+}
+
 .question-des-main {
   text-align: center;
   width: 100%;
-  height: 50%;
-  font-size: 18px;
-  margin-top: 5%; 
-  overflow: auto;
+  height: 80%;
+  font-size: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 30px; 
 }
 .work-button{
-  margin-top: 20%;
+  margin-top: 30px;
   text-align: center;
+}
+.tip {
+   margin-top: 30px;
+   color:#75757f
 }
 .el-row {
   margin-bottom: 15px;
