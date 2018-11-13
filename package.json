@@ -14,6 +14,7 @@
     "element-ui": "^2.4.9",
     "nanobar": "^0.4.2",
     "nprogress": "^0.2.0",
+    "unsplash-js": "^4.8.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.1",

@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
 import NProgress from 'NProgress'
 import 'nprogress/nprogress.css'
+const Unsplash = require('unsplash-js').default;
 NProgress.configure({ easing: 'ease', speed: 2000 });
 Vue.prototype.$ajax = axios
 Vue.use(ElementUI);

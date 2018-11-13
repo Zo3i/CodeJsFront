@@ -4,12 +4,12 @@
       <el-header>
         <el-row type="flex" justify="left">
          <el-col :span="22">
-           <div> <img src="../static/image/header.png" alt="" width="40px"></div>
+           <div> <img  @click="home()" src="../static/image/header.png" alt="" width="40px"></div>
          </el-col>
          <el-col :span="2" class='user'>
-           <span>登录</span>
-           <span>·</span>
-           <span>注册</span>
+           <span @click="login"><a  class="login" href="#">登录</a></span>
+           &nbsp;
+           <span @click="regist"><a  class="regist" href="#">注册</a></span>
          </el-col>
         </el-row>   
         </el-header>
@@ -23,7 +23,14 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    home () {
+       this.$router.push('/')
+    },
+    login () {},
+    regist () {}
+  }
 }
 </script>
 
@@ -56,6 +63,22 @@ export default {
     font-size: 20px;
     font-weight: lighter;
   }
+  .login, .regist{
+    background-color: #efefef;
+    color: #000 !important;
+    border: solid 1px black;
+    border-width: 4px;
+    padding: 5px;
+    font-size: 16px;
+  }
+  /* .regist {
+    background-color: #efefef;
+    color: #000 !important;
+    border: solid 1px black;
+    border-width: 4px;
+    padding: 2px;
+    font-size: 16px;
+  } */
 
   ::-webkit-scrollbar {
   display: block;

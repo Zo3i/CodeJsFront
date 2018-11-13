@@ -140,7 +140,7 @@ html {
   text-align: center;
 }
 .tip {
-   margin-top: 30px;
+   margin-top: 26px;
    color:#75757f
 }
 .el-row {
