@@ -29,7 +29,7 @@ Happy Coding.<span style="background-image:url(../../../static/image/Sign_of_the
                 </el-row>
                 <el-row type="flex" justify="center" class="body login-form-item">
                   <el-col :span=12>
-                  <input type="text" name="password" class="password" placeholder="请输入密码"/> 
+                  <input type="password" name="password" class="password" placeholder="请输入密码"/> 
                   </el-col>  
                 </el-row>
                 <el-row type="flex" justify="space-around" class="body login-form-item">
@@ -144,6 +144,7 @@ html {
   font-size: 20px;
   text-align: center;
   height: 40px;
+  color: black;
 }
 #console {
   background-color: black;

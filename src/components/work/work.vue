@@ -84,7 +84,7 @@ export default {
       editor.setOption("extraKeys", {
         // Tab键换成4个空格
         Tab: function(cm) {
-          var spaces = Array(cm.getOption("indentUnit") + 1).join("   ");
+          var spaces = Array(cm.getOption("indentUnit") + 1).join("  ");
           cm.replaceSelection(spaces);
         },
         // F11键切换全屏
