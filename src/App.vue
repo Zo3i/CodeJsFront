@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <el-container style="overflow: auto;">
+    <el-container>
       <el-header>
-        <el-row type="flex" justify="left">
-         <el-col :span="22">
+        <el-row type="flex" :gutter="20" justify="space-between">
+         <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" >
            <div> <img  @click="home()" src="../static/image/header.png" alt="" width="40px"></div>
          </el-col>
-         <el-col :span="2" class='user'>
-           <span @click="login"><a  class="login" href="#">登录</a></span>
+         <el-col :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
+           <span @click.prevent="login()"><a href="#" class="login" >登录</a></span>
            &nbsp;
-           <span @click="regist"><a  class="regist" href="#">注册</a></span>
+           <span @click.prevent="regist()"><a href="#" class="regist" >注册</a></span>
          </el-col>
         </el-row>   
         </el-header>
@@ -28,7 +28,9 @@ export default {
     home () {
        this.$router.push('/')
     },
-    login () {},
+    login () {
+      this.$router.push('/user/login')
+    },
     regist () {}
   }
 }
@@ -59,17 +61,20 @@ export default {
     min-height: calc(100vh - 160px);
   }
 
-  .user{
+  .users{
     font-size: 20px;
     font-weight: lighter;
+    text-align: center;
   }
   .login, .regist{
+    text-align: center;
     background-color: #efefef;
     color: #000 !important;
     border: solid 1px black;
     border-width: 4px;
     padding: 5px;
     font-size: 16px;
+    overflow: hidden;
   }
   /* .regist {
     background-color: #efefef;

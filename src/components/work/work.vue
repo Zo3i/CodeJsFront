@@ -1,6 +1,6 @@
 <template>
     <div>
-            <div class="top">
+            <div class="work-top">
                 <div class="main-left">
                   <p style="font-size: 20px;font-weight: bold;color: whitesmoke">QUESTION: {{randomQuestion.name}}</p>
                   <hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>
@@ -205,8 +205,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+@font-face{
+    font-family: 'Oxygen Mono';
+    src : url('../../../static/font/OxygenMono-Regular.ttf');
+}
 body {
-  font: 14px "Lato","Helvetica Neue","Helvetica",sans-serif;
+  font: 14px "Oxygen Mono","Helvetica Neue","Helvetica",sans-serif;
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -216,7 +220,7 @@ html {
     height: 100%;
 }
 .CodeMirror {
-  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 20px "Oxygen Mono", Helvetica, Arial, sans-serif;
 }
 
 
@@ -253,7 +257,7 @@ html {
   padding: 10px;
   flex-grow: 1;
 }
-.top{
+.work-top{
     display: flex;
 }
 .below {
