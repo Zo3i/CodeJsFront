@@ -4,7 +4,7 @@
          <el-col :xs="12" :sm="12" :md="10" :lg="14" :xl="18">
            <div class="left">
              <div class="image"></div>
-             <div class="des">Hello</div>
+             <div class="des">World</div>
            </div>
          </el-col>
          <el-col :xs="12" :sm="12" :md="14" :lg="10" :xl="6">
@@ -24,17 +24,19 @@ Happy Coding.<span style="background-image:url(../../../static/image/Sign_of_the
                 <p style="font-size: 30px">登录</p>
                 <el-row type="flex" justify="center" class="body login-form-item">
                   <el-col :span=12>
-                  <input type="text" name="user" class="user" placeholder="请输入账号"/> 
+                    <p style="text-align: left">电话:</p>
+                  <input type="text" name="user" class="user" id="mobile" placeholder="请输入手机号"/> 
                   </el-col>  
                 </el-row>
                 <el-row type="flex" justify="center" class="body login-form-item">
                   <el-col :span=12>
-                  <input type="password" name="password" class="password" placeholder="请输入密码"/> 
+                    <p style="text-align: left">密码:</p>
+                  <input type="password" name="password" id="password" class="password" placeholder="请输入密码"/> 
                   </el-col>  
                 </el-row>
                 <el-row type="flex" justify="space-around" class="body login-form-item">
                   <el-col :span=24>
-                  <input type="button" name="login" class="login" value="登录账户"/> 
+                  <input type="button" @click="login()" name="login" class="login" value="登录账户"/> 
                   <input type="button" name="login" class="login" value="忘记密码"/>
                   </el-col> 
                 </el-row>
@@ -57,14 +59,44 @@ export default {
     };
   },
   methods: {
-
+    login() {
+      var mobile = $('#mobile').val()
+      var password = $('#password').val()
+      if(!/^1[34578]\d{9}$/.test(mobile)){
+        floatMessage("手机号不正确!")
+        $(".trigger-info").click()
+      } else {
+        if (password.length <= 5 || password.length >= 18) {
+             floatMessage("密码长度为6-18.")
+             $(".trigger-info").click()
+        } else {
+          this.$ajax({
+            method: 'post',
+            url: '/login',
+            data: {
+              password: this.$md5(password),
+              mobile: mobile
+            }
+          }).then(res => {
+            console.log(res)
+            if (res.status ==200 && res.data != undefined && res.data != null && res.data != '') {
+              floatMessage("Biu,登录成功!")
+              $(".trigger-info").click()
+            } else {
+               floatMessage("登录失败,账号或密码错误!")
+               $(".trigger-info").click()
+            }
+          }).catch(err => {
+           
+          })          
+        }
+      }
+    }
   },
   mounted() {
     $('#console').t({
     speed:50,
     typing:function(elm,chr,left,total){
-      console.log("total"+total)
-      console.log(left)
       $('#s_bar').css({width:((left+1)*400)/total});
     }
 

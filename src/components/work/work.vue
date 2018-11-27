@@ -34,7 +34,7 @@
                       <div class="submit">
                         <div class="check">
                           <button @click="cal()" v-if="cheked" style="background-color:#3c7dba;width:80px;border-radius:6px;border-color:#3c7dba;color:#303133">run</button>
-                          <button v-else style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab">提交</button>
+                          <button @click="save()" v-else  style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab">提交</button>
                         </div>
                       </div>
                 </div>
@@ -169,6 +169,10 @@ export default {
     },
     codeChange() {
       this.cheked = true
+    },
+    save() {
+      var editor = this.editor
+      console.oldLog(editor.getValue())
     }
   },
   mounted() {

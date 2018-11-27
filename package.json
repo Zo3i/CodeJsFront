@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.4.9",
+    "js-md5": "^0.7.3",
     "nanobar": "^0.4.2",
     "nprogress": "^0.2.0",
     "unsplash-js": "^4.8.0",

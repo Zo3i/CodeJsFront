@@ -13,23 +13,31 @@
                  <pre id="console">
 <span id="sign-bar" name="sign-bar" style="display:block;height:10px;width:1px;background-image:linear-gradient(90deg,#67b04b,#67b04b);margin-bottom:-30px"></span>
 <del>欢迎~</del><del>Welcome!</del><del>emmmmmmm</del>欢迎来到,JavaScript代码场!
-<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank">你意想不到的东西!<span style="background-image:url(../../../static/image/Ghost_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span></a>
-在这里发生.<span style="background-image:url(../../../static/image/Yellow_Moon_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span>
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank">来啦小弟!<span style="background-image:url(../../../static/image/Ghost_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span></a>
+Happy Every Day.<span style="background-image:url(../../../static/image/Yellow_Moon_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span>
 欢迎注册!<span style="background-image:url(../../../static/image/Clapping_Hands.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span>
 <span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span></pre>
              </div>
              <div class="login-form">
-               <br/><br/><br/><br/>
+               <br/><br/>
                <div class="login-form-body">
                 <p style="font-size: 30px">注册</p>
                 <el-row type="flex" justify="center" class="body login-form-item">
                   <el-col :span=12>
-                  <input type="text" name="user" class="user" placeholder="请输入账号"/> 
+                  <p style="text-align: left">电话:</p>
+                  <input type="text" name="mobile" class="user" id="mobile" placeholder="请输入手机号"/> 
                   </el-col>  
                 </el-row>
                 <el-row type="flex" justify="center" class="body login-form-item">
                   <el-col :span=12>
-                  <input type="password" name="password" class="password" placeholder="请输入密码"/> 
+                    <p style="text-align: left">名字:</p>
+                  <input type="text" name="name" class="user" id="name" placeholder="你叫啥?"/> 
+                  </el-col>  
+                </el-row>
+                <el-row type="flex" justify="center" class="body login-form-item">
+                  <el-col :span=12>
+                    <p style="text-align: left">密码:</p>
+                  <input type="password" name="password" id="password" class="password" placeholder="请输入密码"/> 
                   </el-col>  
                 </el-row>
                 <el-row type="flex" justify="space-around" class="body login-form-item">
@@ -58,7 +66,42 @@ export default {
   },
   methods: {
     sign() {
+      var name = $('#name').val()
+      var password = $('#password').val()
+      var mobile = $('#mobile').val()
 
+      if(!/^1[34578]\d{9}$/.test(mobile)){
+        floatMessage("手机号不正确!")
+        $(".trigger-info").click()
+      } else {
+        if (name.length <= 0 || name.length >= 20) {
+           floatMessage("名字长度为0-20.")
+           $(".trigger-info").click()
+        } else {
+          if (password.length <= 5 || password.length >= 18) {
+             floatMessage("密码长度为6-18.")
+             $(".trigger-info").click()
+          } else {
+            this.$ajax({
+              method: 'post',
+              url: '/sign',
+              data: {
+                name: name,
+                password: this.$md5(password) ,
+                mobile: mobile
+              }
+            }).then(res => {
+              if (res) {
+                 floatMessage("哎哟,注册成功咯!")
+                 $(".trigger-info").click()
+              }
+            }).catch(err => {
+
+            })
+           
+          }
+        }
+      }
     },
     login() {
       this.$router.push('/user/login')

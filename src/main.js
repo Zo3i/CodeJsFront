@@ -9,6 +9,9 @@ import axios from 'axios'
 import NProgress from 'NProgress'
 import 'nprogress/nprogress.css'
 const Unsplash = require('unsplash-js').default;
+import md5 from 'js-md5';
+
+Vue.prototype.$md5 = md5;
 NProgress.configure({ easing: 'ease', speed: 2000 });
 Vue.prototype.$ajax = axios
 Vue.use(ElementUI);
