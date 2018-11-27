@@ -14,7 +14,7 @@
         </el-row>   
         </el-header>
       <el-main>
-        <router-view/>
+        <router-view :key="$route.name"/>
       </el-main>
       <el-footer><el-row type="flex" justify="center">Copyright © 2018-2020 Powerd By: Jo</el-row></el-footer>
     </el-container>
@@ -24,6 +24,11 @@
 <script>
 export default {
   name: 'App',
+  data() {
+    return {
+
+    }
+  },
   methods: {
     home () {
        this.$router.push('/')
@@ -31,8 +36,11 @@ export default {
     login () {
       this.$router.push('/user/login')
     },
-    regist () {}
-  }
+    regist () {
+      this.$router.push('/user/sign')
+    },
+  },
+
 }
 </script>
 

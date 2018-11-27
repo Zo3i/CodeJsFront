@@ -1,27 +1,27 @@
 <template>
     <div >
       <el-row type="flex" justify="left" class="body">
-         <el-col :xs="12" :sm="12" :md="10" :lg="14" :xl="18">
+         <el-col :xs="12" :sm="12" :md="14" :lg="16" :xl="18">
            <div class="left">
              <div class="image"></div>
              <div class="des">Hello</div>
            </div>
          </el-col>
-         <el-col :xs="12" :sm="12" :md="14" :lg="10" :xl="6">
+         <el-col :xs="12" :sm="12" :md="10" :lg="8" :xl="6">
            <div class="main">
              <div class="top">
                  <pre id="console">
-<span id="s_bar"  name="login-bar" style="display:block;height:10px;width:1px;background-image:linear-gradient(90deg,#67b04b,#67b04b);margin-bottom:-30px"></span>
-<del>欢迎~</del><del>Welcome!</del><del>emmmmmmm</del>Hello There!
-<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank">Learn Java Script Here.<span style="background-image:url(../../../static/image/Ghost_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span></a>
-Happy Learning.<span style="background-image:url(../../../static/image/Yellow_Moon_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span>
-Happy Coding.<span style="background-image:url(../../../static/image/Sign_of_the_Horns_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span>
-########################</pre>
+<span id="sign-bar" name="sign-bar" style="display:block;height:10px;width:1px;background-image:linear-gradient(90deg,#67b04b,#67b04b);margin-bottom:-30px"></span>
+<del>欢迎~</del><del>Welcome!</del><del>emmmmmmm</del>欢迎来到,JavaScript代码场!
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank">你意想不到的东西!<span style="background-image:url(../../../static/image/Ghost_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span></a>
+在这里发生.<span style="background-image:url(../../../static/image/Yellow_Moon_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span>
+欢迎注册!<span style="background-image:url(../../../static/image/Clapping_Hands.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span>
+<span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span><span style="background-image:url(../../../static/image/1f427.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span></pre>
              </div>
              <div class="login-form">
                <br/><br/><br/><br/>
                <div class="login-form-body">
-                <p style="font-size: 30px">登录</p>
+                <p style="font-size: 30px">注册</p>
                 <el-row type="flex" justify="center" class="body login-form-item">
                   <el-col :span=12>
                   <input type="text" name="user" class="user" placeholder="请输入账号"/> 
@@ -34,8 +34,8 @@ Happy Coding.<span style="background-image:url(../../../static/image/Sign_of_the
                 </el-row>
                 <el-row type="flex" justify="space-around" class="body login-form-item">
                   <el-col :span=24>
-                  <input type="button" name="login" class="login" value="登录账户"/> 
-                  <input type="button" name="login" class="login" value="忘记密码"/>
+                  <input type="button" name="login" class="login" @click="sign()" value="注册账户"/> 
+                  <input type="button" name="login" class="login" @click="login()" value="前往登录"/>
                   </el-col> 
                 </el-row>
                </div>
@@ -57,15 +57,18 @@ export default {
     };
   },
   methods: {
+    sign() {
 
+    },
+    login() {
+      this.$router.push('/user/login')
+    }
   },
   mounted() {
     $('#console').t({
     speed:50,
     typing:function(elm,chr,left,total){
-      console.log("total"+total)
-      console.log(left)
-      $('#s_bar').css({width:((left+1)*400)/total});
+      $('#sign-bar').css({width:((left+1)*400)/total});
     }
 
 });
