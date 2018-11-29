@@ -6,10 +6,13 @@
          <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" >
            <div> <img  @click="home()" src="../static/image/header.png" alt="" width="40px"></div>
          </el-col>
-         <el-col :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
+         <el-col  v-if="isLogin" :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
            <span @click.prevent="login()"><a href="#" class="login" >登录</a></span>
            &nbsp;
            <span @click.prevent="regist()"><a href="#" class="regist" >注册</a></span>
+         </el-col>
+         <el-col  else :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
+           嘻嘻嘻已登录!
          </el-col>
         </el-row>   
         </el-header>
@@ -26,7 +29,7 @@ export default {
   name: 'App',
   data() {
     return {
-
+      isLogin: false
     }
   },
   methods: {
@@ -40,6 +43,9 @@ export default {
       this.$router.push('/user/sign')
     },
   },
+  mounted: {
+    
+  }
 
 }
 </script>

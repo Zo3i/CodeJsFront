@@ -92,7 +92,7 @@ export default {
               }
             }).then(res => {
               if (res) {
-                 floatMessage("哎哟,注册成功咯!")
+                 floatMessage(res.data)
                  $(".trigger-info").click()
               }
             }).catch(err => {

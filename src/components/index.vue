@@ -36,6 +36,7 @@
 
 <script>
   import NProgress from 'NProgress'
+  import * as types from '@/store/types'
 export default {
   name: "Index",
   data() {
@@ -63,8 +64,16 @@ export default {
      url: '/getRandomQuestion',
     }).then (res => {
       this.randomQuestion = res.data
-      console.log(res.data)
-    }) 
+    })
+
+    this.$ajax({
+     method: 'get',
+     url: '/getUserInfo',
+    }).then (res => {
+     console.log(res)
+     this.$store.commit(types.USER, res.data)
+    })
+    
   },
   beforeCreate() {
   },

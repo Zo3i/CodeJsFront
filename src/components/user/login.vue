@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
       <el-row type="flex" justify="left" class="body">
          <el-col :xs="12" :sm="12" :md="10" :lg="14" :xl="18">
            <div class="left">
@@ -51,6 +51,7 @@ Happy Coding.<span style="background-image:url(../../../static/image/Sign_of_the
 <script>
   import NProgress from 'NProgress'
   import Unsplash from 'unsplash-js';
+  import * as types from '@/store/types'
 export default {
   name: "Index",
   data() {
@@ -82,6 +83,8 @@ export default {
             if (res.status ==200 && res.data != undefined && res.data != null && res.data != '') {
               floatMessage("Biu,登录成功!")
               $(".trigger-info").click()
+              this.$store.commit(types.LOGIN, res.data.token)
+              setTimeout(this.$router.push('/'), 2000)
             } else {
                floatMessage("登录失败,账号或密码错误!")
                $(".trigger-info").click()
