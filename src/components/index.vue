@@ -65,7 +65,6 @@ export default {
     }).then (res => {
       this.randomQuestion = res.data
     })
-
     this.$ajax({
      method: 'get',
      url: '/getUserInfo',

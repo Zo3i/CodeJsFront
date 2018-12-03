@@ -6,14 +6,15 @@
          <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" >
            <div> <img  @click="home()" src="../static/image/header.png" alt="" width="40px"></div>
          </el-col>
-         <el-col  v-if="isLogin" :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
+         <el-col  v-if="isLogin"  :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
+          {{user.name}} <img  @click="home()" :src="faceImage" alt="" width="50px" height="50">
+         </el-col>
+         <el-col v-else :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
            <span @click.prevent="login()"><a href="#" class="login" >登录</a></span>
            &nbsp;
            <span @click.prevent="regist()"><a href="#" class="regist" >注册</a></span>
          </el-col>
-         <el-col  else :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
-           嘻嘻嘻已登录!
-         </el-col>
+         
         </el-row>   
         </el-header>
       <el-main>
@@ -29,7 +30,9 @@ export default {
   name: 'App',
   data() {
     return {
-      isLogin: false
+      isLogin: false,
+      user: {},
+      faceImage: ""
     }
   },
   methods: {
@@ -43,8 +46,14 @@ export default {
       this.$router.push('/user/sign')
     },
   },
-  mounted: {
-    
+  mounted() {
+    console.log(JSON.parse(localStorage.user))
+    if (localStorage.user) {
+      this.user = JSON.parse(localStorage.user)
+      this.isLogin = true
+      this.faceImage = '../static/image/face/' + Math.floor(Math.random() * 29) + ".png"
+      console.log(this.faceImage)
+    }
   }
 
 }

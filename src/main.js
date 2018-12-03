@@ -50,13 +50,14 @@ axios.interceptors.response.use(
           break
         case 500:
           err.message = '服务器端出错'
+          console.log(err.response)
           if (
-            err.response.data.message === 'Token 错误!' ||
+            err.response.data.message === 'Header参数有误' ||
             err.response.data.message === '请重新登录!'
           ) {
             store.commit(types.LOGOUT)
             router.replace({
-              path: '/Login',
+              path: '/user/login',
               query: { redirect: router.currentRoute.fullPath }
             })
           }
