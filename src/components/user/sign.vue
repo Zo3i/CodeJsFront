@@ -1,4 +1,4 @@
-<template>
+<template :key="key">
     <div >
       <el-row type="flex" justify="left" class="body">
          <el-col :xs="12" :sm="12" :md="14" :lg="16" :xl="18">
@@ -61,7 +61,8 @@ export default {
   name: "Index",
   data() {
     return {
-      imgUrl :""
+      imgUrl :"",
+      key: ""
     };
   },
   methods: {
@@ -108,6 +109,7 @@ export default {
     }
   },
   mounted() {
+    this.key = Math.random() 
     $('#console').t({
     speed:50,
     typing:function(elm,chr,left,total){

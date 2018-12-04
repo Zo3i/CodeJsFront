@@ -6,5 +6,6 @@ Vue.use(Router)
 
 export default {
     path: '/user/login',
-    component: Login
+    component: Login,
+    meta: { keepAlive: false },
   }

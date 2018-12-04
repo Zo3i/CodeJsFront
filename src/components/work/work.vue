@@ -28,7 +28,7 @@
                       <ol ref="task">
                         <li v-for="task in tasks" :key = task.id>
                           {{task.task}}
-                          <hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>
+                          <hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 20px;'/>
                         </li>
                       </ol>
                       <div class="submit">

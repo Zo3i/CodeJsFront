@@ -6,19 +6,31 @@
          <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" >
            <div> <img  @click="home()" src="../static/image/header.png" alt="" width="40px"></div>
          </el-col>
-         <el-col  v-if="isLogin"  :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
-          {{user.name}} <img  @click="home()" :src="faceImage" alt="" width="50px" height="50">
+         <el-col  v-if="GLOBAL.isLogin"  :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
+           {{user.name}}
+          <el-dropdown trigger="click"  size="medium" placement="bottom">
+            <span class="el-dropdown-link">
+              <img  @click="home()" :src="faceImage" alt="" width="50px" height="50">
+            </span>
+            <el-dropdown-menu slot="dropdown" >
+              <el-dropdown-item >个人中心</el-dropdown-item>
+              <el-dropdown-item>留言板</el-dropdown-item>
+              <el-dropdown-item @click.native="logout()">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+          &nbsp;&nbsp;&nbsp;
          </el-col>
          <el-col v-else :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
            <span @click.prevent="login()"><a href="#" class="login" >登录</a></span>
            &nbsp;
            <span @click.prevent="regist()"><a href="#" class="regist" >注册</a></span>
+           &nbsp;&nbsp;&nbsp;
          </el-col>
          
         </el-row>   
         </el-header>
       <el-main>
-        <router-view :key="$route.name"/>
+        <router-view key="key" />
       </el-main>
       <el-footer><el-row type="flex" justify="center">Copyright © 2018-2020 Powerd By: Jo</el-row></el-footer>
     </el-container>
@@ -26,13 +38,13 @@
 </template>
 
 <script>
+import * as types from '@/store/types'
 export default {
   name: 'App',
   data() {
     return {
-      isLogin: false,
       user: {},
-      faceImage: ""
+      faceImage: "",
     }
   },
   methods: {
@@ -45,14 +57,33 @@ export default {
     regist () {
       this.$router.push('/user/sign')
     },
+    logout () {
+      this.$store.commit(types.LOGOUT)
+      this.GLOBAL.isLogin = false
+      console.log(this.GLOBAL.isLogin)
+      this.$router.push('/user/login')
+    }
   },
   mounted() {
-    console.log(JSON.parse(localStorage.user))
-    if (localStorage.user) {
+  },
+  watch: {
+    '$route':function(to,from){
+        console.log("路由")
+        // location.reload()
+        this.$forceUpdate();//强制重新绘制
+    }
+  },
+  created() {
+    console.log(1)
+    if (localStorage.user.indexOf("name") != -1) {
       this.user = JSON.parse(localStorage.user)
       this.isLogin = true
       this.faceImage = '../static/image/face/' + Math.floor(Math.random() * 29) + ".png"
-      console.log(this.faceImage)
+    }
+  },
+  computed: {
+    key() {
+      return this.$route.name !== undefined? this.$route.name + new Date(): this.$route + new Date()
     }
   }
 
@@ -87,7 +118,7 @@ export default {
   .users{
     font-size: 20px;
     font-weight: lighter;
-    text-align: center;
+    text-align: right;
   }
   .login, .regist{
     text-align: center;

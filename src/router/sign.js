@@ -6,5 +6,7 @@ Vue.use(Router)
 
 export default {
     path: '/user/sign',
-    component: Sign
+    component: Sign,
+    name: "登录",
+    meta: { keepAlive: false },
   }

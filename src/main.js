@@ -12,8 +12,10 @@ const Unsplash = require('unsplash-js').default;
 import store from './store/store';
 import * as types from './store/types'
 import md5 from 'js-md5';
+import global from './components/util/Global'
 
 
+Vue.prototype.GLOBAL = global
 Vue.prototype.$md5 = md5;
 NProgress.configure({ easing: 'ease', speed: 2000 });
 Vue.prototype.$ajax = axios
@@ -102,6 +104,7 @@ axios.interceptors.request.use(
 
 // 页面刷新时，重新赋值token
 if (window.localStorage.getItem('token')) {
+  console.log("flush")
   store.commit(types.LOGIN, window.localStorage.getItem('token'))
 }
 
@@ -120,7 +123,6 @@ axios.interceptors.request.use(
 
 
 router.beforeEach((to, from, next) => {
-
   NProgress.start();
   NProgress.set(1)
   NProgress.inc()

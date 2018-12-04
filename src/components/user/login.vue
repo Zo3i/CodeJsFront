@@ -1,6 +1,6 @@
-<template>
+<template :key="key">
     <div>
-      <el-row type="flex" justify="left" class="body">
+      <el-row type="flex" justify="left" class="body" >
          <el-col :xs="12" :sm="12" :md="10" :lg="14" :xl="18">
            <div class="left">
              <div class="image"></div>
@@ -10,8 +10,8 @@
          <el-col :xs="12" :sm="12" :md="14" :lg="10" :xl="6">
            <div class="main">
              <div class="top">
-                 <pre id="console">
-<span id="s_bar"  name="login-bar" style="display:block;height:10px;width:1px;background-image:linear-gradient(90deg,#67b04b,#67b04b);margin-bottom:-30px"></span>
+                 <pre id="console" key="2333">
+<span  id="s_bar"  name="login-bar" style="display:block;height:10px;width:1px;background-image:linear-gradient(90deg,#67b04b,#67b04b);margin-bottom:-30px"></span>
 <del>欢迎~</del><del>Welcome!</del><del>emmmmmmm</del>Hello There!
 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank">Learn Java Script Here.<span style="background-image:url(../../../static/image/Ghost_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span></a>
 Happy Learning.<span style="background-image:url(../../../static/image/Yellow_Moon_Emoji.png);background-size:cover;display:inline-block;height:40px;width:40px;"></span>
@@ -56,7 +56,8 @@ export default {
   name: "Index",
   data() {
     return {
-      imgUrl :""
+      imgUrl :"",
+      key: ""
     };
   },
   methods: {
@@ -85,6 +86,8 @@ export default {
               $(".trigger-info").click()
               this.$store.commit(types.LOGIN, res.data.token)
               setTimeout(this.$router.push('/'), 2000)
+              this.GLOBAL.isLogin = true
+              console.log(this.GLOBAL.isLogin)
             } else {
                floatMessage("登录失败,账号或密码错误!")
                $(".trigger-info").click()
@@ -97,6 +100,7 @@ export default {
     }
   },
   mounted() {
+    this.key = Math.random() 
     $('#console').t({
     speed:50,
     typing:function(elm,chr,left,total){
