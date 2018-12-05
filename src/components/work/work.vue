@@ -33,8 +33,8 @@
                       </ol>
                       <div class="submit">
                         <div class="check">
-                          <button @click="cal()" v-if="cheked" style="background-color:#3c7dba;width:80px;border-radius:6px;border-color:#3c7dba;color:#303133">run</button>
-                          <button @click="save()" v-else  style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab">提交</button>
+                          <button v-show="cheked" @click="cal()"  style="background-color:#3c7dba;width:80px;border-radius:6px;border-color:#3c7dba;color:#303133">检查</button>
+                          <button  v-show="!cheked"  @click="save()" style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab">提交</button>
                         </div>
                       </div>
                 </div>
@@ -57,7 +57,8 @@ export default {
       flag: true,
       cheked: true,
       right: 0,
-      submitPay:""
+      submitPay:"",
+      user: {}
     };
   },
   methods: {
@@ -100,6 +101,24 @@ export default {
         that.codeChange()
       })
     },
+    save() {
+      var editor = this.editor
+      console.oldLog("提交")
+      var answer = editor.getValue()
+      this.$ajax({
+          method: 'post',
+          url: '/saveAnswer',
+          data: {
+            questionId: this.randomQuestion.questionId,
+            userMobile: this.user.mobile,
+            answer: answer
+          }
+      }).then (res => {
+          console.oldLog(res)
+      }).catch(err => {
+
+      })
+    },
     cal() {
       //初始化
       this.right = 0
@@ -113,10 +132,8 @@ export default {
       for (var i in task) {
         var func = task[i].task.split("=")[0]
         var answer = task[i].task.split("=")[1]
-        console.oldLog(func)
         try {
           temp = eval(editor.getValue() + func)
-          console.oldLog(answer.replace(temp, ''))
           if (answer.replace(temp, '').trim() == '""'
               || answer.replace(temp, '').trim() == "''"
               || answer.replace(temp, '').trim() == '' ) {
@@ -170,23 +187,17 @@ export default {
     codeChange() {
       this.cheked = true
     },
-    save() {
-      var editor = this.editor
-      console.oldLog(editor.getValue())
-    }
   },
   mounted() {
     var that = this;
     this.init();
     //获取随机问题
     var editor = this.editor;
-    console.log(this.$route.query.id)
      this.$ajax({
           method: 'post',
           url: '/getQuestion/' + this.$route.query.id,
       }).then (res => {
           this.randomQuestion = res.data
-          console.oldLog(res)
           //设置题目
           editor.setValue(res.data.questionInit);
           //设置全局task
@@ -195,6 +206,7 @@ export default {
 
       })
     console.log = this.log;
+    this.user = JSON.parse(localStorage.user)
   },
   beforeCreate() {
     //替换console

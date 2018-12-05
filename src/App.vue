@@ -32,7 +32,7 @@
       <el-main>
         <router-view key="key" />
       </el-main>
-      <el-footer><el-row type="flex" justify="center">Copyright © 2018-2020 Powerd By: Jo</el-row></el-footer>
+      <el-footer><el-row type="flex" justify="center">Copyright © 2018-2020 Powerd By: Jo_     ⎛⎝•‿•⎠⎞</el-row></el-footer>
     </el-container>
   </div>
 </template>
@@ -74,7 +74,6 @@ export default {
     }
   },
   created() {
-    console.log(1)
     if (localStorage.user.indexOf("name") != -1) {
       this.user = JSON.parse(localStorage.user)
       this.isLogin = true
@@ -97,14 +96,13 @@ export default {
     color: #efefef;
     line-height: 60px;
     height: 50px;
+    font-size: 20px;
     font-weight: bold;
   }
 
   .el-header {
     border: solid 1px black;
     width: auto;
-    /* border-top-color :#f300f3;
-    border-top-width: 3px; */
     background-color: black;
   }
 
@@ -130,14 +128,6 @@ export default {
     font-size: 16px;
     overflow: hidden;
   }
-  /* .regist {
-    background-color: #efefef;
-    color: #000 !important;
-    border: solid 1px black;
-    border-width: 4px;
-    padding: 2px;
-    font-size: 16px;
-  } */
 
   ::-webkit-scrollbar {
   display: block;
