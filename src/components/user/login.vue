@@ -86,6 +86,8 @@ export default {
               $(".trigger-info").click()
               this.$store.commit(types.LOGIN, res.data.token)
               this.GLOBAL.isLogin = true
+              //用户头像
+              localStorage.userFaceId = Math.floor(Math.random() * 29)
               this.$router.push('/')
             } else {
                floatMessage("登录失败,账号或密码错误!")

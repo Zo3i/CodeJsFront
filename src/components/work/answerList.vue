@@ -1,7 +1,12 @@
 <template>
   <div>
-    <h1>hello</h1>
-    <textarea id="code" ref="code"></textarea>
+    <div class="top">
+      恭喜-----
+    </div>
+    <br>
+    <div id = "answer">
+      大佬的最佳实践
+    </div>
   </div>
 </template>
 
@@ -14,41 +19,44 @@ export default {
     return {
       answer: {},
       user: {},
-      editor:{}
     };
   },
   methods: {
-    init() {
+    init(className, content) {
+      console.log("className=" + className)
+      console.log(content)
+      console.log('#' + className)
       var that = this
-      this.editor = CodeMirror.fromTextArea(this.$refs.code, {
+      var editor = CodeMirror.fromTextArea(document.getElementById(className), {
         theme: "monokai",
         mode: "text/javascript",
         readOnly: true
       });
-      var editor = this.editor;
+      editor.setValue(content)
       editor.setSize('auto','auto');
     }
   },
   mounted() {
-    this.init()
+     this.$ajax({
+          method: 'post',
+          url: '/getAllAnwser',
+          data: {
+            questionId: this.$route.query.questionId
+          }
+      }).then (res => {
+          res.data.forEach( (element, index) => {
+            console.log(element)
+            $('#answer').append("<textarea id='answer-item"+ index +"'></textarea><br>")
+            this.init('answer-item' + index, element.answer)
+          })
+      }).catch(err => {
 
+      }) 
   },
   beforeCreate() {
 
   },
   created() {
-    this.$ajax({
-          method: 'post',
-          url: '/getAllAnwser',
-          data: {
-            questionId:"1059605785811202048"
-          }
-      }).then (res => {
-          console.log(res)
-          this.editor.setValue(res.data[0].answer)
-      }).catch(err => {
-
-      })
   },
   components: {
     VueMarkdown
@@ -79,5 +87,8 @@ html {
   height: auto;
   overflow-y: hidden;
   overflow-x: auto;
+}
+.top{
+  color: antiquewhite
 }
 </style>

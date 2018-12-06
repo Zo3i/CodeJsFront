@@ -45,6 +45,7 @@ export default {
     return {
       user: {},
       faceImage: "",
+      faceImageId: ""
     }
   },
   methods: {
@@ -68,7 +69,8 @@ export default {
     if (localStorage.user.indexOf("name") != -1 && localStorage.token != undefined && localStorage.token != "") {
       this.user = JSON.parse(localStorage.user)
       this.GLOBAL.isLogin = true
-      this.faceImage = '../static/image/face/' + Math.floor(Math.random() * 29) + ".png"
+      this.faceImageId = localStorage.userFaceId
+      this.faceImage = '../static/image/face/' + this.faceImageId + ".png"
     }
   },
   mounted() {
@@ -76,11 +78,9 @@ export default {
   },
   watch: {
     '$route':function(to,from){
-        this.$forceUpdate();//强制重新绘制
         if (localStorage.user.indexOf("name") != -1 && localStorage.token != undefined && localStorage.token != "") {
-          this.user = JSON.parse(localStorage.user)
-          this.GLOBAL.isLogin = true
-          this.faceImage = '../static/image/face/' + Math.floor(Math.random() * 29) + ".png"
+          this.faceImageId = localStorage.userFaceId
+          this.faceImage = '../static/image/face/' + this.faceImageId + ".png"
         }
     }
   },
@@ -88,6 +88,7 @@ export default {
 
   },
   beforeCreate() {
+    
   },
   computed: {
     key() {

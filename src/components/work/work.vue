@@ -116,6 +116,11 @@ export default {
           }
       }).then (res => {
           console.oldLog(res)
+          floatMessage("提交成功~")
+          $(".trigger-info").click()
+          if (res.status == 200) {
+             this.$router.push('/work/answerList?questionId=' + this.randomQuestion.id)
+          }
       }).catch(err => {
 
       })
