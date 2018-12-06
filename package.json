@@ -18,6 +18,7 @@
     "unsplash-js": "^4.8.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.4",
+    "vue-markdown": "^2.2.4",
     "vue-router": "^3.0.1",
     "vue-tree-list": "^1.0.8",
     "vuex": "^3.0.1"

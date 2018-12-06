@@ -4,6 +4,7 @@ import First from './first'
 import Work from './work'
 import Login from './login'
 import Sign from './sign'
+import AnswerList from './answer'
 
 
 Vue.use(Router)
@@ -13,6 +14,7 @@ export default new Router({
     First,
     Work,
     Login,
-    Sign
+    Sign,
+    AnswerList
   ]
 })

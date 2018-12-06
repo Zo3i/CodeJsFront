@@ -85,9 +85,8 @@ export default {
               floatMessage("Biu,登录成功!")
               $(".trigger-info").click()
               this.$store.commit(types.LOGIN, res.data.token)
-              setTimeout(this.$router.push('/'), 2000)
               this.GLOBAL.isLogin = true
-              console.log(this.GLOBAL.isLogin)
+              this.$router.push('/')
             } else {
                floatMessage("登录失败,账号或密码错误!")
                $(".trigger-info").click()

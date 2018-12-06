@@ -104,12 +104,13 @@ export default {
     save() {
       var editor = this.editor
       console.oldLog("提交")
+      console.oldLog(this.randomQuestion)
       var answer = editor.getValue()
       this.$ajax({
           method: 'post',
           url: '/saveAnswer',
           data: {
-            questionId: this.randomQuestion.questionId,
+            questionId: this.randomQuestion.id,
             userMobile: this.user.mobile,
             answer: answer
           }

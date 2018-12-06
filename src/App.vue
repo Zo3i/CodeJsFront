@@ -10,7 +10,7 @@
            {{user.name}}
           <el-dropdown trigger="click"  size="medium" placement="bottom">
             <span class="el-dropdown-link">
-              <img  @click="home()" :src="faceImage" alt="" width="50px" height="50">
+              <img  :src="faceImage" alt="" width="50px" height="50">
             </span>
             <el-dropdown-menu slot="dropdown" >
               <el-dropdown-item >个人中心</el-dropdown-item>
@@ -26,8 +26,8 @@
            <span @click.prevent="regist()"><a href="#" class="regist" >注册</a></span>
            &nbsp;&nbsp;&nbsp;
          </el-col>
-         
-        </el-row>   
+
+        </el-row>
         </el-header>
       <el-main>
         <router-view key="key" />
@@ -60,25 +60,34 @@ export default {
     logout () {
       this.$store.commit(types.LOGOUT)
       this.GLOBAL.isLogin = false
-      console.log(this.GLOBAL.isLogin)
       this.$router.push('/user/login')
     }
   },
+  beforeMount() {
+    console.log("挂载之前")
+    if (localStorage.user.indexOf("name") != -1 && localStorage.token != undefined && localStorage.token != "") {
+      this.user = JSON.parse(localStorage.user)
+      this.GLOBAL.isLogin = true
+      this.faceImage = '../static/image/face/' + Math.floor(Math.random() * 29) + ".png"
+    }
+  },
   mounted() {
+    
   },
   watch: {
     '$route':function(to,from){
-        console.log("路由")
-        // location.reload()
         this.$forceUpdate();//强制重新绘制
+        if (localStorage.user.indexOf("name") != -1 && localStorage.token != undefined && localStorage.token != "") {
+          this.user = JSON.parse(localStorage.user)
+          this.GLOBAL.isLogin = true
+          this.faceImage = '../static/image/face/' + Math.floor(Math.random() * 29) + ".png"
+        }
     }
   },
   created() {
-    if (localStorage.user.indexOf("name") != -1) {
-      this.user = JSON.parse(localStorage.user)
-      this.isLogin = true
-      this.faceImage = '../static/image/face/' + Math.floor(Math.random() * 29) + ".png"
-    }
+
+  },
+  beforeCreate() {
   },
   computed: {
     key() {
