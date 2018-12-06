@@ -8,12 +8,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
 import NProgress from 'NProgress'
 import 'nprogress/nprogress.css'
-const Unsplash = require('unsplash-js').default;
 import store from './store/store';
 import * as types from './store/types'
 import md5 from 'js-md5';
 import global from './components/util/Global'
-
 
 Vue.prototype.GLOBAL = global
 Vue.prototype.$md5 = md5;
