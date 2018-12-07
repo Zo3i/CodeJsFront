@@ -85,7 +85,7 @@ export default {
           } else {
             this.$ajax({
               method: 'post',
-              url: '/sign',
+              url: '/api/sign',
               data: {
                 name: name,
                 password: this.$md5(password) ,
@@ -95,6 +95,7 @@ export default {
               if (res) {
                  floatMessage(res.data)
                  $(".trigger-info").click()
+                 this.$router.push('/user/login')
               }
             }).catch(err => {
 

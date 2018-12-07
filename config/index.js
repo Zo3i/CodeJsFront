@@ -11,9 +11,19 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/rxMgr/a/third': {
-        target: 'http://localhost:8090',
-        changeOrigin: true
+      '/api': {
+        target: 'http://localhost:8090/rxMgr/a/third',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''   //需要rewrite重写的,
+        } 
+      },
+      '/otherApi': {
+        target: 'https://api.gushi.ci/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/otherApi': ''   //需要rewrite重写的,
+        } 
       },
     },
 

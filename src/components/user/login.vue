@@ -74,7 +74,7 @@ export default {
         } else {
           this.$ajax({
             method: 'post',
-            url: '/login',
+            url: '/api/login',
             data: {
               password: this.$md5(password),
               mobile: mobile

@@ -48,7 +48,7 @@ export default {
     skip() {
       this.$ajax({
       method: 'post',
-      url: '/getRandomQuestion',
+      url: '/api/getRandomQuestion',
       }).then (res => {
         this.randomQuestion = res.data
         console.log(res.data)
@@ -61,13 +61,13 @@ export default {
   mounted() {
     this.$ajax({
      method: 'post',
-     url: '/getRandomQuestion',
+     url: '/api/getRandomQuestion',
     }).then (res => {
       this.randomQuestion = res.data
     })
     this.$ajax({
      method: 'get',
-     url: '/getUserInfo',
+     url: '/api/getUserInfo',
     }).then (res => {
      console.log(res)
      this.$store.commit(types.USER, res.data)

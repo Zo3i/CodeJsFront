@@ -108,7 +108,7 @@ export default {
       var answer = editor.getValue()
       this.$ajax({
           method: 'post',
-          url: '/saveAnswer',
+          url: '/api/saveAnswer',
           data: {
             questionId: this.randomQuestion.id,
             userMobile: this.user.mobile,
@@ -201,7 +201,7 @@ export default {
     var editor = this.editor;
      this.$ajax({
           method: 'post',
-          url: '/getQuestion/' + this.$route.query.id,
+          url: '/api/getQuestion/' + this.$route.query.id,
       }).then (res => {
           this.randomQuestion = res.data
           //设置题目

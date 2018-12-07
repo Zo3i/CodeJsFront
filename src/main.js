@@ -20,7 +20,7 @@ Vue.prototype.$ajax = axios
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = '/rxMgr/a/third'
+// axios.defaults.baseURL = '/api'
 
 // 响应拦截器即异常处理
 axios.interceptors.response.use(
