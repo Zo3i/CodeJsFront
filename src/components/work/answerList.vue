@@ -14,12 +14,18 @@
       <div class="goodjob">{{goodjob}}</div>
     </div>
     <br>
-    <div id="answer"></div>
+    <div id="answer">
+      <div v-for="item in answerlist" v-bind:key="item.id">
+        <answerItem :answer="item"></answerItem>
+      </div>
+      
+    </div>
   </div>
 </template>
 
 <script>
 import NProgress from "NProgress";
+import AnswerItem from '@/components/base/answerItem/answer-item'
 export default {
   name: "Index",
   data() {
@@ -28,26 +34,16 @@ export default {
       user: {},
       question: {},
       goodjob: "",
-      answerList: {},
+      answerlist: [],
       page: 1
     };
   },
   methods: {
-    init(className, content) {
-      var that = this;
-      var editor = CodeMirror.fromTextArea(document.getElementById(className), {
-        theme: "monokai",
-        mode: "text/javascript",
-        readOnly: true
-      });
-      editor.setValue(content);
-      editor.setSize("auto", "auto");
-    },
     load() {
       var that = this
       var begin = (this.page - 1) * 3;
       var end = this.page * 3;
-      this.answerList.some((element, index) => {
+      this.answerlist.some((element, index) => {
         if (index >= begin && index < end) {
           var faceImage =
             "../static/image/face/" +
@@ -94,7 +90,7 @@ export default {
         '<div  style=" text-align:center"><button id="load" style="background-color:rgba(0,0,0,0.2);width:120px;border-radius:6px;border-color:#3c7dba;color:#84a3cc;font-size:20px">加载更多</button></div>';
       var over =
         '<div style="text-align:center;font-size:18px">######我是有底线的#######<div>';
-      if (end >= this.answerList.length) {
+      if (end >= this.answerlist.length) {
         $("#answer").append(over);
       } else {
         $("#answer").append(loadBtn);
@@ -127,23 +123,25 @@ export default {
       var author = res.data.author;
       this.goodjob = content;
     });
+  },
+  beforeCreate() {},
+  created() {
     this.$ajax({
       method: "post",
       url: "/api/getAllAnwser",
       data: {
         questionId: this.$route.query.questionId
       }
-    })
-      .then(res => {
+    }).then(res => {
         this.question = res.data[0].question;
-        this.answerList = res.data;
-        this.load();
-      })
-      .catch(err => {});
+        this.answerlist = res.data;
+        console.log(res.data)
+        // this.load();
+      }).catch(err => {})
   },
-  beforeCreate() {},
-  created() {},
-  components: {}
+  components: {
+    AnswerItem
+  }
 };
 </script>
 
