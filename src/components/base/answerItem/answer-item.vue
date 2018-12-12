@@ -18,7 +18,13 @@ export default {
     props: {
         answer: {
          type: Object
-     }
+        },
+        start: {
+            type: Number
+        },
+        end: {
+            type: Number
+        }
     },
      data () {
         return {
@@ -69,7 +75,6 @@ export default {
         }
     },
     mounted() {
-     console.log(this.answer)
      this.faceImage = "../static/image/face/" + Math.floor(Math.random() * 27 + 1) + ".png";
      this.isLike = this.answer.like 
      this.like = this.isLike ? this.likeImage : this.dislikeImage
