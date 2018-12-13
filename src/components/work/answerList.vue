@@ -16,12 +16,12 @@
     <br>
     <div id="answer">
       <div v-for="(item, index) in answerlist" v-bind:key="item.id">
-        <answerItem :answer="item" v-if="index < page"></answerItem>
+        <answerItem :answer="item" :key="index" v-if="index < (page * 5)"></answerItem>
       </div>
     </div>
-    <div v-if="totle > 5">
+    <div v-if="totle > 5 && totle > (page * 5)">
       <div  style=" text-align:center">
-        <button id="load" style="background-color:rgba(0,0,0,0.2);width:120px;border-radius:6px;border-color:#3c7dba;color:#84a3cc;font-size:20px">
+        <button id="load" @click="load" style="background-color:rgba(0,0,0,0.2);width:120px;border-radius:6px;border-color:#3c7dba;color:#84a3cc;font-size:20px">
           加载更多
         </button>
       </div>
@@ -46,7 +46,9 @@ export default {
     };
   },
   methods: {
-
+    load() {
+      this.page ++
+    }
   },
   mounted() {
     this.user = JSON.parse(localStorage.user)
@@ -58,7 +60,6 @@ export default {
       var author = res.data.author;
       this.goodjob = content;
     })
-   
   },
   beforeCreate() {},
   created() {
@@ -66,7 +67,8 @@ export default {
       method: "post",
       url: "/api/getAllAnwser",
       data: {
-        questionId: this.$route.query.questionId
+        questionId: this.$route.query.questionId,
+        userMobile: JSON.parse(localStorage.user).mobile
       }
     }).then(res => {
         this.question = res.data[0].question;
