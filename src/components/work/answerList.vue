@@ -71,6 +71,10 @@ export default {
         userMobile: JSON.parse(localStorage.user).mobile
       }
     }).then(res => {
+        if (res.data.length == 0) {
+            floatMessage("别偷看答案哦!")
+             $(".trigger-info").click()
+        }
         this.question = res.data[0].question;
         this.answerlist = res.data
         this.totle = res.data.length

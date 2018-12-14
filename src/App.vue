@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-container>
+    <el-container id="container">
       <el-header>
         <el-row type="flex" :gutter="20" justify="space-between">
          <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" >
@@ -100,6 +100,17 @@ export default {
 </script>
 
 <style>
+
+  #app, #container { 
+    padding:0px;
+    margin:0px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    border:hidden;
+  }
   .el-header,
   .el-footer {
     background-color: #1f2020;

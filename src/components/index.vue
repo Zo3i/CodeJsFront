@@ -1,8 +1,8 @@
 <template>
-    <div >
+    <div>
       <div class="question">
         <el-row type="flex" justify="center">
-         <el-col :span="4">
+         <el-col :xs="12" :sm="16" :md="14" :lg="12" :xl="10">
            <div class="question-simple">
             <div class="question-simple-q">
               <p>Q :)</p>
@@ -14,9 +14,8 @@
               <button @click="skip()" style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab;font-size:20px">skip</button>
             </div>
            </div>
-           
           </el-col>
-          <el-col :span="8">
+          <el-col :xs="10" :sm="8" :md="8" :lg="6" :xl="5">
             <div class="question-des">
               <div class="question-des-body">
                 <p>M :)</p>
@@ -30,7 +29,15 @@
           </el-col>
         </el-row>
       </div>
-       
+      <div>
+        <div class="team"> 
+          <el-row type="flex" justify="center">
+            <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">
+              <div class="team-main"></div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -41,14 +48,15 @@ export default {
   name: "Index",
   data() {
     return {
-      randomQuestion: {}
+      randomQuestion: {},
+      user: {}
     };
   },
   methods: {
     skip() {
       this.$ajax({
       method: 'post',
-      url: '/api/getRandomQuestion',
+      url: '/api/getRandomQuestion?mobile=' + this.user.mobile,
       }).then (res => {
         this.randomQuestion = res.data
         console.log(res.data)
@@ -59,6 +67,7 @@ export default {
     }
   },
   mounted() {
+    this.user = JSON.parse(localStorage.user)
     this.$ajax({
      method: 'post',
      url: '/api/getRandomQuestion',
@@ -77,7 +86,7 @@ export default {
   beforeCreate() {
   },
   created() {
-
+    
   },
   components: {}
 };
@@ -126,7 +135,7 @@ html {
   text-align: center;
   width: 100%;
   height: 80%;
-  font-size: 22px;
+  font-size: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -153,5 +162,12 @@ html {
 }
 .el-row {
   margin-bottom: 15px;
+}
+.team {
+  height: 300px;
+}
+.team-main {
+  width: 100%;
+  background-color: #262729;
 }
 </style>
