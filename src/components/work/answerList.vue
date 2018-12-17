@@ -64,6 +64,12 @@ export default {
   beforeCreate() {},
   created() {
     this.$ajax({
+     method: 'get',
+     url: '/api/getUserInfo',
+    }).then (res => {
+     localStorage.user = JSON.stringify(res.data)
+    })
+    this.$ajax({
       method: "post",
       url: "/api/getAllAnwser",
       data: {

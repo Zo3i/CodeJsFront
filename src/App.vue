@@ -7,10 +7,10 @@
            <div> <img  @click="home()" src="../static/image/header.png" alt="" width="40px"></div>
          </el-col>
          <el-col  v-if="GLOBAL.isLogin"  :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
-           {{user.name}}
+           <!-- {{user.name}} -->
           <el-dropdown trigger="click"  size="medium" placement="bottom">
             <span class="el-dropdown-link">
-              <img  :src="faceImage" alt="" width="50px" height="50">
+              <img  :src="faceImage" alt="" width="50px" height="50"><span style="font-size:20px;color:white;padding:5px"> {{user.rank}}</span>
             </span>
             <el-dropdown-menu slot="dropdown" >
               <el-dropdown-item >个人中心</el-dropdown-item>
@@ -65,7 +65,6 @@ export default {
     }
   },
   beforeMount() {
-    console.log("挂载之前")
     if (localStorage.user.indexOf("name") != -1 && localStorage.token != undefined && localStorage.token != "") {
       this.user = JSON.parse(localStorage.user)
       this.GLOBAL.isLogin = true
@@ -144,10 +143,11 @@ export default {
     background-color: #efefef;
     color: #000 !important;
     border: solid 1px black;
-    border-width: 4px;
+    border-width: 1px;
     padding: 5px;
     font-size: 16px;
     overflow: hidden;
+    border-radius: 4px;
   }
 
   ::-webkit-scrollbar {

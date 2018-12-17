@@ -103,8 +103,6 @@ export default {
     },
     save() {
       var editor = this.editor
-      console.oldLog("提交")
-      console.oldLog(this.randomQuestion)
       var answer = editor.getValue()
       this.$ajax({
           method: 'post',
