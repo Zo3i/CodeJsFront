@@ -1,9 +1,10 @@
 <template>
   <div>
-    <el-row type="flex" justify="end">
+    <el-row type="flex" justify="end" :class="'member' + index" >
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">#{{index}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.jsUser.name}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.jsUser.rank}}</el-col>
+        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15"><img :src='zoneImg' width="50px" /></el-col>
     </el-row>
   </div>
 </template>
@@ -19,16 +20,16 @@ export default {
     },
      data () {
         return {
-           
+           zoneImg: '../static/image/zone/' + Math.floor(Math.random() * 58 + 1) + '.png'
         };
     },
     methods: {
 
     },
     mounted() {
-        console.log(this.teamMember)
-        console.log(this.teamMember.jsUser)
-        console.log(this.index)
+        if (this.teamMember.jsUser.mobile == JSON.parse(localStorage.user).mobile) {
+           $('.member' + this.index).css('color', '#4bd5c4')
+        }
     },
 
 }

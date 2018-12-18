@@ -108,7 +108,7 @@ html {
   height: 100%;
 }
 .answer-list {
-  color: white;
+  color: #aaaaa9;
 }
 .CodeMirror {
   font: 20px "Oxygen Mono", Helvetica, Arial, sans-serif;
@@ -123,7 +123,7 @@ html {
   overflow-x: auto;
 }
 .top {
-  color: white;
+  color: #aaaaa9;
 }
 .question-info {
   font-size: 30px;

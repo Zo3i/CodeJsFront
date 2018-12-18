@@ -1,93 +1,147 @@
 <template>
-    <div>
-      <div class="question">
-        <el-row type="flex" justify="center">
-         <el-col :xs="12" :sm="16" :md="14" :lg="12" :xl="10">
-           <div class="question-simple">
+  <div>
+    <div class="question">
+      <el-row type="flex" justify="center">
+        <el-col :xs="12" :sm="16" :md="14" :lg="12" :xl="10">
+          <div class="question-simple">
             <div class="question-simple-q">
               <p>Q :)</p>
               <div class="question-simple-name" v-text="randomQuestion.name"></div>
             </div>
-            <hr style='border-top: 1px solid #3c3c3c; margin-bottom: 10px;'/>
+            <hr style="border-top: 1px solid #3c3c3c; margin-bottom: 10px;">
             <div class="work-button">
-              <button @click="go()" style="background-color:#3c7dba;width:80px;border-radius:6px;border-color:#3c7dba;color:#303133;font-size:20px">try</button>
-              <button @click="skip()" style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab;font-size:20px">skip</button>
+              <button
+                @click="go()"
+                style="background-color:#3c7dba;width:80px;border-radius:6px;border-color:#3c7dba;color:#303133;font-size:20px"
+              >try</button>
+              <button
+                @click="skip()"
+                style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab;font-size:20px"
+              >skip</button>
             </div>
-           </div>
-          </el-col>
-          <el-col :xs="10" :sm="8" :md="8" :lg="6" :xl="5">
-            <div class="question-des">
-              <div class="question-des-body">
-                <p>M :)</p>
-                <div class="question-des-main" v-text="randomQuestion.description"></div>
-              </div> 
-              <hr style='border-top: 1px solid #262729;margin-bottom: 10px;'/>
-              <div class="tip">
-                <p>TIP: 本题<span v-text="randomQuestion.score"></span>分</p>
+          </div>
+        </el-col>
+        <el-col :xs="10" :sm="8" :md="8" :lg="6" :xl="5">
+          <div class="question-des">
+            <div class="question-des-body">
+              <p>D :)</p>
+              <div class="question-des-main" v-text="randomQuestion.description"></div>
+            </div>
+            <hr style="border-top: 1px solid #262729;margin-bottom: 10px;">
+            <div class="tip">
+              <p>
+                TIP: 本题
+                <span v-text="randomQuestion.score"></span>分
+              </p>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
+    <div>
+      <div class="team">
+        <el-row type="flex" justify="center">
+          <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">
+            <div v-if="haveTeam" class="team-main">
+              <div class="team-member">
+                <el-row type="flex" justify="space-between">
+                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">排名</el-col>
+                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">成员</el-col>
+                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">分数</el-col>
+                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">空间</el-col>
+                </el-row>
+              </div>
+              <div v-for="(item, index) in teamall" :key="item.id" class="team-member">
+                <hr style="border-top: 1px solid #221f1f; margin-bottom: 30px;margin-top: -5px;">
+                <MemberItem class="team-member-info" :teamMember="item" :index="index + 1"></MemberItem>
+              </div>
+            </div>
+            <div v-else class="team-main">
+              <p class="team-msg">{{teamMsg}}</p>
+              <input
+                v-if="show && !join"
+                type="button"
+                value="创建团队"
+                class="login"
+                @click="createTeamBtn()"
+              >
+              <input
+                v-if="show && !join"
+                type="button"
+                value="加入团队"
+                class="login"
+                @click="joinTeamBtn()"
+              >
+              <div v-if="!show">
+                <el-row type="flex" justify="center" class="body">
+                  <el-col :span="12">
+                    <input
+                      style="color:black"
+                      type="text"
+                      name="teamName"
+                      class="teamName"
+                      id="teamName"
+                      placeholder="请输入团队名称"
+                    >
+                  </el-col>
+                </el-row>
+                <el-row type="flex" justify="space-around" class="body">
+                  <el-col :span="24">
+                    <input
+                      type="button"
+                      @click="createTeam()"
+                      name="login"
+                      class="login"
+                      value="创建"
+                    >
+                    <input
+                      type="button"
+                      @click="cancelCreate()"
+                      name="login"
+                      class="login"
+                      value="取消"
+                    >
+                  </el-col>
+                </el-row>
+              </div>
+              <div v-if="join">
+                <el-row type="flex" justify="center" class="body">
+                  <el-col :span="12">
+                    <input
+                      style="color:black"
+                      type="text"
+                      name="teamName"
+                      class="teamName"
+                      id="joinTeamName"
+                      placeholder="请输入团队名称"
+                    >
+                  </el-col>
+                </el-row>
+                <el-row type="flex" justify="space-around" class="body">
+                  <el-col :span="24">
+                    <input type="button" @click="joinTeam()" name="login" class="login" value="加入">
+                    <input
+                      type="button"
+                      @click="cancelJoin()"
+                      name="login"
+                      class="login"
+                      value="取消"
+                    >
+                  </el-col>
+                </el-row>
               </div>
             </div>
           </el-col>
         </el-row>
       </div>
-      <div>
-        <div class="team"> 
-          <el-row type="flex" justify="center">
-            <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">
-              <div v-if="haveTeam" class="team-main" >
-                <div class="team-member">
-                  <el-row type="flex" justify="end">
-                    <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">排名</el-col>
-                    <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">成员</el-col>
-                    <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">分数</el-col>
-                 </el-row>
-                </div>
-                <div v-for="(item, index) in teamall" :key="item.id" class="team-member">
-                  <hr style='border-top: 1px solid #3c3c3c; margin-bottom: 10px;'/>
-                  <MemberItem class="team-member-info" :teamMember="item" :index="index + 1"></MemberItem>
-                </div>
-              </div>
-              <div v-else class="team-main" >
-                <p class="team-msg">{{teamMsg}}</p>
-                <input v-if="show && !join" type="button" value="创建团队" class="login" @click="createTeamBtn()" />
-                <input v-if="show && !join" type="button" value="加入团队" class="login" @click="joinTeamBtn()" />
-                <div v-if="!show">
-                    <el-row type="flex" justify="center" class="body">
-                      <el-col :span=12>
-                        <input style="color:black" type="text" name="teamName" class="teamName" id="teamName" placeholder="请输入团队名称"/> 
-                      </el-col>  
-                    </el-row>
-                    <el-row type="flex" justify="space-around" class="body">
-                      <el-col :span=24>
-                        <input type="button" @click="createTeam()" name="login" class="login" value="创建"/>
-                        <input type="button" @click="cancelCreate()" name="login" class="login" value="取消"/>  
-                      </el-col> 
-                    </el-row>
-                </div>
-                <div v-if="join">
-                    <el-row type="flex" justify="center" class="body">
-                      <el-col :span=12>
-                        <input style="color:black" type="text" name="teamName" class="teamName" id="joinTeamName" placeholder="请输入团队名称"/> 
-                      </el-col>  
-                    </el-row>
-                    <el-row type="flex" justify="space-around" class="body">
-                      <el-col :span=24>
-                        <input type="button" @click="joinTeam()" name="login" class="login" value="加入"/> 
-                        <input type="button" @click="cancelJoin()" name="login" class="login" value="取消"/> 
-                      </el-col> 
-                    </el-row>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-      </div>
     </div>
+  </div>
 </template>
 
 <script>
-  import NProgress from 'NProgress'
-  import * as types from '@/store/types'
-  import MemberItem from '@/components/base/teamItem/member-item'
+import NProgress from "NProgress";
+import * as types from "@/store/types";
+import MemberItem from "@/components/base/teamItem/member-item";
 export default {
   name: "Index",
   data() {
@@ -97,113 +151,113 @@ export default {
       teamInfo: {},
       haveTeam: false,
       show: true,
-      teamMsg: '抱歉您还没有参加或创建团队!',
+      teamMsg: "抱歉您还没有参加或创建团队!",
       teamall: [],
-      join: false,
+      join: false
     };
   },
   methods: {
     skip() {
       this.$ajax({
-      method: 'post',
-      url: '/api/getRandomQuestion?mobile=' + this.user.mobile,
-      }).then (res => {
-        this.randomQuestion = res.data
-        console.log(res.data)
-      })
+        method: "post",
+        url: "/api/getRandomQuestion?mobile=" + this.user.mobile
+      }).then(res => {
+        this.randomQuestion = res.data;
+      });
     },
     go() {
-      this.$router.push('/work?id=' + this.randomQuestion.id)
+      this.$router.push("/work?id=" + this.randomQuestion.id);
     },
     createTeam() {
-      var teamName = $('#teamName').val()
+      var teamName = $("#teamName").val();
       this.$ajax({
-        method: 'post',
-        url: '/api/maketeam',
+        method: "post",
+        url: "/api/maketeam",
         data: {
           teamName: teamName,
-          mobile: this.user.mobile,
+          mobile: this.user.mobile
         }
-      }).then (res => {
-          location.reload()
-      })
+      }).then(res => {
+        location.reload();
+      });
     },
     createTeamBtn() {
-      this.show = false
-      this.teamMsg = "开始小队之旅吧~"
+      this.show = false;
+      this.teamMsg = "开始小队之旅吧~";
     },
     cancelCreate() {
-      this.show = true
-      this.teamMsg = '抱歉您还没有参加或创建团队!'
+      this.show = true;
+      this.teamMsg = "抱歉您还没有参加或创建团队!";
     },
     cancelJoin() {
-      this.join = false
-      this.teamMsg = '抱歉您还没有参加或创建团队!'
+      this.join = false;
+      this.teamMsg = "抱歉您还没有参加或创建团队!";
     },
     joinTeamBtn() {
-      this.teamMsg = "开始小队之旅吧~"
-      this.join = true
+      this.teamMsg = "开始小队之旅吧~";
+      this.join = true;
     },
     joinTeam() {
-      var teamName = $('#joinTeamName').val()
+      var teamName = $("#joinTeamName").val();
       this.$ajax({
-        method: 'post',
-        url: '/api/jointeam',
+        method: "post",
+        url: "/api/jointeam",
         data: {
           teamName: teamName,
-          mobile: this.user.mobile,
+          mobile: this.user.mobile
         }
-      }).then (res => {
-          location.reload()
-      })
+      }).then(res => {
+        location.reload();
+      });
     }
   },
   mounted() {
-    this.user = JSON.parse(localStorage.user)
-
+    console.log("触发挂载");
     //获取随机题目
     this.$ajax({
-     method: 'post',
-     url: '/api/getRandomQuestion',
-    }).then (res => {
-      this.randomQuestion = res.data
-    })
-
-    //获取用户信息
-    this.$ajax({
-     method: 'get',
-     url: '/api/getUserInfo',
-    }).then (res => {
-     this.$store.commit(types.USER, res.data)
-    })
-
-    //查询队伍
-    this.$ajax({
-      method: 'get',
-      url: '/api/teaminfo?mobile=' + this.user.mobile,
-    }).then (res => {
-     console.log(res)
-     this.teamInfo = res.data
-     if (res.data != undefined && res.data != '' && res.data != null) {
-       this.haveTeam = true
-       var teamid = res.data.id
-       //获取队伍所有人
+      method: "post",
+      url: "/api/getRandomQuestion"
+    }).then(res => {
+      this.randomQuestion = res.data;
+    });
+    new Promise(resolve => {
+      //获取用户信息
       this.$ajax({
-        method: 'get',
-        url: '/api/teamall?teamid=' + teamid,
-        }).then (res => {
-          console.log(res)
-          this.teamall = res.data
-        })
-     }
-    })
-    
+        method: "get",
+        url: "/api/getUserInfo"
+      }).then(res => {
+        this.$store.commit(types.USER, res.data);
+        this.user = res.data;
+        resolve(res.data);
+      });
+    }).then(data => {
+      //查询队伍
+      this.$ajax({
+        method: "get",
+        url: "/api/teaminfo?mobile=" + data.mobile
+      }).then(res => {
+        this.teamInfo = res.data;
+        if (res.data != undefined && res.data != "" && res.data != null) {
+          this.haveTeam = true;
+          var teamid = res.data.id;
+          //获取队伍所有人
+          this.$ajax({
+            method: "get",
+            url: "/api/teamall?teamid=" + teamid
+          }).then(res => {
+            this.teamall = res.data;
+          });
+        }
+      });
+    });
   },
-  beforeCreate() {
+  watch: {
+    $route: function(to, from) {
+      console.log("检测跳转首页");
+    }
   },
-  created() {
-    
-  },
+  beforeCreate() {},
+  created() {},
   components: {
     MemberItem
   }
@@ -213,22 +267,22 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 body {
-  font: 14px "Lato","Helvetica Neue","Helvetica",sans-serif;
+  font: 14px "Lato", "Helvetica Neue", "Helvetica", sans-serif;
   min-height: 100%;
   background-color: #303133;
 }
 html {
-    height: 100%;
+  height: 100%;
 }
 .question {
-  margin-top: 1%; 
+  margin-top: 1%;
 }
 .question-simple {
   padding: 20px;
   background-color: #262729;
   height: 300px;
   width: 100%;
-  color: aliceblue;
+  color: #aaaaa9;
   font-size: 30px;
 }
 
@@ -238,7 +292,7 @@ html {
   background-color: #3c3c3c;
   height: 300px;
   width: 100%;
-  color:antiquewhite;
+  color: #aaaaa9;
 }
 
 .question-simple-q {
@@ -257,7 +311,7 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-top: 30px; 
+  margin-top: 30px;
 }
 
 .question-des-main {
@@ -268,15 +322,15 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-top: 30px; 
+  margin-top: 30px;
 }
-.work-button{
+.work-button {
   margin-top: 30px;
   text-align: center;
 }
 .tip {
-   margin-top: 26px;
-   color:#75757f
+  margin-top: 26px;
+  color: #75757f;
 }
 .el-row {
   margin-bottom: 15px;
@@ -287,19 +341,18 @@ html {
 .team-main {
   width: 100%;
   background-color: #262729;
-  color: white;
+  color: #aaaaa9;
   font-size: 25px;
   text-align: center;
   padding: 10px;
 }
 .team-member {
-  text-align: left;
-  padding: 10px;
+  padding: 1px;
 }
 .team-member-info {
   color: #90bab5;
 }
 .team-msg {
-  color: #f16967
+  color: #f16967;
 }
 </style>

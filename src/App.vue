@@ -4,13 +4,13 @@
       <el-header>
         <el-row type="flex" :gutter="20" justify="space-between">
          <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" >
-           <div> <img  @click="home()" src="../static/image/header.png" alt="" width="40px"></div>
+           <div> <img  @click="home()" src="../static/image/header.png" alt="" width="50px"></div>
          </el-col>
          <el-col  v-if="GLOBAL.isLogin"  :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
-           <!-- {{user.name}} -->
+           {{user.name}}
           <el-dropdown trigger="click"  size="medium" placement="bottom">
             <span class="el-dropdown-link">
-              <img  :src="faceImage" alt="" width="50px" height="50"><span style="font-size:20px;color:white;padding:5px"> {{user.rank}}</span>
+              <img  :src="faceImage" alt="" width="50px" height="50"><span style="font-size:20px;color:white;padding:5px"> </span>
             </span>
             <el-dropdown-menu slot="dropdown" >
               <el-dropdown-item >个人中心</el-dropdown-item>
@@ -32,7 +32,7 @@
       <el-main>
         <router-view key="key" />
       </el-main>
-      <el-footer><el-row type="flex" justify="center">Copyright © 2018-2020 Powerd By: Jo_     ⎛⎝•‿•⎠⎞</el-row></el-footer>
+      <el-footer><el-row type="flex" justify="center">Copyright © 2018-2020 Powerd By: Jo_ </el-row></el-footer>
     </el-container>
   </div>
 </template>
@@ -73,11 +73,18 @@ export default {
     }
   },
   mounted() {
-    
+
   },
   watch: {
-    '$route':function(to,from){
+    '$route':function(to, from){
         if (localStorage.user.indexOf("name") != -1 && localStorage.token != undefined && localStorage.token != "") {
+          //获取用户信息
+          this.$ajax({
+            method: 'get',
+            url: '/api/getUserInfo',
+            }).then (res => {
+              this.user = res.data
+            })
           this.faceImageId = localStorage.userFaceId
           this.faceImage = '../static/image/face/' + this.faceImageId + ".png"
         }
@@ -113,11 +120,15 @@ export default {
   .el-header,
   .el-footer {
     background-color: #1f2020;
-    color: #efefef;
-    line-height: 60px;
+    color: #aaaaa9;
     height: 50px;
-    font-size: 20px;
+    font-size: 10px;
     font-weight: bold;
+    padding: 5px;
+  }
+
+  .el-footer {
+    line-height: 50px;
   }
 
   .el-header {
