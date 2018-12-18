@@ -34,20 +34,22 @@
           <el-row type="flex" justify="center">
             <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">
               <div v-if="haveTeam" class="team-main" >
-                <div v-for="(item, index) in teamall" :key="item.id" class="team-member">
+                <div class="team-member">
                   <el-row type="flex" justify="end">
                     <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">排名</el-col>
                     <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">成员</el-col>
                     <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">分数</el-col>
-                  </el-row>
+                 </el-row>
+                </div>
+                <div v-for="(item, index) in teamall" :key="item.id" class="team-member">
                   <hr style='border-top: 1px solid #3c3c3c; margin-bottom: 10px;'/>
                   <MemberItem class="team-member-info" :teamMember="item" :index="index + 1"></MemberItem>
-                  <div style="text-align:center" id="add"><input  type="button" value="邀请成员" class="login" @click="addBtn()" /></div>
                 </div>
               </div>
               <div v-else class="team-main" >
                 <p class="team-msg">{{teamMsg}}</p>
-                <input v-if="show" type="button" value="创建团队" class="login" @click="createTeamBtn()" />
+                <input v-if="show && !join" type="button" value="创建团队" class="login" @click="createTeamBtn()" />
+                <input v-if="show && !join" type="button" value="加入团队" class="login" @click="joinTeamBtn()" />
                 <div v-if="!show">
                     <el-row type="flex" justify="center" class="body">
                       <el-col :span=12>
@@ -56,7 +58,21 @@
                     </el-row>
                     <el-row type="flex" justify="space-around" class="body">
                       <el-col :span=24>
-                        <input type="button" @click="createTeam()" name="login" class="login" value="创建"/> 
+                        <input type="button" @click="createTeam()" name="login" class="login" value="创建"/>
+                        <input type="button" @click="cancelCreate()" name="login" class="login" value="取消"/>  
+                      </el-col> 
+                    </el-row>
+                </div>
+                <div v-if="join">
+                    <el-row type="flex" justify="center" class="body">
+                      <el-col :span=12>
+                        <input style="color:black" type="text" name="teamName" class="teamName" id="joinTeamName" placeholder="请输入团队名称"/> 
+                      </el-col>  
+                    </el-row>
+                    <el-row type="flex" justify="space-around" class="body">
+                      <el-col :span=24>
+                        <input type="button" @click="joinTeam()" name="login" class="login" value="加入"/> 
+                        <input type="button" @click="cancelJoin()" name="login" class="login" value="取消"/> 
                       </el-col> 
                     </el-row>
                 </div>
@@ -83,6 +99,7 @@ export default {
       show: true,
       teamMsg: '抱歉您还没有参加或创建团队!',
       teamall: [],
+      join: false,
     };
   },
   methods: {
@@ -108,8 +125,6 @@ export default {
           mobile: this.user.mobile,
         }
       }).then (res => {
-          // floatMessage(res.data)
-          // $(".trigger-info").click()
           location.reload()
       })
     },
@@ -117,10 +132,30 @@ export default {
       this.show = false
       this.teamMsg = "开始小队之旅吧~"
     },
-    addBtn() {
-     this.$alert('邀请地址:http://localhost:8090/rxMgr/a/third/addmember', '标题名称', {
-          confirmButtonText: '确定',
-        });
+    cancelCreate() {
+      this.show = true
+      this.teamMsg = '抱歉您还没有参加或创建团队!'
+    },
+    cancelJoin() {
+      this.join = false
+      this.teamMsg = '抱歉您还没有参加或创建团队!'
+    },
+    joinTeamBtn() {
+      this.teamMsg = "开始小队之旅吧~"
+      this.join = true
+    },
+    joinTeam() {
+      var teamName = $('#joinTeamName').val()
+      this.$ajax({
+        method: 'post',
+        url: '/api/jointeam',
+        data: {
+          teamName: teamName,
+          mobile: this.user.mobile,
+        }
+      }).then (res => {
+          location.reload()
+      })
     }
   },
   mounted() {
@@ -263,5 +298,8 @@ html {
 }
 .team-member-info {
   color: #90bab5;
+}
+.team-msg {
+  color: #f16967
 }
 </style>
