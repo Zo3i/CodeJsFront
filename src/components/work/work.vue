@@ -2,7 +2,7 @@
     <div>
             <div class="work-top">
                 <div class="main-left">
-                  <p style="font-size: 20px;font-weight: bold;color: whitesmoke">QUESTION: {{randomQuestion.name}}</p>
+                  <p style="font-size: 20px;font-weight: bold;color: #bccdd3">QUESTION: {{randomQuestion.name}}</p>
                   <hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>
                 <div>
                     {{randomQuestion.description}}
@@ -16,7 +16,7 @@
                 <div class="result">
                   <template v-show="flag">
                     <div ref="result">
-                      <p style="font-size: 20px;font-weight: bold;color: whitesmoke">RESULT:</p>
+                      <p style="font-size: 20px;font-weight: bold;color: #bccdd3">RESULT:</p>
                       <ol v-html="result" style="list-style-type: square">
                       </ol>
                     </div>
@@ -24,7 +24,7 @@
                   <div id="error" ref="error" v-show="!flag"></div>
                 </div>
                 <div class="task">
-                  <p style="font-size: 20px;font-weight: bold;color: whitesmoke">TASKS:</p>
+                  <p style="font-size: 20px;font-weight: bold;color: #bccdd3">TASKS:</p>
                       <ol ref="task">
                         <li v-for="task in tasks" :key = task.id>
                           {{task.task}}
@@ -248,7 +248,7 @@ html {
   letter-spacing: 0.1em;
   overflow :auto;
   flex-grow: 1;
-  color: #fcf5ed;
+  color: #aaaaa9;
   background-color: #1f2020;
   /* background-clip: content-box; */
   padding: 20px;
@@ -271,7 +271,7 @@ html {
   overflow: auto;
 }
 .task {
-  color: #fcf5ed;
+  color: #aaaaa9;
   height: 200px;
   width: 50%;
   padding: 10px;

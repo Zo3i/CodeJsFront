@@ -212,14 +212,6 @@ export default {
     }
   },
   mounted() {
-    console.log("触发挂载");
-    //获取随机题目
-    this.$ajax({
-      method: "post",
-      url: "/api/getRandomQuestion"
-    }).then(res => {
-      this.randomQuestion = res.data;
-    });
     new Promise(resolve => {
       //获取用户信息
       this.$ajax({
@@ -231,6 +223,13 @@ export default {
         resolve(res.data);
       });
     }).then(data => {
+      //获取问题
+      this.$ajax({
+        method: "post",
+        url: "/api/getRandomQuestion?mobile=" + data.mobile
+      }).then(res => {
+        this.randomQuestion = res.data
+      });
       //查询队伍
       this.$ajax({
         method: "get",

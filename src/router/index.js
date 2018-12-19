@@ -5,7 +5,7 @@ import Work from './work'
 import Login from './login'
 import Sign from './sign'
 import AnswerList from './answer'
-
+import Center from './center'
 
 Vue.use(Router)
 
@@ -15,6 +15,7 @@ export default new Router({
     Work,
     Login,
     Sign,
-    AnswerList
+    AnswerList,
+    Center
   ]
 })

@@ -13,14 +13,14 @@
               <img  :src="faceImage" alt="" width="50px" height="50"><span style="font-size:20px;color:white;padding:5px"> </span>
             </span>
             <el-dropdown-menu slot="dropdown" >
-              <el-dropdown-item >个人中心</el-dropdown-item>
+              <el-dropdown-item @click.native="center()">个人中心</el-dropdown-item>
               <el-dropdown-item>留言板</el-dropdown-item>
               <el-dropdown-item @click.native="logout()">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           &nbsp;&nbsp;&nbsp;
          </el-col>
-         <el-col v-else :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
+         <el-col v-else :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='usersLog'>
            <span @click.prevent="login()"><a href="#" class="login" >登录</a></span>
            &nbsp;
            <span @click.prevent="regist()"><a href="#" class="regist" >注册</a></span>
@@ -62,6 +62,9 @@ export default {
       this.$store.commit(types.LOGOUT)
       this.GLOBAL.isLogin = false
       this.$router.push('/user/login')
+    },
+    center () {
+      this.$router.push('/user/center')
     }
   },
   beforeMount() {
@@ -117,8 +120,7 @@ export default {
     height:100%;
     border:hidden;
   }
-  .el-header,
-  .el-footer {
+  .el-header {
     background-color: #1f2020;
     color: #aaaaa9;
     height: 50px;
@@ -128,6 +130,12 @@ export default {
   }
 
   .el-footer {
+    background-color: #1f2020;
+    color: #aaaaa9;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+    height: 30px;
     line-height: 50px;
   }
 
@@ -149,6 +157,12 @@ export default {
     font-weight: lighter;
     text-align: right;
   }
+  .usersLog {
+    font-size: 20px;
+    font-weight: lighter;
+    text-align: right;
+    line-height: 60px;
+  } 
   .login, .regist{
     text-align: center;
     background-color: #efefef;

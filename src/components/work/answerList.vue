@@ -1,6 +1,6 @@
 <template>
   <div class="answer-list">
-    <div class="top">
+    <div class="answer-top">
       <div class="question-info">
         <el-row>
           <el-col :xs="18" :sm="18" :md="18" :lg="10" :xl="10">
@@ -63,28 +63,34 @@ export default {
   },
   beforeCreate() {},
   created() {
-    this.$ajax({
-     method: 'get',
-     url: '/api/getUserInfo',
-    }).then (res => {
-     localStorage.user = JSON.stringify(res.data)
-    })
-    this.$ajax({
-      method: "post",
-      url: "/api/getAllAnwser",
-      data: {
-        questionId: this.$route.query.questionId,
-        userMobile: JSON.parse(localStorage.user).mobile
-      }
-    }).then(res => {
-        if (res.data.length == 0) {
-            floatMessage("别偷看答案哦!")
-             $(".trigger-info").click()
+
+    new Promise(resolve => {
+      //获取用户信息
+      this.$ajax({
+        method: "get",
+        url: "/api/getUserInfo"
+      }).then(res => {
+        this.user = res.data;
+        resolve(res.data);
+      });
+    }).then(data => {
+      this.$ajax({
+        method: "post",
+        url: "/api/getAllAnwser",
+        data: {
+          questionId: this.$route.query.questionId,
+          userMobile: data.mobile
         }
-        this.question = res.data[0].question;
-        this.answerlist = res.data
-        this.totle = res.data.length
-      }).catch(err => {})
+      }).then(res => {
+          if (res.data.length == 0) {
+              floatMessage("别偷看答案哦!")
+              $(".trigger-info").click()
+          }
+          this.question = res.data[0].question;
+          this.answerlist = res.data
+          this.totle = res.data.length
+        }).catch(err => {})
+    })
   },
   components: {
     AnswerItem
@@ -122,8 +128,9 @@ html {
   overflow-y: hidden;
   overflow-x: auto;
 }
-.top {
+.answer-top {
   color: #aaaaa9;
+  height: 200px;
 }
 .question-info {
   font-size: 30px;
