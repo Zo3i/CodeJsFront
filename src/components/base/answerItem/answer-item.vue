@@ -3,7 +3,7 @@
       <div style='font-size:18px;margin-bottom:10px;'>
           <img :src="faceImage" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{answer.user.name}}
       </div>
-      <textarea :id = "'answer-item' + answer.id"></textarea>
+      <textarea :id = "'answer-item' + key"></textarea>
       <div style='padding:10px;font-size:20px;font-weight:bold'>
         <img v-show="isLike" @click="dislike()" class='like' :src="likeImage"  width='15px' height='15px' />
         <img v-show="!isLike" @click="like()" class='dislike'  :src='disLikeImage'  width='15px' height='15px' />
@@ -41,13 +41,13 @@ export default {
             collectImage: '../static/image/collect.png',
             discollectImage: '../static/image/discollect.png',
             currentUser: {},
-            author: {}
+            author: {},
         };
     },
     methods: {
         init() {
             var that = this;
-            var editor = CodeMirror.fromTextArea(document.getElementById("answer-item" + this.answer.id), {
+            var editor = CodeMirror.fromTextArea(document.getElementById("answer-item" + this.key), {
                 theme: "monokai",
                 mode: "text/javascript",
                 readOnly: true
@@ -117,7 +117,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.answer)
+     console.log(this.answer)
      this.faceImage = "../static/image/face/" + Math.floor(Math.random() * 27 + 1) + ".png";
      this.isLike = this.answer.like 
      this.isCollect = this.answer.collect
@@ -127,6 +127,16 @@ export default {
      this.author = this.answer.user
      this.init()
     },
+    computed: {
+       key: {
+        // 计算属性：依赖message变化而变化  依赖没变化就不会重新渲染；
+        get () {
+           return Math.floor(Math.random() * 9999999999999)
+        },
+        set () {
+        }
+      }
+     }
 
 }
 </script>
