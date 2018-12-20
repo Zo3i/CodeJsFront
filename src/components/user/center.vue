@@ -5,8 +5,8 @@
          <el-col :xs="2" :sm="2" :md="2" :lg="2" :xl="3"></el-col>
 
           <el-col class="top-info-card" :xs="6" :sm="6" :md="8" :lg="6" :xl="5">
-            <p class="top-info-card-main">目前积分</p>
-            <span>2</span>
+            <p class="top-info-card-main">积分所有</p>
+            <span>{{myinfo.totleRank}}</span>
             <p style="writing-mode: tb-rl; color:rgba(170,170,169,0.3)">秘籍</p>
           </el-col>
          
@@ -14,30 +14,22 @@
 
           <el-col class="top-info-card" :xs="6" :sm="6" :md="8" :lg="6" :xl="5">
             <p class="top-info-card-main">收到点赞</p>
-            <span>2</span>
+            <span>{{myinfo.totleLike}}</span>
             <p style="writing-mode: tb-rl; color:rgba(170,170,169,0.3)">宝典</p>
           </el-col>
 
-
-          <!-- <el-col :xs="2" :sm="2" :md="2" :lg="2" :xl="3"></el-col> -->
           <el-col :xs="1" :sm="1" :md="1" :lg="1" :xl="1"></el-col>
 
           <el-col class="top-info-card" :xs="6" :sm="6" :md="8" :lg="6" :xl="5">
-            <p class="top-info-card-main">被收藏答案</p>  
-            <span>2</span>
+            <p class="top-info-card-main">被收藏数</p>  
+            <span>{{myinfo.totleCollect}}</span>
             <p style="writing-mode: tb-rl; color:rgba(170,170,169,0.3)">快乐</p>
           </el-col>
-          <!-- <el-col :xs="2" :sm="2" :md="2" :lg="2" :xl="3"></el-col>
-          <el-col class="top-info-card" :xs="6" :sm="6" :md="8" :lg="6" :xl="5">
-            <p class="top-info-card-main">答案最佳</p>
-            <span>2</span>
-            <p style="writing-mode: tb-rl; color:rgba(170,170,169,0.3)">学习</p>
-          </el-col> -->
           <el-col :xs="1" :sm="1" :md="1" :lg="1" :xl="1"></el-col>
 
           <el-col class="top-info-card" :xs="6" :sm="6" :md="8" :lg="6" :xl="5">
             <p class="top-info-card-main">所在战队</p>
-            <span>2</span>
+            <span>{{myinfo.team}}</span>
             <p style="writing-mode: tb-rl; color:rgba(170,170,169,0.3)">收获</p>
           </el-col>
 
@@ -47,7 +39,17 @@
 
         <div class="bottom-info">
           <el-tabs v-model="activeName" tab-position="right" style="height: 200px;" @tab-click="handleClick">
-            <el-tab-pane label="解决问题" name="first" >xxx</el-tab-pane>
+            <el-tab-pane label="解决问题" name="first" >
+              <el-row type="flex" justify="end" >
+                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" class="myquestion-title">题目</el-col>
+                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" class="myquestion-title">分数</el-col>
+                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" class="myquestion-title">时间</el-col>
+              </el-row>
+              <br/>
+              <div v-for="(item, index) in questionList" v-bind:key="index">
+                  <UserQuestion :question="item" :key="item.name"></UserQuestion>
+                </div>
+            </el-tab-pane>
             <el-tab-pane label="我的答案" name="second" class="myanswer" :lazy='lazy' >
               <div class="answer">
                 <div v-for="(item, index) in answerlist" v-bind:key="index * 3">
@@ -69,24 +71,27 @@
                 </div>
               </div>
             </el-tab-pane>
-          </el-tabs>`
+          </el-tabs>
         </div>
-
     </div>
+
 </template>
 
 <script>
   import NProgress from 'NProgress'
   import AnswerItem from '@/components/base/answerItem/answer-item'
+  import UserQuestion from '@/components/base/userQuestion/user-question'
 export default {
   name: "Index",
   data() {
     return {
-      activeName: 'fourth',
+      activeName: 'second',
       answerlist: [],
       likeList: [],
       collectList: [],
+      questionList: [],
       lazy: true,
+      myinfo: {}
     };
   },
   methods: {
@@ -134,21 +139,32 @@ export default {
           this.collectList = res.data
         }).catch(err => {})        
 
+
+     this.$ajax({
+        method: "post",
+        url: "/api/getAllQuestion?token=" + data.token,
+      }).then(res => {
+          this.questionList = res.data
+        }).catch(err => {})    
    
-
-
+    this.$ajax({
+        method: "post",
+        url: "/api/myInfo?token=" + data.token,
+      }).then(res => {
+          this.myinfo = res.data
+        }).catch(err => {}) 
 
     })
 
 
   },
   components: {
-    AnswerItem
+    AnswerItem,
+    UserQuestion,
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 @font-face{
     font-family: 'Oxygen Mono';
@@ -156,7 +172,7 @@ export default {
 }
 .top-info {
   height: 10px;
-  background-color:darkgrey;
+  background-color:#494646;
 }
 .top-info-card {
   height: 300px;
@@ -213,5 +229,9 @@ text-align: center;
 }
 .collectanswer {
   color: #aaaaa9
+}
+.myquestion-title {
+  font-size: 30px;
+  color: antiquewhite;
 }
 </style>

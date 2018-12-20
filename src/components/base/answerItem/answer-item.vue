@@ -1,6 +1,6 @@
 <template>
   <div class="loading">
-      <div style='font-size:18px;margin-bottom:10px;'>
+      <div style='font-size:18px;margin-bottom:10px;cursor: pointer;' @click="goCenter()">
           <img :src="faceImage" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{answer.user.name}}
       </div>
       <textarea :id = "'answer-item' + key"></textarea>
@@ -8,9 +8,10 @@
         <img v-show="isLike" @click="dislike()" class='like' :src="likeImage"  width='15px' height='15px' />
         <img v-show="!isLike" @click="like()" class='dislike'  :src='disLikeImage'  width='15px' height='15px' />
         <span style='padding:1px'>{{totalLike}}</span>
-        <img v-show="isCollect" :src="collectImage" @click="disCollect()"  width='15px' height='15px'>
-        <img  v-show="!isCollect" :src="discollectImage" @click="collect()"  width='15px' height='15px'>
-        <span style='padding:1px'>{{totalCollect}}</span>  
+        <img v-show="isCollect" :src="collectImage" @click="disCollect()"  class='collect' width='15px' height='15px'>
+        <img  v-show="!isCollect" :src="discollectImage" @click="collect()" class='discollect' width='15px' height='15px'>
+        <span style='padding:1px'>{{totalCollect}}</span>
+        <a class="question" @click="seeQuestion">查看问题</a>
       </div>
       <br><br><hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>
   </div>
@@ -42,6 +43,7 @@ export default {
             discollectImage: '../static/image/discollect.png',
             currentUser: {},
             author: {},
+            questionId: ''
         };
     },
     methods: {
@@ -114,6 +116,12 @@ export default {
             }).then(res => {
                 console.log("succee")
             })
+        },
+        seeQuestion() {
+            this.$router.push('/work?id=' + this.questionId)
+        },
+        goCenter() {
+            this.$router.push('/work?id=' + this.questionId)
         }
     },
     mounted() {
@@ -125,11 +133,12 @@ export default {
      this.totalLike = this.answer.totalLike
      this.currentUser = JSON.parse(localStorage.user)
      this.author = this.answer.user
+     this.questionId = this.answer.questionId
      this.init()
     },
     computed: {
        key: {
-        // 计算属性：依赖message变化而变化  依赖没变化就不会重新渲染；
+        // 计算属性:
         get () {
            return Math.floor(Math.random() * 9999999999999)
         },
@@ -141,5 +150,26 @@ export default {
 }
 </script>
 <style>
+    .question {
+        color: #75757f;
+        text-decoration: none;
+    }
+    a:active, a:hover {
+        text-decoration:none;
+        color: #eceff1;
+        cursor: pointer;
+    }
+    .like {
+        cursor: pointer;
+    }
+    .dislike {
+        cursor: pointer;
+    }
+    .collect {
+        cursor: pointer;
+    }
+    .discollect {
+        cursor: pointer;
+    }
 
 </style>

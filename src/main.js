@@ -13,6 +13,10 @@ import * as types from './store/types'
 import md5 from 'js-md5';
 import global from './components/util/Global'
 
+import VmBackTop from 'vue-multiple-back-top'
+ 
+Vue.component(VmBackTop.name, VmBackTop)
+
 Vue.prototype.GLOBAL = global
 Vue.prototype.$md5 = md5;
 NProgress.configure({ easing: 'ease', speed: 2000 });
