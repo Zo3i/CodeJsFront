@@ -40,7 +40,7 @@
         <div class="bottom-info">
           <el-tabs v-model="activeName" tab-position="right" style="height: 200px;" @tab-click="handleClick">
             <el-tab-pane label="解决问题" name="first" >
-              <el-row type="flex" justify="end" >
+              <!-- <el-row type="flex" justify="end" >
                   <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" class="myquestion-title">题目</el-col>
                   <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" class="myquestion-title">分数</el-col>
                   <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" class="myquestion-title">时间</el-col>
@@ -48,7 +48,20 @@
               <br/>
               <div v-for="(item, index) in questionList" v-bind:key="index">
                   <UserQuestion :question="item" :key="item.name"></UserQuestion>
-                </div>
+                </div> -->
+                <!-- <timeline-title>战绩</timeline-title> -->
+                
+              <!-- <div v-for="(item, index) in questionList" v-bind:key="index">
+                <timeline-item bg-color="#9dd8e0">
+                  <UserQuestion :question="item" :key="item.name"></UserQuestion>
+                </timeline-item>
+                  
+                </div> -->
+                 <hzqing-vue-timeline 
+   timelineColor="#5bbcd5"  
+   timeContentColor="white"
+   :dataList="questionList"
+   ></hzqing-vue-timeline>
             </el-tab-pane>
             <el-tab-pane label="我的答案" name="second" class="myanswer" :lazy='lazy' >
               <div class="answer">
@@ -85,13 +98,13 @@ export default {
   name: "Index",
   data() {
     return {
-      activeName: 'second',
+      activeName: 'first',
       answerlist: [],
       likeList: [],
       collectList: [],
       questionList: [],
       lazy: true,
-      myinfo: {}
+      myinfo: {},
     };
   },
   methods: {
@@ -144,7 +157,16 @@ export default {
         method: "post",
         url: "/api/getAllQuestion?token=" + data.token,
       }).then(res => {
-          this.questionList = res.data
+          // this.questionList = res.data
+          var data = res.data
+          data.forEach(e => {
+            e.time = e.createTime
+            e.title = e.name
+            e.content = '获得' + e.rank + '分'
+            e.img = '../static/image/zone/' + Math.floor(Math.random() * 58 + 1) + '.png'
+          });
+          console.log(data)
+          this.questionList = data
         }).catch(err => {})    
    
     this.$ajax({
@@ -233,5 +255,22 @@ text-align: center;
 .myquestion-title {
   font-size: 30px;
   color: antiquewhite;
+}
+#hzqing {
+  color: #e7e7e7;
+  --timelineColor:#444 !important;
+   --timeContentColor:#aaaaa9 !important;
+}
+.timeline-img {
+  /* background-color: red; */
+}
+.timeline-img>div {
+  background-color: #333333 !important;
+  /* border-radius: 0 !important; */
+}
+.vue-avatar--wrapper {
+  border-radius: 0 !important;
+  /* width: 80px !important; */
+  /* height: 80px !important; */
 }
 </style>

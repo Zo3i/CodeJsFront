@@ -13,9 +13,9 @@ import * as types from './store/types'
 import md5 from 'js-md5';
 import global from './components/util/Global'
 
-import VmBackTop from 'vue-multiple-back-top'
- 
-Vue.component(VmBackTop.name, VmBackTop)
+
+import hzqingVueTimeline from 'hzqing-vue-timeline'
+Vue.use(hzqingVueTimeline)
 
 Vue.prototype.GLOBAL = global
 Vue.prototype.$md5 = md5;

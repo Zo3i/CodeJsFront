@@ -6,6 +6,7 @@ import Login from './login'
 import Sign from './sign'
 import AnswerList from './answer'
 import Center from './center'
+import Zone from './zone'
 
 Vue.use(Router)
 
@@ -16,6 +17,7 @@ export default new Router({
     Login,
     Sign,
     AnswerList,
-    Center
+    Center,
+    Zone
   ]
 })

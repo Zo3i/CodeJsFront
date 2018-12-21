@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.4.9",
+    "hzqing-vue-timeline": "^1.0.3",
     "js-md5": "^0.7.3",
     "nanobar": "^0.4.2",
     "nprogress": "^0.2.0",
@@ -19,6 +20,7 @@
     "unsplash-js": "^4.8.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.4",
+    "vue-cute-timeline": "^1.2.8",
     "vue-markdown": "^2.2.4",
     "vue-multiple-back-top": "^1.0.2",
     "vue-router": "^3.0.1",

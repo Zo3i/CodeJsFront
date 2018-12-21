@@ -4,7 +4,8 @@
       <el-header>
         <el-row type="flex" :gutter="20" justify="space-between">
          <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" >
-           <div> <img  @click="home()" src="../static/image/header.png" alt="" width="50px"></div>
+           <!-- <div> <img  @click="home()" src="../static/image/header.png" alt="" width="50px"></div> -->
+          <div  @click="home()" class="logo">JSWEB</div>
          </el-col>
          <el-col  v-if="GLOBAL.isLogin"  :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
            {{user.name}}
@@ -136,8 +137,8 @@ export default {
     font-size: 12px;
     font-weight: bold;
     padding: 5px;
-    height: 30px;
-    line-height: 50px;
+    height: 40px !important;
+    line-height: 30px;
   }
 
   .el-header {
@@ -174,6 +175,11 @@ export default {
     font-size: 16px;
     overflow: hidden;
     border-radius: 4px;
+  }
+  .logo {
+    font-size: 30px;
+    line-height: 60px;
+     cursor: pointer;
   }
 
   ::-webkit-scrollbar {
