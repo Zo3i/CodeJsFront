@@ -187,6 +187,8 @@ export default {
 };
 </script>
 
+
+
 <style>
 @font-face{
     font-family: 'Oxygen Mono';
@@ -198,7 +200,7 @@ export default {
 }
 .top-info-card {
   height: 300px;
-  background-color: rgba(117,117,127,0.2);
+  background-color: rgba(0, 0, 0, 0.14);
 
 -webkit-box-shadow: 5px 8px 26px -6px rgba(170,170,169,1);
 -moz-box-shadow: 5px 8px 26px -6px rgba(170,170,169,1);
@@ -216,7 +218,7 @@ text-align: center;
 }
 
 .bottom-info {
-  background-color: #444;
+  background-color: #282828;
   margin: 0 auto;
 }
 .el-tabs__item {
@@ -258,7 +260,7 @@ text-align: center;
 }
 #hzqing {
   color: #e7e7e7;
-  --timelineColor:#444 !important;
+  --timelineColor:#00000000 !important;
    --timeContentColor:#aaaaa9 !important;
 }
 .timeline-img {
@@ -273,4 +275,5 @@ text-align: center;
   /* width: 80px !important; */
   /* height: 80px !important; */
 }
+
 </style>

@@ -1,13 +1,29 @@
 <template :key="key">
     <div>
-        <div class="image">
-        
+        <div class="image"></div>
+        <div class="main">
+            <div class="title">留下你的脚印吧</div>
+            <div class="leave-comment">
+                <form id="comment-form">
+                    <input type="text" placeholder="说点什么吧..." id="comment" name="comment"/>
+                    <input type="hidden" id = "touser" name="touser" >
+                    <input type="button" value="提交" @click="submit()" />
+                </form>
+            </div>
+            <div class="comment">
+               <div class="comment-item">
+                   <img :src="face"  width='50px' height='50px' /> 
+                   <span>admin:</span><span>xxxxxx</span>
+                   <span value="this user mobile"><a type="button" value="" >回复</a></span>
+               </div>
+               <hr/>
+               <div class="comment-item">
+                   <img :src="face"  width='50px' height='50px' /> 
+                   <span>admin 对 xxx 说:</span><span>xxxxxx</span>
+               </div>
+            </div>
         </div>
-    <div class="main">
-        
     </div>
-    </div>
-    
 </template>
 
 <script>
@@ -17,13 +33,50 @@ export default {
   name: "Index",
   data() {
     return {
-
+        face : '../static/image/face/1.png',
+        user: {},
+        zoneId: '',
     };
   },
   methods: {
+      submit () {
+            // console.log($('#comment-form').serializeArray());
+            
+            
+            var comment = $('#comment').val()
+            var touser = $('#touser').val()
+            this.$ajax({
+                method: "post",
+                url: "/api/leaveComment",
+                data: {
+                   comment: comment,
+                   zone: this.zoneId,
+                   toUserId: touser,
+                   fromMobile: this.user.mobile
+                }
+            }).then(res => {
+                console.log(res)
+            });
 
+      }
   },
   mounted() {
+      //获取用户信息
+      this.$ajax({
+        method: "get",
+        url: "/api/getUserInfo"
+      }).then(res => {
+        this.user = res.data;
+      });
+      this.zoneId = this.$route.query.zoneId
+
+console.log("获取留言")
+      this.$ajax({
+        method: "get",
+        url: "/api/getComment?zoneId=" + this.zoneId
+      }).then(res => {
+        console.log(res)
+      });
 
   },
   beforeCreate() {
@@ -60,10 +113,20 @@ html {
 }
 
 .main {
-    margin-top: 20px;
+    margin-top: 40px;
     width: 100%;
-    height: 800px;
+    /* height: 800px; */
     background-color: cadetblue;
+}
+.title {
+    font-size: 30px;
+    text-align: center;
+}
+.comment-item {
+    height: 80px;
+    background-color: bisque;
+    padding: 10px;
+    font-size: 20px;
 }
 
 </style>

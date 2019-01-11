@@ -4,7 +4,7 @@
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">#{{index}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.jsUser.name}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.jsUser.rank}}</el-col>
-        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15"><img :src='zoneImg' width="50px" /></el-col>
+        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" ><img @click="zone()" :src='zoneImg' width="50px" /></el-col>
     </el-row>
   </div>
 </template>
@@ -24,7 +24,10 @@ export default {
         };
     },
     methods: {
-
+        zone() {
+            console.log(this.teamMember.jsUser.zoneId)
+            this.$router.push('/user/zone?zoneId=' + this.teamMember.jsUser.zoneId)
+        }
     },
     mounted() {
         if (this.teamMember.jsUser.mobile == JSON.parse(localStorage.user).mobile) {
