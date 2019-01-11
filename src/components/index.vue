@@ -178,16 +178,16 @@ export default {
           mobile: this.user.mobile
         }
       }).then(res => {
-        location.reload();
+        location.reload()
       });
     },
     createTeamBtn() {
       this.show = false;
-      this.teamMsg = "开始小队之旅吧~";
+      this.teamMsg = "开始小队之旅吧~"
     },
     cancelCreate() {
       this.show = true;
-      this.teamMsg = "抱歉您还没有参加或创建团队!";
+      this.teamMsg = "抱歉您还没有参加或创建团队!"
     },
     cancelJoin() {
       this.join = false;
