@@ -1,6 +1,6 @@
 <template :key="key">
     <div ref="box">
-        <div class="image"></div>
+        <div class="image-comment"></div>
 
         <div class="container">
             <div class="chevron"></div>
@@ -12,14 +12,22 @@
         <div class="main">
             <div class="leave-comment">
                 <div id="comment-form">
-                    <input type="text" placeholder="说点什么吧..." id="comment" name="comment"/>
+                    <input type="text"  placeholder="说点什么吧..." id="comment" name="comment"/>
                     <input type="hidden" id = "touser" name="touser" >
-                    <input type="button" value="提交" @click="submit()" />
+                    <input type="button" class="login" value="提交" @click="submit()" />
                 </div>
             </div>
             <div class="comment" v-for="(item, index) in commentList" v-bind:key="item.id">
-                <commentItem :comment="item" :index="index" :fromMobile="user.mobile" :key="index"></commentItem>
+                <commentItem :comment="item" :index="index" :fromMobile="user.mobile" :key="index" v-if="index < (page * 5)"></commentItem>
             </div>
+
+            <div v-if="totle > 5 && totle > (page * 5)">
+            <div  style=" text-align:center">
+                <button id="load" @click="load" style="background-color:rgba(0,0,0,0.2);width:120px;border-radius:6px;border-color:#3c7dba;color:#84a3cc;font-size:20px">
+                加载更多
+                </button>
+            </div>
+            </div>        
         </div>
     </div>
 </template>
@@ -28,6 +36,7 @@
   import NProgress from 'NProgress'
   import * as types from '@/store/types'
   import CommentItem from '@/components/base/comment/comment-item'
+
 export default {
   name: "Index",
   data() {
@@ -36,6 +45,8 @@ export default {
         user: {},
         zoneId: '',
         commentList: [],
+        page: 1,
+        totle : ''
     };
   },
   methods: {
@@ -55,12 +66,20 @@ export default {
             }).then(res => {
                 console.log(res)
                 floatMessage(res.data)
-                $(".trigger-info").click()  
+                $(".trigger-info").click()
+                console.log(this.$route.query.zoneId)
+                //不刷新界面,重新读取数据
+                var url = this.$route.path + '?zoneId=' + this.$route.query.zoneId + '&rand=' + Math.random()
+                this.$router.push(url)
             });
-      }
+      },
+    load() {
+      this.page ++
+    },
 
   },
   mounted() {
+
       //获取用户信息
       this.$ajax({
         method: "get",
@@ -69,27 +88,34 @@ export default {
         this.user = res.data;
       });
       this.zoneId = this.$route.query.zoneId
+      this.$ajax({
+        method: "get",
+        url: "/api/getComment?zoneId=" + this.zoneId
+       }).then(res => {
+        this.commentList = res.data
+        this.totle = res.data.length
+        console.log(this.totle)
+      });
+  },
+  beforeCreate() {
+  },
+  created() {
 
-
-    new Promise(resolve => {
-        this.$ajax({
+  },
+  components: {
+      CommentItem
+  },
+  watch: {
+  '$route' (to, from) {
+      this.$ajax({
             method: "get",
             url: "/api/getComment?zoneId=" + this.zoneId
         }).then(res => {
             this.commentList = res.data
             console.log(res)
-            resolve()
         });
-    }).then(data => {
-      })
-  },
-  beforeCreate() {
-  },
-  created() {
-  },
-  components: {
-      CommentItem
   }
+}
 };
 </script>
 
@@ -114,7 +140,7 @@ html {
     height: 100%;
 }
 
-.image {
+.image-comment {
   background-image: url("https://source.unsplash.com/random");
   background-position: center center;
   background-repeat: no-repeat;

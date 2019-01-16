@@ -1,7 +1,9 @@
 <template>
   <div class="comment-main">
       <div style='font-size:18px;margin-bottom:10px;'>
-          <img :src="faceImage" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{comment.fromName}} 
+          <span @click="goZone()">
+            <img :src="faceImage" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{comment.fromName}} 
+          </span>
       </div>
       <div v-if="comment.toUserId.length == 0" class="comment-item">
             <p>于 {{comment.createTime}} 留言:</p>
@@ -61,8 +63,14 @@ export default {
                 console.log(res)
                 floatMessage(res.data)
                 $(".trigger-info").click()
+                //不刷新界面,重新读取数据
+                var url = this.$route.path + '?zoneId=' + this.$route.query.zoneId + '&rand=' + Math.random()
+                this.$router.push(url)
             });
             this.show = !this.show
+        },
+        goZone() {
+             this.$router.push('/user/zone?zoneId=' + this.comment.zone)
         }
     },
     mounted() {

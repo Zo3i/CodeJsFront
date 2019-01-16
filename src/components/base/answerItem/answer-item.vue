@@ -121,7 +121,8 @@ export default {
             this.$router.push('/work?id=' + this.questionId)
         },
         goCenter() {
-            this.$router.push('/work?id=' + this.questionId)
+            // console.log(this.answer)
+            this.$router.push('/user/zone?zoneId='+ this.answer.user.zoneId)
         }
     },
     mounted() {

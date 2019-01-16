@@ -65,22 +65,37 @@
             </el-tab-pane>
             <el-tab-pane label="我的答案" name="second" class="myanswer" :lazy='lazy' >
               <div class="answer">
-                <div v-for="(item, index) in answerlist" v-bind:key="index * 3">
-                  <answerItem :answer="item" :key="item.id"></answerItem>
+                <div v-if="answerlist.length > 0">
+                  <div  v-for="(item, index) in answerlist" v-bind:key="index * 3">
+                    <answerItem :answer="item" :key="item.id"></answerItem>
+                  </div>
+                </div>
+                <div v-else>
+                  <p class="emptyList">空空如也</p>
                 </div>
               </div>
             </el-tab-pane>
             <el-tab-pane label="收藏答案" name="third" :lazy='lazy' >
               <div class="collectanswer">
-                <div v-for="(item, index) in collectList" v-bind:key="index">
-                  <answerItem :answer="item" :key="item.id"></answerItem>
+                <div v-if="collectList.length > 0">
+                  <div v-for="(item, index) in collectList" v-bind:key="index">
+                    <answerItem :answer="item" :key="item.id"></answerItem>
+                  </div>
+                </div>
+                <div v-else>
+                  <p class="emptyList">空空如也</p>
                 </div>
               </div>
             </el-tab-pane>
             <el-tab-pane label="点赞答案" name="fourth" class="myanswer" :lazy='lazy' >
               <div class="likeanswer">
-                <div v-for="(item, index) in likeList" v-bind:key="index">
-                  <answerItem :answer="item" :key="item.id"></answerItem>
+                <div v-if="likeList.length > 0">
+                  <div v-for="(item, index) in likeList" v-bind:key="index">
+                    <answerItem :answer="item" :key="item.id"></answerItem>
+                  </div>
+                </div>
+                <div v-else>
+                  <p class="emptyList">空空如也</p>
                 </div>
               </div>
             </el-tab-pane>
@@ -274,6 +289,11 @@ text-align: center;
   border-radius: 0 !important;
   /* width: 80px !important; */
   /* height: 80px !important; */
+}
+.emptyList {
+  font-size: 50px;
+  text-align: center;
+  line-height: 220px;
 }
 
 </style>

@@ -207,7 +207,14 @@ export default {
           mobile: this.user.mobile
         }
       }).then(res => {
-        location.reload();
+        console.log(res)
+        if (res.data == "已加入小队!") {
+          location.reload();
+        } else {
+           floatMessage(res.data)
+           $(".trigger-info").click()
+        }
+        
       });
     }
   },

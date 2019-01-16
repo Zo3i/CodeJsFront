@@ -1,49 +1,56 @@
 <template>
-    <div>
-            <div class="work-top">
-                <div class="main-left">
-                  <p style="font-size: 20px;font-weight: bold;color: #bccdd3">QUESTION: {{randomQuestion.name}}</p>
-                  <hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>
-                <div>
-                    {{randomQuestion.description}}
-                </div>
-                </div>
-                <div class="main-right">
-                    <textarea id="code" ref="code"></textarea>
-                </div>
-            </div>
-            <div class="below">
-                <div class="result">
-                  <template v-show="flag">
-                    <div ref="result">
-                      <p style="font-size: 20px;font-weight: bold;color: #bccdd3">RESULT:</p>
-                      <ol v-html="result" style="list-style-type: square">
-                      </ol>
-                    </div>
-                  </template>
-                  <div id="error" ref="error" v-show="!flag"></div>
-                </div>
-                <div class="task">
-                  <p style="font-size: 20px;font-weight: bold;color: #bccdd3">TASKS:</p>
-                      <ol ref="task">
-                        <li v-for="task in tasks" :key = task.id>
-                          {{task.task}}
-                          <hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 20px;'/>
-                        </li>
-                      </ol>
-                      <div class="submit">
-                        <div class="check">
-                          <button v-show="cheked" @click="cal()"  style="background-color:#3c7dba;width:80px;border-radius:6px;border-color:#3c7dba;color:#303133">检查</button>
-                          <button  v-show="!cheked"  @click="save()" style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab">提交</button>
-                        </div>
-                      </div>
-                </div>
-            </div>
+  <div>
+    <div class="work-top">
+      <div class="main-left">
+        <p
+          style="font-size: 20px;font-weight: bold;color: #bccdd3"
+        >QUESTION: {{randomQuestion.name}}</p>
+        <hr style="border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;">
+        <div>{{randomQuestion.description}}</div>
+      </div>
+      <div class="main-right">
+        <textarea id="code" ref="code"></textarea>
+      </div>
     </div>
+    <div class="below">
+      <div class="result">
+        <template v-show="flag">
+          <div ref="result">
+            <p style="font-size: 20px;font-weight: bold;color: #bccdd3">RESULT:</p>
+            <ol v-html="result" style="list-style-type: square"></ol>
+          </div>
+        </template>
+        <div id="error" ref="error" v-show="!flag"></div>
+      </div>
+      <div class="task">
+        <p style="font-size: 20px;font-weight: bold;color: #bccdd3">TASKS:</p>
+        <ol ref="task">
+          <li v-for="task in tasks" :key="task.id">
+            {{task.task}}
+            <hr style="border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 20px;">
+          </li>
+        </ol>
+        <div class="submit">
+          <div class="check">
+            <button
+              v-show="cheked"
+              @click="cal()"
+              style="background-color:#3c7dba;width:80px;border-radius:6px;border-color:#3c7dba;color:#303133"
+            >检查</button>
+            <button
+              v-show="!cheked"
+              @click="save()"
+              style="background-color:rgba(0,0,0,0.2);width:80px;border-radius:6px;border-color:#3c7dba;color:#4467ab"
+            >提交</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-  import NProgress from 'NProgress'
+import NProgress from "NProgress";
 export default {
   name: "Index",
   data() {
@@ -57,13 +64,13 @@ export default {
       flag: true,
       cheked: true,
       right: 0,
-      submitPay:"",
+      submitPay: "",
       user: {}
     };
   },
   methods: {
     init() {
-      var that = this
+      var that = this;
       this.editor = CodeMirror.fromTextArea(this.$refs.code, {
         lineNumbers: true,
         styleActiveLine: true,
@@ -80,7 +87,7 @@ export default {
         } //
       });
       var editor = this.editor;
-      editor.setSize('auto','400px');
+      editor.setSize("auto", "400px");
       // editor.setValue("//your code here");
       editor.setOption("extraKeys", {
         // Tab键换成4个空格
@@ -97,62 +104,125 @@ export default {
           if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
         }
       });
-      editor.on("change", function (){
-        that.codeChange()
-      })
+      editor.on("change", function() {
+        that.codeChange();
+      });
     },
     save() {
-      var editor = this.editor
-      var answer = editor.getValue()
+      var editor = this.editor;
+      var answer = editor.getValue();
       this.$ajax({
-          method: 'post',
-          url: '/api/saveAnswer',
-          data: {
-            questionId: this.randomQuestion.id,
-            userMobile: this.user.mobile,
-            answer: answer
-          }
-      }).then (res => {
-          console.oldLog(res)
-          floatMessage(res.data)
-          $(".trigger-info").click()
-          if (res.status == 200) {
-             this.$router.push('/work/answerList?questionId=' + this.randomQuestion.id)
-          }
-      }).catch(err => {
-
+        method: "post",
+        url: "/api/saveAnswer",
+        data: {
+          questionId: this.randomQuestion.id,
+          userMobile: this.user.mobile,
+          answer: answer
+        }
       })
+        .then(res => {
+          console.oldLog(res);
+          floatMessage(res.data);
+          $(".trigger-info").click();
+          if (res.status == 200) {
+            this.$router.push(
+              "/work/answerList?questionId=" + this.randomQuestion.id
+            );
+          }
+        })
+        .catch(err => {});
     },
     cal() {
       //初始化
-      this.right = 0
-      this.flag = true
-      var task = this.randomQuestion.questionTasksList
-      var that = this
-      this.result = ""
-      this.consoleRes = ""
-      var editor = this.editor
-      var temp = ""
+      this.right = 0;
+      this.flag = true;
+      var task = this.randomQuestion.questionTasksList;
+      var that = this;
+      this.result = "";
+      this.consoleRes = "";
+      var editor = this.editor;
+      var temp = "";
+
       for (var i in task) {
-        var func = task[i].task.split("=")[0]
-        var answer = task[i].task.split("=")[1]
         try {
-          temp = eval(editor.getValue() + func)
-          if (answer.replace(temp, '').trim() == '""'
-              || answer.replace(temp, '').trim() == "''"
-              || answer.replace(temp, '').trim() == '' ) {
+
+          let func = task[i].task.split("=")[0];
+          let answer = task[i].task.split("=")[1];
+          var userAnswer = editor.getValue();
+          var isRight = ""
+
+          console.oldLog(answer[0])
+          console.oldLog(answer[answer.length-1])
+          // 判断类型
+          if (
+            (answer[0] == "'" && answer[answer.length-1] == "'") ||
+            (answer[0] == '"' && answer[answer.length-1] == '"')
+          ) {
+            console.oldLog("字符串");
+            answer = answer.substr(1, answer.length - 2);
+            isRight = function isRight() {
+              console.oldLog(answer);
+              console.oldLog(eval(editor.getValue() + func));
+              return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + ''
+            }
+          } else if (answer[0] == "[" && answer[answer.length - 1] == "]") {
+            console.oldLog("数组");
+            answer = answer.substr(1, answer.length - 2);
+            answer = JSON.parse("[" + answer + "]");
+
+            isRight = function isRight() {
+              console.oldLog(answer);
+              console.oldLog(eval(editor.getValue() + func));
+              return JSON.stringify(eval(editor.getValue() + func)) ==
+                JSON.stringify(answer) ? true : eval(editor.getValue() + func) + ''
+            }
+          } else if (answer[0] == "{" && answer[answer.length] == "}") {
+            console.oldLog("对象");
+            answer = JSON.parse(answer);
+
+            isRight = function isRight() {
+              console.oldLog(answer);
+              console.oldLog(eval(editor.getValue() + func));
+              return (
+                JSON.stringify(eval(editor.getValue() + func)) ==
+                JSON.stringify(answer) ? true : eval(editor.getValue() + func) + ''
+              );
+            }
+          } else {
+            console.oldLog("整数");
+            answer = parseInt(answer);
+
+            isRight = function isRight() {
+              console.oldLog(answer);
+              console.oldLog(eval(editor.getValue() + func));
+              console.oldLog(eval(editor.getValue() + func) === answer)
+              return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + '';
+            }
+          }
+
+          // console.oldLog(isRight);
+
+          if (isRight() === true) {
             //累计正确答案的数量
-            this.right++
-            that.result += "<li style='color:#67b04b;font-size: 22px'>正确!</li>"
-            that.result += "<hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>"
+            this.right++;
+            that.result +=
+              "<li style='color:#67b04b;font-size: 22px'>正确!</li>";
+            that.result +=
+              "<hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>";
           } else {
             that.result +=
-              "<li>我们希望得到的答案是:  " + answer + "</li>" + " <li style='color:#bb1b19'>您的答案是:  " + temp + "</li>";
-            that.result += "<hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>"
+              "<li>我们希望得到的答案是:  " +
+              answer +
+              "</li>" +
+              " <li style='color:#bb1b19'>您的答案是:  " +
+              isRight() +
+              "</li>";
+            that.result +=
+              "<hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>";
           }
         } catch (ex) {
           //处理异常事件
-          that.flag = false
+          that.flag = false;
           this.treeData = [
             {
               text: "Catch Error(部分信息，可能因浏览器而异)",
@@ -182,71 +252,68 @@ export default {
         }
       }
       if (this.right == task.length) {
-        this.cheked = false
+        this.cheked = false;
       }
     },
     log(str) {
       this.consoleRes += str + "\r\n";
     },
     codeChange() {
-      this.cheked = true
-    },
+      this.cheked = true;
+    }
   },
   mounted() {
     var that = this;
     this.init();
     //获取随机问题
     var editor = this.editor;
-     this.$ajax({
-          method: 'post',
-          url: '/api/getQuestion/' + this.$route.query.id,
-      }).then (res => {
-          this.randomQuestion = res.data
-          //设置题目
-          editor.setValue(res.data.questionInit);
-          //设置全局task
-          that.tasks = res.data.questionTasksList
-      }).catch(err => {
-
+    this.$ajax({
+      method: "post",
+      url: "/api/getQuestion/" + this.$route.query.id
+    })
+      .then(res => {
+        this.randomQuestion = res.data;
+        //设置题目
+        editor.setValue(res.data.questionInit);
+        //设置全局task
+        that.tasks = res.data.questionTasksList;
       })
+      .catch(err => {});
     console.log = this.log;
-    this.user = JSON.parse(localStorage.user)
+    this.user = JSON.parse(localStorage.user);
   },
   beforeCreate() {
     //替换console
     console.oldLog = console.log;
   },
-  created() {
-
-  },
+  created() {},
   components: {}
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-@font-face{
-    font-family: 'Oxygen Mono';
-    src : url('../../../static/font/OxygenMono-Regular.ttf');
+@font-face {
+  font-family: "Oxygen Mono";
+  src: url("../../../static/font/OxygenMono-Regular.ttf");
 }
 body {
-  font: 14px "Oxygen Mono","Helvetica Neue","Helvetica",sans-serif;
+  font: 14px "Oxygen Mono", "Helvetica Neue", "Helvetica", sans-serif;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #303133;
 }
 html {
-    height: 100%;
+  height: 100%;
 }
 .CodeMirror {
   font: 20px "Oxygen Mono", Helvetica, Arial, sans-serif;
 }
 
-
 .main-left {
   letter-spacing: 0.1em;
-  overflow :auto;
+  overflow: auto;
   flex-grow: 1;
   color: #aaaaa9;
   background-color: #1f2020;
@@ -277,21 +344,21 @@ html {
   padding: 10px;
   flex-grow: 1;
 }
-.work-top{
-    display: flex;
+.work-top {
+  display: flex;
 }
 .below {
-    display: flex;
+  display: flex;
 }
 #error {
-    background-color: #3c3c3c;
-    color: black
+  background-color: #3c3c3c;
+  color: black;
 }
-.result{
+.result {
   color: white;
-  background-color: #1f2020
+  background-color: #1f2020;
 }
-.task{
+.task {
   background-color: black;
   font-size: 20px;
   height: 400px;
@@ -301,7 +368,7 @@ html {
   display: flex;
   flex-direction: column;
 }
-.submit{
+.submit {
   margin-top: auto;
   /* push to bottom */
   align-self: flex-start;
@@ -313,5 +380,4 @@ html {
 .questionName {
   background-color: #77f93a;
 }
-
 </style>

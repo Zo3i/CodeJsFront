@@ -4,7 +4,7 @@
          <el-col :xs="12" :sm="12" :md="14" :lg="16" :xl="18">
            <div class="left">
              <div class="image"></div>
-             <div class="des">Hello</div>
+             <div class="des">World</div>
            </div>
          </el-col>
          <el-col :xs="12" :sm="12" :md="10" :lg="8" :xl="6">
