@@ -5,7 +5,7 @@
         <el-row type="flex" :gutter="20" justify="space-between">
          <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" >
            <!-- <div> <img  @click="home()" src="../static/image/header.png" alt="" width="50px"></div> -->
-          <div  @click="home()" class="logo">&nbsp;&nbsp;JSWEB</div>
+          <div   class="logo"><span @click="home()">&nbsp;&nbsp;JSWEB</span></div>
          </el-col>
          
          <el-col  v-if="GLOBAL.isLogin"  :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
@@ -17,6 +17,7 @@
             <el-dropdown-menu slot="dropdown" >
               <el-dropdown-item @click.native="center()">个人中心</el-dropdown-item>
               <el-dropdown-item @click.native="zone()">空间</el-dropdown-item>
+              <el-dropdown-item @click.native="rank()">总榜</el-dropdown-item>
               <el-dropdown-item @click.native="logout()">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -70,6 +71,9 @@ export default {
     },
     zone () {
       this.$router.push('/user/zone?zoneId=' + this.user.zoneId)
+    },
+    rank () {
+      this.$router.push('/user/rank')
     }
   },
   beforeMount() {

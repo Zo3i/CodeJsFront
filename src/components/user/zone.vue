@@ -64,6 +64,7 @@ export default {
                    fromMobile: this.user.mobile
                 }
             }).then(res => {
+                $('#comment').val('')
                 console.log(res)
                 floatMessage(res.data)
                 $(".trigger-info").click()

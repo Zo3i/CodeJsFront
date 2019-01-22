@@ -7,6 +7,7 @@ import Sign from './sign'
 import AnswerList from './answer'
 import Center from './center'
 import Zone from './zone'
+import Rank from './rank'
 
 Vue.use(Router)
 
@@ -18,6 +19,7 @@ export default new Router({
     Sign,
     AnswerList,
     Center,
-    Zone
+    Zone,
+    Rank
   ]
 })
