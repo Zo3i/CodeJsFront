@@ -6,7 +6,7 @@
           style="font-size: 20px;font-weight: bold;color: #bccdd3"
         >QUESTION: {{randomQuestion.name}}</p>
         <hr style="border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;">
-        <div>{{randomQuestion.description}}</div>
+        <div><textarea class="textarea-des" v-text="randomQuestion.description"></textarea></div>
       </div>
       <div class="main-right">
         <textarea id="code" ref="code"></textarea>
@@ -26,7 +26,7 @@
         <p style="font-size: 20px;font-weight: bold;color: #bccdd3">TASKS:</p>
         <ol ref="task">
           <li v-for="task in tasks" :key="task.id">
-            {{task.task}}
+            {{task.taskQuestion}} = {{task.taskAnswer}}
             <hr style="border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 20px;">
           </li>
         </ol>
@@ -146,13 +146,12 @@ export default {
       for (var i in task) {
         try {
 
-          let func = task[i].task.split("=")[0];
-          let answer = task[i].task.split("=")[1];
+          let func = task[i].taskQuestion
+          let answer = task[i].taskAnswer
           var userAnswer = editor.getValue();
           var isRight = ""
 
-          console.oldLog(answer[0])
-          console.oldLog(answer[answer.length-1])
+          console.oldLog(answer)
           // 判断类型
           if (
             (answer[0] == "'" && answer[answer.length-1] == "'") ||
@@ -188,9 +187,19 @@ export default {
                 JSON.stringify(answer) ? true : eval(editor.getValue() + func) + ''
               );
             }
+          } else  if (answer == "false" || answer == "true") {
+            console.oldLog("布尔");
+            isRight = function isRight() {
+              console.oldLog(answer);
+              console.oldLog(eval(editor.getValue() + func));
+              console.oldLog(eval(editor.getValue() + func) === answer)
+              //转布尔
+              answer = answer == "true" ? true : false
+              return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + '';
+            }
           } else {
             console.oldLog("整数");
-            answer = parseInt(answer);
+            answer = Number(answer);
 
             isRight = function isRight() {
               console.oldLog(answer);
@@ -309,6 +318,7 @@ html {
 }
 .CodeMirror {
   font: 20px "Oxygen Mono", Helvetica, Arial, sans-serif;
+  overflow: auto;
 }
 
 .main-left {
@@ -379,5 +389,13 @@ html {
 }
 .questionName {
   background-color: #77f93a;
+}
+.textarea-des {
+  background-color: #1f2020;
+  border: 0;
+  height: 280px;
+  width: 100%;
+  overflow: auto;
+  resize: none;  
 }
 </style>

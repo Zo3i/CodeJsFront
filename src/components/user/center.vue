@@ -223,7 +223,7 @@ box-shadow: 5px 8px 26px -6px rgba(170,170,169,1);
 
 
 font-size: 30px;
-color: bisque;
+color: #aaaaa9;
 text-align: center;
     display: inline;
 }

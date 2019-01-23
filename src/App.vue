@@ -73,7 +73,7 @@ export default {
       this.$router.push('/user/zone?zoneId=' + this.user.zoneId)
     },
     rank () {
-      this.$router.push('/user/rank')
+      this.$router.push('/user/rank?mobile=' + this.user.mobile)
     }
   },
   beforeMount() {
@@ -103,7 +103,27 @@ export default {
     }
   },
   created() {
-
+    function IsPC() {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ["Android", "iPhone","SymbianOS", 
+                        "Windows Phone","iPad", "iPod"];
+        var flag = true;
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
+    if (!IsPC()) {
+        var e = confirm("请用电脑打开!"); 
+        if (e) {
+         window.location.href = 'http://t.cn/E5H9KMC'
+        } else {
+          window.location.href = 'http://t.cn/E5H9KMC'
+        }
+    }
   },
   beforeCreate() {
     
@@ -192,10 +212,8 @@ export default {
 
   ::-webkit-scrollbar {
   display: block;
-  width: 0.5em;
+  width: 0.1em;
   overflow: auto;
-  height: 2em;
-
 }
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(48,49,51, 0.3);

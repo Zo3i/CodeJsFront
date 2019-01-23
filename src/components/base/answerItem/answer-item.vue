@@ -1,7 +1,7 @@
 <template>
   <div class="loading">
-      <div style='font-size:18px;margin-bottom:10px;cursor: pointer;' @click="goCenter()">
-          <img :src="faceImage" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{answer.user.name}}
+      <div style='font-size:18px;margin-bottom:10px;cursor: pointer;' >
+          <img :src="faceImage" @click="goCenter()" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{answer.user.name}}
       </div>
       <textarea :id = "'answer-item' + key"></textarea>
       <div style='padding:10px;font-size:20px;font-weight:bold'>
@@ -11,7 +11,7 @@
         <img v-show="isCollect" :src="collectImage" @click="disCollect()"  class='collect' width='15px' height='15px'>
         <img  v-show="!isCollect" :src="discollectImage" @click="collect()" class='discollect' width='15px' height='15px'>
         <span style='padding:1px'>{{totalCollect}}</span>
-        <a class="question" @click="seeQuestion">查看问题</a>
+        <a class="question" @click="seeQuestion">查看问题</a> &nbsp;|&nbsp; <a class="question" @click="seeAnswer">所有答案</a>
       </div>
       <br><br><hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>
   </div>
@@ -119,6 +119,9 @@ export default {
         },
         seeQuestion() {
             this.$router.push('/work?id=' + this.questionId)
+        },
+        seeAnswer () {
+            this.$router.push('/work/answerList?questionId=' + this.questionId)
         },
         goCenter() {
             // console.log(this.answer)

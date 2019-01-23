@@ -110,6 +110,11 @@ body {
   flex-direction: column;
   background-color: #303133;
 }
+::-webkit-scrollbar {
+    display: none; 
+    width: 0.1em;
+    overflow: auto;
+}
 html {
   height: 100%;
 }
