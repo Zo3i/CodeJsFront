@@ -6,7 +6,7 @@
           style="font-size: 20px;font-weight: bold;color: #bccdd3"
         >QUESTION: {{randomQuestion.name}}</p>
         <hr style="border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;">
-        <div><textarea class="textarea-des" v-text="randomQuestion.description"></textarea></div>
+        <div><textarea style="outline: none;" class="textarea-des" readonly v-text="randomQuestion.description"></textarea></div>
       </div>
       <div class="main-right">
         <textarea id="code" ref="code"></textarea>
@@ -143,6 +143,17 @@ export default {
       var editor = this.editor;
       var temp = "";
 
+      //攻击拦截
+      // var xss = ['alert', 'confirm', 'prompt']
+      // var isScript = false
+      // xss.map(e => isScript = editor.getValue().indexOf(e) != -1 ? false : true)
+      // console.oldLog(isScript)
+      // if (isScript) {
+      //   floatMessage("请勿输入非法字符!")
+      //   $(".trigger-info").click()
+      //   return false
+      // }
+
       for (var i in task) {
         try {
 
@@ -191,8 +202,7 @@ export default {
             console.oldLog("布尔");
             isRight = function isRight() {
               console.oldLog(answer);
-              console.oldLog(eval(editor.getValue() + func));
-              console.oldLog(eval(editor.getValue() + func) === answer)
+              console.oldLog("答案" + eval(editor.getValue() + func));
               //转布尔
               answer = answer == "true" ? true : false
               return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + '';
@@ -318,7 +328,7 @@ html {
 }
 .CodeMirror {
   font: 20px "Oxygen Mono", Helvetica, Arial, sans-serif;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .main-left {

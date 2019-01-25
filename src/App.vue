@@ -3,7 +3,7 @@
     <el-container id="container">
       <el-header>
         <el-row type="flex" :gutter="20" justify="space-between">
-         <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" >
+         <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="2" >
            <!-- <div> <img  @click="home()" src="../static/image/header.png" alt="" width="50px"></div> -->
           <div   class="logo"><span @click="home()">&nbsp;&nbsp;JSWEB</span></div>
          </el-col>
@@ -180,6 +180,7 @@ export default {
     color: #333;
     text-align: left;
     min-height: calc(100vh - 160px);
+    padding: 0px; 
   }
 
   .users{
@@ -212,7 +213,7 @@ export default {
 
   ::-webkit-scrollbar {
   display: block;
-  width: 0.1em;
+  width: 0.5em;
   overflow: auto;
 }
 ::-webkit-scrollbar-track {

@@ -3,6 +3,7 @@
     <el-row type="flex" justify="end" :class="'member' + index" >
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" ><span :class="'color' + index">◈</span>{{index}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{rankItem.name}}</el-col>
+        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{rankItem.count}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{rankItem.best}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" >{{rankItem.totalRank}}</el-col>
     </el-row>

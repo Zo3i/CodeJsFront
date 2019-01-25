@@ -1,5 +1,5 @@
 <template :key="key">
-    <div>
+    <div style="pedding:20px;">
       <el-row type="flex" justify="left" class="body" >
          <el-col :xs="12" :sm="12" :md="10" :lg="14" :xl="18">
            <div class="left">

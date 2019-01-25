@@ -30,7 +30,7 @@ export default {
         index: {
             type: Number
         },
-        fromMobile: {
+        fromToken: {
             type: String
         }
 
@@ -55,9 +55,9 @@ export default {
                 data: {
                    comment: comment,
                    zone: zoneId,
-                   toUserId: touser,
-                   fromMobile: this.fromMobile,
-                   toUserId: fromUserId 
+                   toUserId: fromUserId,
+                   token: this.fromToken,
+                //    toUserId: fromUserId 
                 }
             }).then(res => {
                 console.log(res)

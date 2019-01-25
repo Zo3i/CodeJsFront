@@ -9,6 +9,7 @@
                             <el-row type="flex" justify="space-between">
                             <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">排名</el-col>
                             <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">队名</el-col>
+                            <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">人数</el-col>
                             <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">状元</el-col>
                             <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">总分</el-col>
                             </el-row>
@@ -59,7 +60,7 @@ export default {
         url: '/api/rank',
     }).then (res => {
         console.log(res)
-        var team = res.data
+        var team = res.data //.concat(res.data).concat(res.data).concat(res.data).concat(res.data).concat(res.data).concat(res.data)
         this.totle = team.length
         this.teamAll = team
         
@@ -73,7 +74,7 @@ export default {
 
 
 
-<style>
+<style >
 @font-face{
     font-family: 'Oxygen Mono';
     src : url('../../../static/font/OxygenMono-Regular.ttf');
@@ -82,6 +83,7 @@ export default {
     font-size: 40px;
     color: #aaaaa9;
     text-align: center;
+    padding: 20px;
 }
 .rank {
     background-color: #262729;
@@ -100,5 +102,9 @@ export default {
 .rank-item-info {
     color: #90bab5;
 }
-
+.el-col {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>

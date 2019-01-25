@@ -120,6 +120,7 @@ html {
 }
 .answer-list {
   color: #aaaaa9;
+  padding: 10px;
 }
 .CodeMirror {
   font: 20px "Oxygen Mono", Helvetica, Arial, sans-serif;

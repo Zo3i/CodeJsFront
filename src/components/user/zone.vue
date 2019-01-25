@@ -9,7 +9,7 @@
         </div>
 
 
-        <div class="main">
+        <div class="main-zone">
             <div class="leave-comment">
                 <div id="comment-form">
                     <input type="text"  placeholder="说点什么吧..." id="comment" name="comment"/>
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="comment" v-for="(item, index) in commentList" v-bind:key="item.id">
-                <commentItem :comment="item" :index="index" :fromMobile="user.mobile" :key="index" v-if="index < (page * 5)"></commentItem>
+                <commentItem :comment="item" :index="index" :fromToken="user.token" :key="index" v-if="index < (page * 5)"></commentItem>
             </div>
 
             <div v-if="totle > 5 && totle > (page * 5)">
@@ -61,7 +61,7 @@ export default {
                    comment: comment,
                    zone: this.zoneId,
                    toUserId: touser,
-                   fromMobile: this.user.mobile
+                   token: this.user.token
                 }
             }).then(res => {
                 $('#comment').val('')
@@ -151,7 +151,7 @@ html {
   min-height: calc(100vh - 180px);
 }
 
-.main {
+.main-zone {
     margin-top: 40px;
     width: 100%;
     /* height: 800px; */
