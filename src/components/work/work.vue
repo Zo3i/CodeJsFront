@@ -143,85 +143,111 @@ export default {
       var editor = this.editor;
       var temp = "";
 
-      //攻击拦截
-      // var xss = ['alert', 'confirm', 'prompt']
-      // var isScript = false
-      // xss.map(e => isScript = editor.getValue().indexOf(e) != -1 ? false : true)
-      // console.oldLog(isScript)
-      // if (isScript) {
-      //   floatMessage("请勿输入非法字符!")
-      //   $(".trigger-info").click()
-      //   return false
-      // }
-
       for (var i in task) {
-        try {
-
           let func = task[i].taskQuestion
           let answer = task[i].taskAnswer
           var userAnswer = editor.getValue();
           var isRight = ""
+          var questionId = this.randomQuestion.id
 
-          console.oldLog(answer)
-          // 判断类型
-          if (
-            (answer[0] == "'" && answer[answer.length-1] == "'") ||
-            (answer[0] == '"' && answer[answer.length-1] == '"')
-          ) {
-            console.oldLog("字符串");
-            answer = answer.substr(1, answer.length - 2);
-            isRight = function isRight() {
-              console.oldLog(answer);
-              console.oldLog(eval(editor.getValue() + func));
-              return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + ''
-            }
-          } else if (answer[0] == "[" && answer[answer.length - 1] == "]") {
-            console.oldLog("数组");
-            answer = answer.substr(1, answer.length - 2);
-            answer = JSON.parse("[" + answer + "]");
+          new Promise(resolve => {
+            this.getResult(questionId, userAnswer, answer, func)
+          })
 
-            isRight = function isRight() {
-              console.oldLog(answer);
-              console.oldLog(eval(editor.getValue() + func));
-              return JSON.stringify(eval(editor.getValue() + func)) ==
-                JSON.stringify(answer) ? true : eval(editor.getValue() + func) + ''
-            }
-          } else if (answer[0] == "{" && answer[answer.length] == "}") {
-            console.oldLog("对象");
-            answer = JSON.parse(answer);
 
-            isRight = function isRight() {
-              console.oldLog(answer);
-              console.oldLog(eval(editor.getValue() + func));
-              return (
-                JSON.stringify(eval(editor.getValue() + func)) ==
-                JSON.stringify(answer) ? true : eval(editor.getValue() + func) + ''
-              );
-            }
-          } else  if (answer == "false" || answer == "true") {
-            console.oldLog("布尔");
-            isRight = function isRight() {
-              console.oldLog(answer);
-              console.oldLog("答案" + eval(editor.getValue() + func));
-              //转布尔
-              answer = answer == "true" ? true : false
-              return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + '';
-            }
-          } else {
-            console.oldLog("整数");
-            answer = Number(answer);
 
-            isRight = function isRight() {
-              console.oldLog(answer);
-              console.oldLog(eval(editor.getValue() + func));
-              console.oldLog(eval(editor.getValue() + func) === answer)
-              return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + '';
-            }
-          }
+          // console.oldLog(answer)
+          // // 判断类型
+          // if (
+          //   (answer[0] == "'" && answer[answer.length-1] == "'") ||
+          //   (answer[0] == '"' && answer[answer.length-1] == '"')
+          // ) {
+          //   console.oldLog("字符串");
+          //   answer = answer.substr(1, answer.length - 2);
+          //   isRight = function isRight() {
+          //     console.oldLog(answer);
+          //     console.oldLog(eval(editor.getValue() + func));
+          //     return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + ''
+          //   }
+          // } else if (answer[0] == "[" && answer[answer.length - 1] == "]") {
+          //   console.oldLog("数组");
+          //   answer = answer.substr(1, answer.length - 2);
+          //   answer = JSON.parse("[" + answer + "]");
+
+          //   isRight = function isRight() {
+          //     console.oldLog(answer);
+          //     console.oldLog(eval(editor.getValue() + func));
+          //     return JSON.stringify(eval(editor.getValue() + func)) ==
+          //       JSON.stringify(answer) ? true : eval(editor.getValue() + func) + ''
+          //   }
+          // } else if (answer[0] == "{" && answer[answer.length] == "}") {
+          //   console.oldLog("对象");
+          //   answer = JSON.parse(answer);
+
+          //   isRight = function isRight() {
+          //     console.oldLog(answer);
+          //     console.oldLog(eval(editor.getValue() + func));
+          //     return (
+          //       JSON.stringify(eval(editor.getValue() + func)) ==
+          //       JSON.stringify(answer) ? true : eval(editor.getValue() + func) + ''
+          //     );
+          //   }
+          // } else  if (answer == "false" || answer == "true") {
+          //   console.oldLog("布尔");
+          //   isRight = function isRight() {
+          //     console.oldLog(answer);
+          //     console.oldLog("答案" + eval(editor.getValue() + func));
+          //     //转布尔
+          //     answer = answer == "true" ? true : false
+          //     return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + '';
+          //   }
+          // } else {
+          //   console.oldLog("整数");
+          //   answer = Number(answer);
+
+          //   isRight = function isRight() {
+          //     console.oldLog(answer);
+          //     console.oldLog(eval(editor.getValue() + func));
+          //     console.oldLog(eval(editor.getValue() + func) === answer)
+          //     return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + '';
+          //   }
+          // }
 
           // console.oldLog(isRight);
 
-          if (isRight() === true) {
+
+      }
+
+
+
+ 
+
+
+     
+    },
+    log(str) {
+      this.consoleRes += str + "\r\n";
+    },
+    codeChange() {
+      this.cheked = true;
+    },
+    getResult(questionId, useranswer, rightAnswer, task) {
+      var that = this
+                this.$ajax({
+            method: "post",
+            url: "/api/isRight",
+            data: {
+              questionId: questionId,
+              useranswer: useranswer,
+              rightAnswer: rightAnswer,
+              task: task
+            }
+          }).then(res => {
+              
+              var result = res.data
+              console.oldLog(result)
+              if (result.wrong == false) {
+                if (result.right == true) {
             //累计正确答案的数量
             this.right++;
             that.result +=
@@ -231,54 +257,44 @@ export default {
           } else {
             that.result +=
               "<li>我们希望得到的答案是:  " +
-              answer +
+              rightAnswer +
               "</li>" +
               " <li style='color:#bb1b19'>您的答案是:  " +
-              isRight() +
+              result.answer +
               "</li>";
             that.result +=
               "<hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>";
           }
-        } catch (ex) {
-          //处理异常事件
-          that.flag = false;
-          this.treeData = [
-            {
-              text: "Catch Error(部分信息，可能因浏览器而异)",
-              nodes: [
-                {
-                  text: "Error message",
-                  nodes: [
-                    {
-                      text: ex.message,
-                      color: "#bb1b19"
-                    }
-                  ]
-                },
-                {
-                  text: "Error name",
-                  nodes: [
-                    {
-                      text: ex.name,
-                      color: "#bb1b19"
-                    }
-                  ]
-                }
-              ]
-            }
-          ];
-          $("#error").treeview({ data: this.treeData });
+              } else {
+                //处理异常事件
+                that.flag = false;
+                this.treeData = [
+                  {
+                    text: "Catch Error(部分信息，可能因浏览器而异)",
+                    nodes: [
+                      {
+                        text: "Error message",
+                        nodes: [
+                          {
+                            text: result.answer,
+                            color: "#bb1b19"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ];
+                $("#error").treeview({ data: this.treeData });
+              }
+
+
+            var tasks = this.randomQuestion.questionTasksList;
+            console.oldLog(that.right);
+            console.oldLog(tasks.length);
+            if (that.right == tasks.length) {
+              that.cheked = false;
         }
-      }
-      if (this.right == task.length) {
-        this.cheked = false;
-      }
-    },
-    log(str) {
-      this.consoleRes += str + "\r\n";
-    },
-    codeChange() {
-      this.cheked = true;
+})
     }
   },
   mounted() {
@@ -311,7 +327,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 @font-face {
   font-family: "Oxygen Mono";
   src: url("../../../static/font/OxygenMono-Regular.ttf");
@@ -344,6 +360,7 @@ html {
   margin: 10px;
 }
 .main-right {
+  font-size: 20px;
   flex-grow: 1;
   width: 50%;
   height: 400px;
@@ -407,5 +424,19 @@ html {
   width: 100%;
   overflow: auto;
   resize: none;  
+}
+
+  ::-webkit-scrollbar {
+  display: block;
+  width: 0.5em;
+  overflow: auto;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(48,49,51, 0.3);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  box-shadow: inset 0 0 6px rgba(242,242,242, 0.5);
 }
 </style>
