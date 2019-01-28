@@ -85,12 +85,7 @@ export default {
           } else {
             this.$ajax({
               method: 'post',
-              url: '/api/sign',
-              data: {
-                name: name,
-                password: this.$md5(password) ,
-                mobile: mobile
-              }
+              url: '/api/sign?name=' + name + '&password=' + this.$md5(password) + '&mobile=' + mobile,
             }).then(res => {
               if (res) {
                  floatMessage(res.data)

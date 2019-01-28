@@ -64,6 +64,7 @@ export default {
     login() {
       var mobile = $('#mobile').val()
       var password = $('#password').val()
+      console.log('密码'+ this.$md5(password))
       if(!/^1[34578]\d{9}$/.test(mobile)){
         floatMessage("手机号不正确!")
         $(".trigger-info").click()
@@ -74,11 +75,11 @@ export default {
         } else {
           this.$ajax({
             method: 'post',
-            url: '/api/login',
-            data: {
-              password: this.$md5(password),
-              mobile: mobile
-            }
+            url: '/api/login?mobile=' + mobile + '&password=' + this.$md5(password),
+              
+              // password: this.$md5(password),
+              // mobile: mobile
+            
           }).then(res => {
             console.log(res)
             if (res.status ==200 && res.data != undefined && res.data != null && res.data != '') {

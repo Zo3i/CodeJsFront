@@ -204,7 +204,7 @@ export default {
         url: "/api/jointeam",
         data: {
           teamName: teamName,
-          mobile: this.user.mobile
+          token: this.user.token
         }
       }).then(res => {
         console.log(res)
