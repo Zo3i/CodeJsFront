@@ -32,7 +32,7 @@
         </ol>
         <div class="submit">
           <div class="check">
-            <button
+            <button class="checkBtn"
               v-show="cheked"
               @click="cal()"
               style="background-color:#3c7dba;width:80px;border-radius:6px;border-color:#3c7dba;color:#303133"
@@ -65,7 +65,8 @@ export default {
       cheked: true,
       right: 0,
       submitPay: "",
-      user: {}
+      user: {},
+      count: 1
     };
   },
   methods: {
@@ -134,7 +135,9 @@ export default {
     },
     cal() {
       //初始化
+      $('.checkBtn').attr("disabled", true)
       this.right = 0;
+      this.count = 0
       this.flag = true;
       var task = this.randomQuestion.questionTasksList;
       var that = this;
@@ -143,7 +146,7 @@ export default {
       var editor = this.editor;
       var temp = "";
 
-      for (var i in task) {
+      for (let i in task) {
           let func = task[i].taskQuestion
           let answer = task[i].taskAnswer
           var userAnswer = editor.getValue();
@@ -151,7 +154,7 @@ export default {
           var questionId = this.randomQuestion.id
 
           new Promise(resolve => {
-            this.getResult(questionId, userAnswer, answer, func)
+            this.getResult(questionId, userAnswer, answer, func, i)
           })
 
 
@@ -231,7 +234,7 @@ export default {
     codeChange() {
       this.cheked = true;
     },
-    getResult(questionId, useranswer, rightAnswer, task) {
+    getResult(questionId, useranswer, rightAnswer, task, index) {
       var that = this
                 this.$ajax({
             method: "post",
@@ -289,11 +292,18 @@ export default {
 
 
             var tasks = this.randomQuestion.questionTasksList;
-            console.oldLog(that.right);
-            console.oldLog(tasks.length);
+            
             if (that.right == tasks.length) {
               that.cheked = false;
-        }
+           }
+           
+           console.oldLog(this.count);
+            console.oldLog(tasks.length);
+            this.count = this.count + 1
+           if (this.count == tasks.length) {
+             $('.checkBtn').attr("disabled", false)
+           }
+           
 })
     }
   },
