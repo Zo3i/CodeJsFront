@@ -327,7 +327,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 @font-face {
   font-family: "Oxygen Mono";
   src: url("../../../static/font/OxygenMono-Regular.ttf");
@@ -427,16 +427,8 @@ html {
 }
 
   ::-webkit-scrollbar {
-  display: block;
-  width: 0.5em;
-  overflow: auto;
-}
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(48,49,51, 0.3);
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  box-shadow: inset 0 0 6px rgba(242,242,242, 0.5);
+  display: block !important;
+  width: 0.5em !important;;
+  overflow: auto !important;;
 }
 </style>

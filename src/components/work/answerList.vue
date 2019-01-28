@@ -98,7 +98,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @font-face {
   font-family: "Oxygen Mono";
   src: url("../../../static/font/OxygenMono-Regular.ttf");
@@ -110,11 +110,11 @@ body {
   flex-direction: column;
   background-color: #303133;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     display: none; 
     width: 0.1em;
     overflow: auto;
-}
+} */
 html {
   height: 100%;
 }
