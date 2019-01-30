@@ -243,7 +243,8 @@ export default {
               questionId: questionId,
               useranswer: useranswer,
               rightAnswer: rightAnswer,
-              task: task
+              task: task,
+              token: this.user.token
             }
           }).then(res => {
               
