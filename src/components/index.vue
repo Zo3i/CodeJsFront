@@ -162,11 +162,28 @@ export default {
         method: "post",
         url: "/api/getRandomQuestion?mobile=" + this.user.mobile
       }).then(res => {
-        this.randomQuestion = res.data;
+        if (res.data.length == 0) {
+          this.$ajax({
+            url: "/otherApi/all.json",
+            method: "post"
+          }).then(res => {
+            var content = res.data.content;
+            var author = res.data.author;
+            this.goodjob = content;
+            this.randomQuestion = {name: content,description: author,id: null}
+          })
+        } else {
+          this.randomQuestion = res.data;
+        } 
       });
     },
     go() {
-      this.$router.push("/work?id=" + this.randomQuestion.id);
+      if (this.randomQuestion.id != null) {
+        this.$router.push("/work?id=" + this.randomQuestion.id);
+      } else {
+            floatMessage("没题目了,不如赏赏诗吧~")
+            $(".trigger-info").click()
+      }
     },
     createTeam() {
       var teamName = $("#teamName").val();
@@ -235,6 +252,10 @@ export default {
         method: "post",
         url: "/api/getRandomQuestion?mobile=" + data.mobile
       }).then(res => {
+        if (res.data.length == 0) {
+          res.data = {name: "恭喜,你已答完所有题目!"}
+        } 
+        console.log(res.data)
         this.randomQuestion = res.data
       });
       //查询队伍
