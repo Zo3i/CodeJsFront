@@ -42,15 +42,38 @@ export default {
       goodjob: "",
       answerlist: [],
       page: 1,
-      totle: ''
+      totle: '',
+      isScroll: true
     };
   },
   methods: {
     load() {
       this.page ++
+       this.$nextTick(() => {
+         if (this.totle > 5 && this.totle > (this.page * 5)) {
+            this.isScroll = true
+         }
+      })
+    },
+    handleScroll (){
+      var that = this
+      $('.el-main').scroll(function () {
+        console.log("滚动" + that.isScroll)
+        
+        var st = this.scrollTop;
+        var height = this.clientHeight;
+        var sh = this.scrollHeight;
+              if (st + height >= sh && that.isScroll == true){
+                  console.log("到底了..");
+                  that.isScroll = false
+                  st -= 300 
+                  that.load()
+              }
+        });
     }
   },
   mounted() {
+    window.addEventListener('scroll', this.handleScroll, true);
     this.user = JSON.parse(localStorage.user)
     this.$ajax({
       url: "/otherApi/all.json",
@@ -63,7 +86,6 @@ export default {
   },
   beforeCreate() {},
   created() {
-
     new Promise(resolve => {
       //获取用户信息
       this.$ajax({

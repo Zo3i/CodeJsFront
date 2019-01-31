@@ -1,6 +1,6 @@
 <template :key="key">
     <div>
-        <div class="banner">排行榜</div>
+        <div class="banner">大佬排行榜</div>
         <hr style="border-top: 1px solid #221f1f; margin-bottom: 30px;">
             <el-row type="flex" justify="center">
                 <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="18">
@@ -28,7 +28,6 @@
                     </div>
                     </el-col>
                 </el-row>
-
         
     </div>
 </template>
@@ -42,15 +41,38 @@ export default {
     return {
         teamAll: [],
         page: 1,
-        totle: ''
+        totle: '',
+        isScroll: true
     };
   },
   methods: {
     load() {
       this.page ++
+       this.$nextTick(() => {
+         if (this.totle > 5 && this.totle > (this.page * 5)) {
+            this.isScroll = true
+         }
+      })
+    },
+    handleScroll (){
+      var that = this
+      $('.el-main').scroll(function () {
+        console.log("滚动" + that.isScroll)
+        
+        var st = this.scrollTop;
+        var height = this.clientHeight;
+        var sh = this.scrollHeight;
+              if (st + height >= sh && that.isScroll == true){
+                  console.log("到底了..");
+                  that.isScroll = false
+                  st -= 1000
+                  that.load()
+              }
+        });
     }
   },
   mounted() {
+      window.addEventListener('scroll', this.handleScroll, true);
   },
   beforeCreate() {
   },

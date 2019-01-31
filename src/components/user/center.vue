@@ -40,28 +40,17 @@
         <div class="bottom-info">
           <el-tabs v-model="activeName" tab-position="right" style="height: 200px;" @tab-click="handleClick">
             <el-tab-pane label="解决问题" name="first" >
-              <!-- <el-row type="flex" justify="end" >
-                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" class="myquestion-title">题目</el-col>
-                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" class="myquestion-title">分数</el-col>
-                  <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" class="myquestion-title">时间</el-col>
-              </el-row>
-              <br/>
-              <div v-for="(item, index) in questionList" v-bind:key="index">
-                  <UserQuestion :question="item" :key="item.name"></UserQuestion>
-                </div> -->
-                <!-- <timeline-title>战绩</timeline-title> -->
-                
-              <!-- <div v-for="(item, index) in questionList" v-bind:key="index">
-                <timeline-item bg-color="#9dd8e0">
-                  <UserQuestion :question="item" :key="item.name"></UserQuestion>
-                </timeline-item>
-                  
-                </div> -->
-                 <hzqing-vue-timeline 
-   timelineColor="#5bbcd5"  
-   timeContentColor="white"
-   :dataList="questionList"
-   ></hzqing-vue-timeline>
+              <div  v-if="questionList.length > 0">
+                <hzqing-vue-timeline 
+                  timelineColor="#5bbcd5"  
+                  timeContentColor="white"
+                  :dataList="questionList"
+                  ></hzqing-vue-timeline>
+              </div>
+               <div v-else>
+                  <p class="emptyList" style="color: #aaaaa9;">空空如也</p>
+                </div>
+                 
             </el-tab-pane>
             <el-tab-pane label="我的答案" name="second" class="myanswer" :lazy='lazy' >
               <div class="answer">

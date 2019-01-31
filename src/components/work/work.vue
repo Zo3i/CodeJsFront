@@ -66,7 +66,7 @@ export default {
       right: 0,
       submitPay: "",
       user: {},
-      count: 1
+      count: 1,
     };
   },
   methods: {
@@ -153,79 +153,11 @@ export default {
           var isRight = ""
           var questionId = this.randomQuestion.id
 
+
           new Promise(resolve => {
-            this.getResult(questionId, userAnswer, answer, func, i)
+              this.getResult(questionId, userAnswer, answer, func, i)
           })
-
-
-
-          // console.oldLog(answer)
-          // // 判断类型
-          // if (
-          //   (answer[0] == "'" && answer[answer.length-1] == "'") ||
-          //   (answer[0] == '"' && answer[answer.length-1] == '"')
-          // ) {
-          //   console.oldLog("字符串");
-          //   answer = answer.substr(1, answer.length - 2);
-          //   isRight = function isRight() {
-          //     console.oldLog(answer);
-          //     console.oldLog(eval(editor.getValue() + func));
-          //     return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + ''
-          //   }
-          // } else if (answer[0] == "[" && answer[answer.length - 1] == "]") {
-          //   console.oldLog("数组");
-          //   answer = answer.substr(1, answer.length - 2);
-          //   answer = JSON.parse("[" + answer + "]");
-
-          //   isRight = function isRight() {
-          //     console.oldLog(answer);
-          //     console.oldLog(eval(editor.getValue() + func));
-          //     return JSON.stringify(eval(editor.getValue() + func)) ==
-          //       JSON.stringify(answer) ? true : eval(editor.getValue() + func) + ''
-          //   }
-          // } else if (answer[0] == "{" && answer[answer.length] == "}") {
-          //   console.oldLog("对象");
-          //   answer = JSON.parse(answer);
-
-          //   isRight = function isRight() {
-          //     console.oldLog(answer);
-          //     console.oldLog(eval(editor.getValue() + func));
-          //     return (
-          //       JSON.stringify(eval(editor.getValue() + func)) ==
-          //       JSON.stringify(answer) ? true : eval(editor.getValue() + func) + ''
-          //     );
-          //   }
-          // } else  if (answer == "false" || answer == "true") {
-          //   console.oldLog("布尔");
-          //   isRight = function isRight() {
-          //     console.oldLog(answer);
-          //     console.oldLog("答案" + eval(editor.getValue() + func));
-          //     //转布尔
-          //     answer = answer == "true" ? true : false
-          //     return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + '';
-          //   }
-          // } else {
-          //   console.oldLog("整数");
-          //   answer = Number(answer);
-
-          //   isRight = function isRight() {
-          //     console.oldLog(answer);
-          //     console.oldLog(eval(editor.getValue() + func));
-          //     console.oldLog(eval(editor.getValue() + func) === answer)
-          //     return eval(editor.getValue() + func) === answer ? true : eval(editor.getValue() + func) + '';
-          //   }
-          // }
-
-          // console.oldLog(isRight);
-
-
       }
-
-
-
- 
-
-
      
     },
     log(str) {
@@ -236,6 +168,7 @@ export default {
     },
     getResult(questionId, useranswer, rightAnswer, task, index) {
       var that = this
+      var taskNum = parseInt(index) + parseInt(1)
                 this.$ajax({
             method: "post",
             url: "/api/isRight",
@@ -245,9 +178,9 @@ export default {
               rightAnswer: rightAnswer,
               task: task,
               token: this.user.token
-            }
+            },
+            async: false, //或false,是否异步
           }).then(res => {
-              
               var result = res.data
               console.oldLog(result)
               if (result.wrong == false) {
@@ -260,7 +193,7 @@ export default {
               "<hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>";
           } else {
             that.result +=
-              "<li>我们希望得到的答案是:  " +
+              "<li>Task"+ taskNum  +": 我们希望得到的答案是:  " +
               rightAnswer +
               "</li>" +
               " <li style='color:#bb1b19'>您的答案是:  " +
