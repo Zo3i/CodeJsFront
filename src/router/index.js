@@ -8,6 +8,7 @@ import AnswerList from './answer'
 import Center from './center'
 import Zone from './zone'
 import Rank from './rank'
+import UserRank from './userRank'
 
 Vue.use(Router)
 
@@ -20,6 +21,7 @@ export default new Router({
     AnswerList,
     Center,
     Zone,
-    Rank
+    Rank,
+    UserRank
   ]
 })

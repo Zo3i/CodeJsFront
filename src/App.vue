@@ -16,8 +16,9 @@
             </span>
             <el-dropdown-menu slot="dropdown" >
               <el-dropdown-item @click.native="center()">个人中心</el-dropdown-item>
+              <el-dropdown-item @click.native="rank()">团队总榜</el-dropdown-item>
+              <el-dropdown-item @click.native="userRank()">个人总榜</el-dropdown-item>
               <el-dropdown-item @click.native="zone()">空间</el-dropdown-item>
-              <el-dropdown-item @click.native="rank()">总榜</el-dropdown-item>
               <el-dropdown-item @click.native="logout()">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -74,6 +75,9 @@ export default {
     },
     rank () {
       this.$router.push('/user/rank?mobile=' + this.user.mobile)
+    },
+    userRank (){
+      this.$router.push('/user/userRank?mobile=' + this.user.mobile)
     }
   },
   beforeMount() {
