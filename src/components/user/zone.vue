@@ -108,12 +108,21 @@ export default {
   },
   watch: {
   '$route' (to, from) {
+      //获取用户信息
+      this.$ajax({
+        method: "get",
+        url: "/api/getUserInfo"
+      }).then(res => {
+        this.user = res.data;
+      });
+      this.zoneId = this.$route.query.zoneId
+
       this.$ajax({
             method: "get",
             url: "/api/getComment?zoneId=" + this.zoneId
         }).then(res => {
+            this.totle = res.data.length
             this.commentList = res.data
-            console.log(res)
         });
   }
 }

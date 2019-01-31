@@ -71,7 +71,7 @@ export default {
       this.$router.push('/user/center')
     },
     zone () {
-      this.$router.push('/user/zone?zoneId=' + this.user.zoneId)
+      this.$router.push('/user/zone?zoneId=' + this.user.zoneId + '&rand=' + Math.random())
     },
     rank () {
       this.$router.push('/user/rank?mobile=' + this.user.mobile)
