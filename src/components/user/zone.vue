@@ -80,6 +80,28 @@ export default {
 
   },
   mounted() {
+        // this.$ajax({
+        //     method: "get",
+        //     url: "/api/getQuestions?mobile=17700000000&lowRank=1&highRank=6",
+        // }).then(res => {
+        //     console.log(res)
+        // });
+
+        this.$ajax({
+                url: "/api/orderByArgs",
+                method: "post",
+                data: {
+                    lowRank: 1,
+                    highRank: 5,
+                    mobile: '18991658843',
+                    name: '数',
+                    score: 1
+                    }
+            }).then(res => {
+                console.log(res)
+            })
+
+
 
       //获取用户信息
       this.$ajax({
@@ -101,7 +123,7 @@ export default {
   beforeCreate() {
   },
   created() {
-
+      
   },
   components: {
       CommentItem
