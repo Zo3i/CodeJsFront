@@ -2,8 +2,8 @@
   <div>
     <el-row type="flex" justify="end" :class="'member' + index" >
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">#{{index}}</el-col>
-        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.jsUser.name}}</el-col>
-        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.jsUser.rank}}</el-col>
+        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.name}}</el-col>
+        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.rank}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" ><img @click="zone()" :src='zoneImg' width="50px" /></el-col>
     </el-row>
   </div>
@@ -25,12 +25,12 @@ export default {
     },
     methods: {
         zone() {
-            console.log(this.teamMember.jsUser.zoneId)
-            this.$router.push('/user/zone?zoneId=' + this.teamMember.jsUser.zoneId)
+            console.log(this.teamMember.zoneId)
+            this.$router.push('/user/zone?zoneId=' + this.teamMember.zoneId)
         }
     },
     mounted() {
-        if (this.teamMember.jsUser.mobile == JSON.parse(localStorage.user).mobile) {
+        if (this.teamMember.mobile == JSON.parse(localStorage.user).mobile) {
            $('.member' + this.index).css('color', '#4bd5c4')
         }
     },
