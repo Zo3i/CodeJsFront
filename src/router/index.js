@@ -9,6 +9,7 @@ import Center from './center'
 import Zone from './zone'
 import Rank from './rank'
 import UserRank from './userRank'
+import Question from './question'
 
 Vue.use(Router)
 
@@ -22,6 +23,7 @@ export default new Router({
     Center,
     Zone,
     Rank,
-    UserRank
+    UserRank,
+    Question
   ]
 })

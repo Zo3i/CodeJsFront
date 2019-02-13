@@ -9,7 +9,7 @@
          </el-col>
          
 
-         <el-col  v-if="GLOBAL.isLogin"  :xs="15" :sm="12" :md="10" :lg="10" :xl="6" class='users'>
+         <el-col  v-if="GLOBAL.isLogin"  :xs="16" :sm="18" :md="15" :lg="15" :xl="15" class='users'>
 
            <span @click.prevent="userRank()"><a href="#" class="btn" >个人总榜</a></span>
            <span @click.prevent="rank()"><a href="#" class="btn" >团队总榜</a></span>
@@ -81,8 +81,11 @@ export default {
     rank () {
       this.$router.push('/user/rank?mobile=' + this.user.mobile)
     },
-    userRank (){
+    userRank () {
       this.$router.push('/user/userRank?mobile=' + this.user.mobile)
+    },
+    question () {
+       this.$router.push('/user/question?mobile=' + this.user.mobile)
     }
   },
   beforeMount() {
