@@ -4,7 +4,7 @@
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">#{{index}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.name}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{teamMember.rank}}</el-col>
-        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" ><img @click="zone()" :src='zoneImg' width="50px" /></el-col>
+        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15" ><img @click="zone()" :src='zoneImg' width="50px"  style="cursor: pointer" /></el-col>
     </el-row>
   </div>
 </template>

@@ -8,21 +8,26 @@
           <div   class="logo"><span @click="home()">&nbsp;&nbsp;JSWEB</span></div>
          </el-col>
          
-         <el-col  v-if="GLOBAL.isLogin"  :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='users'>
+
+         <el-col  v-if="GLOBAL.isLogin"  :xs="15" :sm="12" :md="10" :lg="10" :xl="6" class='users'>
+
+           <span @click.prevent="userRank()"><a href="#" class="btn" >个人总榜</a></span>
+           <span @click.prevent="rank()"><a href="#" class="btn" >团队总榜</a></span>
+           <span @click.prevent="question()"><a href="#" class="btn" >问题搜索</a></span>
+
            {{user.name}}
           <el-dropdown trigger="click"  size="medium" placement="bottom">
             <span class="el-dropdown-link">
               <img  :src="faceImage" alt="" width="50px" height="50"><span style="font-size:20px;color:white;padding:5px"> </span>
             </span>
             <el-dropdown-menu slot="dropdown" >
-              <el-dropdown-item @click.native="center()">个人中心</el-dropdown-item>
-              <el-dropdown-item @click.native="rank()">团队总榜</el-dropdown-item>
-              <el-dropdown-item @click.native="userRank()">个人总榜</el-dropdown-item>
+              <el-dropdown-item @click.native="center()">个人</el-dropdown-item>
+              <!-- <el-dropdown-item @click.native="rank()">团队总榜</el-dropdown-item>
+              <el-dropdown-item @click.native="userRank()">个人总榜</el-dropdown-item> -->
               <el-dropdown-item @click.native="zone()">空间</el-dropdown-item>
               <el-dropdown-item @click.native="logout()">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          &nbsp;&nbsp;&nbsp;
          </el-col>
          <el-col v-else :xs="10" :sm="6" :md="4" :lg="4" :xl="4" class='usersLog'>
            <span @click.prevent="login()"><a href="#" class="login" >登录</a></span>
@@ -227,5 +232,16 @@ export default {
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
   box-shadow: inset 0 0 6px rgba(242,242,242, 0.5);
+}
+.btn {
+    text-align: center;
+    background-color: #3c3c3c;
+    color: #aaaaa9 !important;
+    border: solid 1px black;
+    border-width: 1px;
+    padding: 5px;
+    font-size: 16px;
+    overflow: hidden;
+    border-radius: 4px;
 }
 </style>

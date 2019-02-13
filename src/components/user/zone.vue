@@ -80,13 +80,6 @@ export default {
 
   },
   mounted() {
-        // this.$ajax({
-        //     method: "get",
-        //     url: "/api/getQuestions?mobile=17700000000&lowRank=1&highRank=6",
-        // }).then(res => {
-        //     console.log(res)
-        // });
-
         this.$ajax({
                 url: "/api/orderByArgs",
                 method: "post",
