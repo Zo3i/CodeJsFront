@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
     "element-ui": "^2.4.9",
+    "gitment": "0.0.3",
     "hzqing-vue-timeline": "^1.0.3",
     "js-md5": "^0.7.3",
     "module": "^1.2.5",
@@ -26,7 +28,6 @@
     "vue-multiple-back-top": "^1.0.2",
     "vue-router": "^3.0.1",
     "vue-tree-list": "^1.0.8",
-    "babel-core": "^6.26.3",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

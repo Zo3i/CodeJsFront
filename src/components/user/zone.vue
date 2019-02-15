@@ -17,6 +17,10 @@
                     <input type="button" class="login" value="提交" @click="submit()" />
                 </div>
             </div>
+<div id="test" style="padding:10px;">
+
+</div>
+
             <div class="comment" v-for="(item, index) in commentList" v-bind:key="item.id">
                 <commentItem :comment="item" :index="index" :fromToken="user.token" :key="index" v-if="index < (page * 5)"></commentItem>
             </div>
@@ -36,7 +40,7 @@
   import NProgress from 'NProgress'
   import * as types from '@/store/types'
   import CommentItem from '@/components/base/comment/comment-item'
-
+  import Gitment from 'gitment'
 export default {
   name: "Index",
   data() {
@@ -96,6 +100,19 @@ export default {
         this.totle = res.data.length
         console.log(this.totle)
       });
+
+    //   const gitment = new Gitment({
+    //     id: this.zoneId, // optional
+    //     owner: 'Zo3i',
+    //     repo: 'Codewars',
+    //     oauth: {
+    //         client_id: 'f4cc427243978eb17909',
+    //         client_secret: '5982e636b460904e61d179e8f4eccfe62182cc46',
+    //     },
+    //     // ...
+    //     // For more available options, check out the documentation below
+    //     })
+    //     gitment.render('test')
   },
   beforeCreate() {
   },
@@ -164,6 +181,7 @@ html {
     width: 100%;
     /* height: 800px; */
     background-color: #262729;
+    /* background-color: #e3fafe */
 }
 .title {
     font-size: 30px;
@@ -249,5 +267,26 @@ html {
     }
 }
 
+
+
+
+/* .gitment-markdown {
+    color:#aaaaa9;
+}
+.gitment-comment-header {
+    background-color: #303133;
+    color: #75757f
+}
+.gitment-container {
+    color: #75757f
+}
+.gitment-editor-body textarea {
+    background-color: #262729;
+    color:#aaaaa9;
+}
+.gitment-editor-body textarea:focus {
+    background-color: #262729;
+    color:#aaaaa9;
+} */
 
 </style>

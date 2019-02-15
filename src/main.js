@@ -14,6 +14,12 @@ import md5 from 'js-md5';
 import global from './components/util/Global'
 
 import hzqingVueTimeline from 'hzqing-vue-timeline'
+
+
+import 'gitment/style/default.css'
+import Gitment from 'gitment'
+
+
 Vue.use(hzqingVueTimeline)
 
 Vue.prototype.GLOBAL = global

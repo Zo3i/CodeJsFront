@@ -247,4 +247,7 @@ export default {
     overflow: hidden;
     border-radius: 4px;
 }
+a:hover  {
+  text-decoration: none
+}
 </style>

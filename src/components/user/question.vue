@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="get-question">
-      <div >
-        题目名字: <input type="text" id="name"> &nbsp; 
+      <div class="search">
+        题目名字: <input type="text" id="name" style="height:37px;"> &nbsp; 
         难度: <select id="rank">
               <option value ="" disabled selected>请选择</option>
               <option value ="1">简单</option>
@@ -10,9 +10,9 @@
               <option value="3">困难</option>
               <option value="4">地狱</option>
              </select>
-         <span @click.prevent="find()"><a href="#" class="login" >查询</a></span>
+         &nbsp; &nbsp; &nbsp; <span @click.prevent="find()"><a href="#" class="login" >查询</a></span>
       </div>
-      <div  class="question-list">
+      <div v-if="totle > 0"  class="question-list">
         <el-row type="flex" justify="center">
                 <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="18">
                     <div class="question-list-info">
@@ -39,6 +39,9 @@
                     </div>
                     </el-col>
                 </el-row>
+      </div>
+      <div v-else class="warm">
+        没题目咯;
       </div>
     </div>
   </div>
@@ -119,7 +122,21 @@ export default {
         resolve(res.data);
       });
     }).then(data => {
-     
+         this.$ajax({
+      url: "/api/orderByArgs",
+      method: "post",
+      data: {
+        lowRank: 0,
+        highRank: 100,
+        mobile: this.$route.query.mobile,
+        name: '',
+        score: 1
+      }
+    }).then(res => {
+      console.log(res)
+      this.questionItem = res.data
+      this.totle = res.data.length
+    })
     });
   },
   beforeCreate() {},
@@ -160,6 +177,28 @@ html {
   background-color: #262729;
 }
 .question-list-main {
-  padding: 20px;
+  padding: 18px;
 }
+.search {
+  line-height: 100px;
+  font-size: 30px;
+  height: 100px;
+}
+.warm {
+  padding: 20px;
+  font-size: 50px;
+}
+
+.login, .regist {
+    text-align: center;
+    background-color: #efefef;
+    color: #000 !important;
+    border: solid 1px black;
+    border-width: 1px;
+    padding: 5px;
+    font-size: 25px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
 </style>
