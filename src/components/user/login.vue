@@ -37,7 +37,7 @@ Happy Coding.<span style="background-image:url(../../../static/image/Sign_of_the
                 <el-row type="flex" justify="space-around" class="body login-form-item">
                   <el-col :span=24>
                   <input type="button" @click="login()" name="login" class="login" value="登录账户"/> 
-                  <input type="button" name="login" class="login" value="忘记密码"/>
+                  <input type="button" @click="passwd()" name="login" class="login" value="忘记密码"/>
                   </el-col> 
                 </el-row>
                </div>
@@ -99,6 +99,9 @@ export default {
           })          
         }
       }
+    },
+    passwd () {
+      this.$router.push('/user/passwd')
     }
   },
   mounted() {

@@ -10,6 +10,7 @@ import Zone from './zone'
 import Rank from './rank'
 import UserRank from './userRank'
 import Question from './question'
+import Passwd from './passwd'
 
 Vue.use(Router)
 
@@ -24,6 +25,7 @@ export default new Router({
     Zone,
     Rank,
     UserRank,
-    Question
+    Question,
+    Passwd
   ]
 })

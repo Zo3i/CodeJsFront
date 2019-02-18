@@ -5,7 +5,7 @@
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{questionItem.name}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{questionItem.score}}</el-col>
         <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">{{questionItem.count}}</el-col>
-        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15"   ><span @click.prevent="go()"><a href="#" class="login" >挑战</a></span></el-col>
+        <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15"   ><span @click.prevent="go()"><a href="#" class="question-btn " >挑战</a></span></el-col>
     </el-row>
   </div>
 </template>

@@ -10,7 +10,7 @@
               <option value="3">困难</option>
               <option value="4">地狱</option>
              </select>
-         &nbsp; &nbsp; &nbsp; <span @click.prevent="find()"><a href="#" class="login" >查询</a></span>
+         &nbsp; &nbsp; &nbsp; <span @click.prevent="find()"><a href="#" class="question-btn" >查询</a></span>
       </div>
       <div v-if="totle > 0"  class="question-list">
         <el-row type="flex" justify="center">
@@ -189,7 +189,7 @@ html {
   font-size: 50px;
 }
 
-.login, .regist {
+.question-btn {
     text-align: center;
     background-color: #efefef;
     color: #000 !important;
