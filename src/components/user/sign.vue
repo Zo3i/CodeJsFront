@@ -124,10 +124,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-@font-face{
-    font-family: 'Oxygen Mono';
-    src : url('../../../static/font/OxygenMono-Regular.ttf');
-}
+
 body {
   font: 14px "Lato","Helvetica Neue","Helvetica",sans-serif;
   min-height: 100%;

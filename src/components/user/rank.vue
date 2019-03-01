@@ -97,10 +97,6 @@ export default {
 
 
 <style >
-@font-face{
-    font-family: 'Oxygen Mono';
-    src : url('../../../static/font/OxygenMono-Regular.ttf');
-}
 .banner {
     font-size: 40px;
     color: #aaaaa9;

@@ -284,7 +284,9 @@ export default {
     }
   },
   beforeCreate() {},
-  created() {},
+  created() {
+    
+  },
   components: {
     MemberItem
   }

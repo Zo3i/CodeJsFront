@@ -70,7 +70,7 @@ export default {
             this.show = !this.show
         },
         goZone() {
-             this.$router.push('/user/zone?zoneId=' + this.comment.zone)
+             this.$router.push('/user/zone?zoneId=' + this.comment.zone + "&rand=" + Math.random())
         }
     },
     mounted() {

@@ -98,21 +98,8 @@ export default {
        }).then(res => {
         this.commentList = res.data
         this.totle = res.data.length
-        console.log(this.totle)
+        console.log(this.commentList)
       });
-
-    //   const gitment = new Gitment({
-    //     id: this.zoneId, // optional
-    //     owner: 'Zo3i',
-    //     repo: 'Codewars',
-    //     oauth: {
-    //         client_id: 'f4cc427243978eb17909',
-    //         client_secret: '5982e636b460904e61d179e8f4eccfe62182cc46',
-    //     },
-    //     // ...
-    //     // For more available options, check out the documentation below
-    //     })
-    //     gitment.render('test')
   },
   beforeCreate() {
   },
@@ -147,10 +134,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-@font-face{
-    font-family: 'Oxygen Mono';
-    src : url('../../../static/font/OxygenMono-Regular.ttf');
-}
+
 body {
   font: 14px "Lato","Helvetica Neue","Helvetica",sans-serif;
   min-height: 100%;

@@ -10,23 +10,32 @@
                <div class="passwd-form-body">
                 <p style="font-size: 30px">忘记密码</p>
                 <el-row type="flex" justify="center" class="body passwd-form-item">
-                  <el-col :span=12>
+                  <el-col :span=24>
                   <!-- <p style="text-align: left">电话:</p> -->
                   <input type="text" name="mobile" class="user" id="mobile" placeholder="请输入手机号"/> 
                   </el-col>  
                 </el-row>
                 <el-row type="flex" justify="center" class="body passwd-form-item">
-                  <el-col :span=12>
-                    <!-- <p style="text-align: left">名字:</p> -->
-                  <input type="text" name="name" class="user" id="name" placeholder="验证码"/> 
-                  </el-col>  
-                </el-row>
-                <el-row type="flex" justify="center" class="body passwd-form-item">
-                  <el-col :span=12>
+                  <el-col :span=24>
                     <!-- <p style="text-align: left">密码:</p> -->
                   <input type="password" name="password" id="password" class="password" placeholder="请输入新密码"/> 
                   </el-col>  
                 </el-row>
+                <el-row type="flex" justify="center" class="body passwd-form-item">
+                  <el-col :span=6>
+                    <!-- <p style="text-align: left">名字:</p> -->
+                  <input type="text" style="width:100px;" name="code" class="user" id="code" placeholder="验证码"/> 
+                  </el-col>  
+                  <el-col :span=6>
+                    <input type="button" name="login" class="login" @click="code()" style="text-align:right;" value="获取验证码"/> 
+                  </el-col> 
+                </el-row>
+                <!-- <el-row type="flex" justify="center" class="body passwd-form-item">
+                  <el-col :span=24>
+                  <input type="button" name="login" class="login" @click="sign()" style="text-align:right;" value="获取验证码"/> 
+                  </el-col>  
+                </el-row> -->
+                
                 <el-row type="flex" justify="space-around" class="body passwd-form-item">
                   <el-col :span=24>
                   <input type="button" name="login" class="login" @click="sign()" value="提交"/> 
@@ -55,8 +64,16 @@ export default {
     };
   },
   methods: {
+    code() {
+      this.$ajax({
+        method: 'post',
+        url: '/api/code?mobile=' + mobile,
+        }).then(res => {
+          console.log(res)
+        })
+    },
     sign() {
-      var name = $('#name').val()
+      var code = $('#code').val()
       var password = $('#password').val()
       var mobile = $('#mobile').val()
 
@@ -64,8 +81,8 @@ export default {
         floatMessage("手机号不正确!")
         $(".trigger-info").click()
       } else {
-        if (name.length <= 0 || name.length >= 20) {
-           floatMessage("名字长度为0-20.")
+        if (code.length <= 0 || code.length >= 4) {
+           floatMessage("请正确填写验证码!")
            $(".trigger-info").click()
         } else {
           if (password.length <= 5 || password.length >= 18) {
@@ -74,7 +91,7 @@ export default {
           } else {
             this.$ajax({
               method: 'post',
-              url: '/api/sign?name=' + name + '&password=' + this.$md5(password) + '&mobile=' + mobile,
+              url: '/api/code',
             }).then(res => {
               if (res) {
                  floatMessage(res.data)
@@ -113,10 +130,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-@font-face{
-    font-family: 'Oxygen Mono';
-    src : url('../../../static/font/OxygenMono-Regular.ttf');
-}
 body {
   font: 14px "Lato","Helvetica Neue","Helvetica",sans-serif;
   min-height: 100%;
@@ -169,6 +182,9 @@ html {
   color: antiquewhite;
   text-align: center;
 
+}
+.passwd-form-body {
+  /* margin-left: 20%; */
 }
 .passwd-form-item {
   margin-top: 20px;

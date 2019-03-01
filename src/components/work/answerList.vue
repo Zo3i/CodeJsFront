@@ -121,10 +121,7 @@ export default {
 </script>
 
 <style scoped>
-@font-face {
-  font-family: "Oxygen Mono";
-  src: url("../../../static/font/OxygenMono-Regular.ttf");
-}
+
 body {
   font: 14px "Oxygen Mono", "Helvetica Neue", "Helvetica", sans-serif;
   min-height: 100%;

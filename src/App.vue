@@ -101,17 +101,19 @@ export default {
   },
   watch: {
     '$route':function(to, from){
-        if (localStorage.user.indexOf("name") != -1 && localStorage.token != undefined && localStorage.token != "") {
-          //获取用户信息
-          this.$ajax({
-            method: 'get',
-            url: '/api/getUserInfo',
-            }).then (res => {
-              this.user = res.data
-            })
-          this.faceImageId = localStorage.userFaceId
-          this.faceImage = '../static/image/face/' + this.faceImageId + ".png"
-        }
+        console.log("是否登录"+this.GLOBAL.isLogin)
+          if (localStorage.user.indexOf("name") != -1 && localStorage.token != undefined && localStorage.token != "") {
+            //获取用户信息
+            this.$ajax({
+              method: 'get',
+              url: '/api/getUserInfo',
+              }).then (res => {
+                this.user = res.data
+              })
+            this.GLOBAL.isLogin = true  
+            this.faceImageId = localStorage.userFaceId
+            this.faceImage = '../static/image/face/' + this.faceImageId + ".png"
+          }
     }
   },
   created() {
@@ -151,7 +153,7 @@ export default {
 </script>
 
 <style>
-
+@import '../static/font/OxygenMono.css';
   #app, #container { 
     padding:0px;
     margin:0px;

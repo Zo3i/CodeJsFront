@@ -194,10 +194,6 @@ export default {
 
 
 <style>
-@font-face{
-    font-family: 'Oxygen Mono';
-    src : url('../../../static/font/OxygenMono-Regular.ttf');
-}
 .top-info {
   height: 10px;
   background-color:#494646;

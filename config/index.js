@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8090/rxMgr/a/third',
+        target: 'http://localhost:8091/rxMgr/a/third',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''   //需要rewrite重写的,
@@ -58,7 +58,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
