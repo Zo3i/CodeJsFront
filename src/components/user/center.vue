@@ -206,7 +206,6 @@ export default {
 -moz-box-shadow: 5px 8px 26px -6px rgba(170,170,169,1);
 box-shadow: 5px 8px 26px -6px rgba(170,170,169,1);
 
-
 font-size: 30px;
 color: #aaaaa9;
 text-align: center;
@@ -218,32 +217,32 @@ text-align: center;
 }
 
 .bottom-info {
-  background-color: #282828;
-  margin: 0 auto;
+  background-color: #282828 !important;
+  margin: 0 auto !important;
 }
 .el-tabs__item {
-  color: darkgrey;
+  color: darkgrey !important;
 }
 .el-tabs__item:hover {
-    color: #75757f;
-    cursor: pointer;
+    color: #75757f !important;
+    cursor: pointer !important;
 }
 .el-tabs__item.is-active {
-    color: #e7e7e7;
+    color: #e7e7e7 !important;
 }
 .el-tabs__active-bar {
-  background-color: #444
+  background-color: #444 !important;
 }
 .el-tabs__nav-wrap::after {
-  background-color: #aaaaa9
+  background-color: #aaaaa9 !important;
 }
 .el-tabs--left, .el-tabs--right{
-  padding: 30px;
-  overflow: auto;
+  padding: 30px !important;
+  overflow: auto !important;
   height: 100% !important
 }
 .myanswer {
-  overflow:auto;
+  overflow:auto !important;
 }
 .answer{
   color: #aaaaa9
