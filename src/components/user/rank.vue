@@ -58,7 +58,6 @@ export default {
       var that = this
       $('.el-main').scroll(function () {
         console.log("滚动" + that.isScroll)
-        
         var st = this.scrollTop;
         var height = this.clientHeight;
         var sh = this.scrollHeight;

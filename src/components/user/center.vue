@@ -56,7 +56,7 @@
               <div class="answer">
                 <div v-if="answerlist.length > 0">
                   <div  v-for="(item, index) in answerlist" v-bind:key="index * 3">
-                    <answerItem :answer="item" :key="item.id"></answerItem>
+                    <answerItem v-if="index < (answerlistPage * 5)" :answer="item"  :key="item.id"></answerItem>
                   </div>
                 </div>
                 <div v-else>
@@ -109,15 +109,43 @@ export default {
       questionList: [],
       lazy: true,
       myinfo: {},
+      answerlistPage: 1,
+      answerlistTotle: '',
+      isScroll: true
     };
   },
   methods: {
-     handleClick(tab, event) {
+    handleClick(tab, event) {
         this.activeName = tab.name
     },
+    load() {
+      this.answerlistPage ++
+      console.log(this.answerlistTotle)
+       this.$nextTick(() => {
+         if (this.answerlistTotle > 5 && this.answerlistTotle > (this.answerlistPage * 5)) {
+            this.isScroll = true
+         }
+      })
+    },
+    handleScroll (){
+      var that = this
+      $('.el-main').scroll(function () {
+        console.log("滚动" + that.isScroll)
+        
+        var st = this.scrollTop;
+        var height = this.clientHeight;
+        var sh = this.scrollHeight;
+              if (st + height >= sh && that.isScroll == true){
+                  console.log("到底了..");
+                  that.isScroll = false
+                  st -= 300
+                  that.load()
+              }
+        });
+    }
   },
   mounted() {
-
+     window.addEventListener('scroll', this.handleScroll, true);
   },
   beforeCreate() {
   },
@@ -133,6 +161,7 @@ export default {
       });
     }).then(data => {
 
+      //用户赞的答案
       this.$ajax({
         method: "post",
         url: "/api/getLikeAnwser?token=" + data.token,
@@ -141,11 +170,13 @@ export default {
         }).catch(err => {})   
 
 
+    //用户回答的答案
       this.$ajax({
         method: "post",
         url: "/api/getMyAnwser?token=" + data.token,
       }).then(res => {
           this.answerlist = res.data
+          this.answerlistTotle = this.answerlist.length
         }).catch(err => {})
 
 
