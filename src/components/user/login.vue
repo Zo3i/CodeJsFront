@@ -117,8 +117,8 @@ export default {
   beforeCreate() {
   },
   created() {
-    localStorage.user = JSON.stringify({"token":"null","name":"","mobile":"null","rank":null,"teamId":"null","zoneId":"null"})
-    localStorage.token = null
+    localStorage.user = JSON.stringify({"token":"null","name":"@","mobile":"null","rank":null,"teamId":"null","zoneId":"null"})
+    localStorage.token = "***"
     localStorage.userFaceId = null
   },
   components: {}
