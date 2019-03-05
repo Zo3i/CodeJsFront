@@ -62,6 +62,9 @@ export default {
   },
   methods: {
     login() {
+      localStorage.user = JSON.stringify({"token":"null","name":"@","mobile":"null","rank":null,"teamId":"null","zoneId":"null"})
+      localStorage.token = "***"
+      localStorage.userFaceId = null
       var mobile = $('#mobile').val()
       var password = $('#password').val()
       console.log('密码'+ this.$md5(password))
@@ -117,9 +120,6 @@ export default {
   beforeCreate() {
   },
   created() {
-    localStorage.user = JSON.stringify({"token":"null","name":"@","mobile":"null","rank":null,"teamId":"null","zoneId":"null"})
-    localStorage.token = "***"
-    localStorage.userFaceId = null
   },
   components: {}
 };
