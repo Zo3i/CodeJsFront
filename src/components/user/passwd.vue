@@ -67,7 +67,7 @@ export default {
     code() {
       this.$ajax({
         method: 'post',
-        url: '/api/code?mobile=' + mobile,
+        url: '/api/code?mobile=' + $('#mobile').val(),
         }).then(res => {
           console.log(res)
         })

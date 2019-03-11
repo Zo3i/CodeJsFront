@@ -84,7 +84,6 @@ export default {
         var userRank = res.data //.concat(res.data).concat(res.data).concat(res.data).concat(res.data).concat(res.data).concat(res.data)
         this.totle = userRank.length
         this.userRank = userRank
-        
     })
   },
   components: {

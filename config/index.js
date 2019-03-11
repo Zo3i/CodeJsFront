@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8091/rxMgr/a/third',
+        target: 'http://localhost:8090/jsweb/a/third',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''   //需要rewrite重写的,

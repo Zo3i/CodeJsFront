@@ -84,7 +84,6 @@ export default {
         var team = res.data //.concat(res.data).concat(res.data).concat(res.data).concat(res.data).concat(res.data).concat(res.data)
         this.totle = team.length
         this.teamAll = team
-        
     })
   },
   components: {
