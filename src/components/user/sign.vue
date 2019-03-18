@@ -90,7 +90,9 @@ export default {
               if (res) {
                  floatMessage(res.data)
                  $(".trigger-info").click()
-                 this.$router.push('/user/login')
+                 if (res.data == '注册成功咯,请登录!') {
+                   this.$router.push('/user/login')
+                 }
               }
             }).catch(err => {
 
