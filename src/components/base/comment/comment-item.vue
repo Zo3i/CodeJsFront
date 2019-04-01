@@ -57,7 +57,6 @@ export default {
                    zone: zoneId,
                    toUserId: fromUserId,
                    token: this.fromToken,
-                //    toUserId: fromUserId 
                 }
             }).then(res => {
                 console.log(res)
@@ -74,7 +73,7 @@ export default {
         }
     },
     mounted() {
-        this.faceImage = "../static/image/face/" + Math.floor(Math.random() * 27 + 1) + ".png";
+    this.faceImage = "../static/image/face/" + Math.floor(Math.random() * 27 + 1) + ".png";  
     },
     computed: {
        key: {
