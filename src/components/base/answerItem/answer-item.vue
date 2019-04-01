@@ -130,7 +130,6 @@ export default {
     },
     mounted() {
      console.log(this.answer)
-     this.faceImage = "../static/image/face/" + Math.floor(Math.random() * 27 + 1) + ".png";
      this.isLike = this.answer.like 
      this.isCollect = this.answer.collect
      this.totalCollect = this.answer.totalCollect
@@ -138,6 +137,12 @@ export default {
      this.currentUser = JSON.parse(localStorage.user)
      this.author = this.answer.user
      this.questionId = this.answer.questionId
+     this.faceImageId = localStorage.userFaceId
+     if (this.answer.user.mobile == this.currentUser.mobile) {
+         this.faceImage = "../static/image/face/" + localStorage.userFaceId + ".png";
+     } else {
+         this.faceImage = "../static/image/face/" + Math.floor(Math.random() * 27 + 1) + ".png";
+     }
      this.init()
     },
     computed: {
