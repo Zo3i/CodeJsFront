@@ -164,7 +164,7 @@ export default {
       //用户赞的答案
       this.$ajax({
         method: "post",
-        url: "/api/getLikeAnwser?token=" + data.token,
+        url: "/api/getLikeAnwser",
       }).then(res => {
           this.likeList = res.data
         }).catch(err => {})   
@@ -173,7 +173,7 @@ export default {
     //用户回答的答案
       this.$ajax({
         method: "post",
-        url: "/api/getMyAnwser?token=" + data.token,
+        url: "/api/getMyAnwser",
       }).then(res => {
           this.answerlist = res.data
           this.answerlistTotle = this.answerlist.length
@@ -182,7 +182,7 @@ export default {
 
       this.$ajax({
         method: "post",
-        url: "/api/getCollctAnwser?token=" + data.token,
+        url: "/api/getCollctAnwser",
       }).then(res => {
           this.collectList = res.data
         }).catch(err => {})        
@@ -190,7 +190,7 @@ export default {
 
      this.$ajax({
         method: "post",
-        url: "/api/getAllQuestion?token=" + data.token,
+        url: "/api/getAllQuestion",
       }).then(res => {
           // this.questionList = res.data
           var data = res.data
@@ -206,7 +206,7 @@ export default {
    
     this.$ajax({
         method: "post",
-        url: "/api/myInfo?token=" + data.token,
+        url: "/api/myInfo",
       }).then(res => {
           this.myinfo = res.data
         }).catch(err => {}) 
