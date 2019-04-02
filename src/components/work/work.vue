@@ -365,6 +365,7 @@ html {
   width: 100%;
   overflow: auto;
   resize: none;  
+  font-size: 20px;
 }
 
   ::-webkit-scrollbar {
