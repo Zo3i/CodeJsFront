@@ -146,19 +146,19 @@ export default {
       var editor = this.editor;
       var temp = "";
 
-      for (let i in task) {
-          let func = task[i].taskQuestion
-          let answer = task[i].taskAnswer
-          var userAnswer = editor.getValue();
-          var isRight = ""
-          var questionId = this.randomQuestion.id
-
-
-          new Promise(resolve => {
-              this.getResult(questionId, userAnswer, answer, func, i)
-          })
-      }
-     
+      // for (let i in task) {
+      //     let func = task[i].taskQuestion
+      //     let answer = task[i].taskAnswer
+      //     var userAnswer = editor.getValue();
+      //     var isRight = ""
+      //     var questionId = this.randomQuestion.id
+          
+      // }
+      var userAnswer = editor.getValue();
+      var questionId = this.randomQuestion.id
+       this.$nextTick(() => {
+         this.getResult(questionId, userAnswer, task)
+        })
     },
     log(str) {
       this.consoleRes += str + "\r\n";
@@ -166,23 +166,22 @@ export default {
     codeChange() {
       this.cheked = true;
     },
-    getResult(questionId, useranswer, rightAnswer, task, index) {
+    getResult(questionId, useranswer, task) {
       var that = this
-      var taskNum = parseInt(index) + parseInt(1)
+      // var taskNum = parseInt(index) + parseInt(1)
                 this.$ajax({
             method: "post",
-            url: "/api/isRight",
+            url: "/api/isAllRight",
             data: {
               questionId: questionId,
               useranswer: useranswer,
-              rightAnswer: rightAnswer,
-              task: task,
-              token: this.user.token
             },
             async: false, //或false,是否异步
           }).then(res => {
-              var result = res.data
+              var resultList = res.data
               console.oldLog(result)
+              for (var i in resultList) {
+                var result =  resultList[i]
               if (result.wrong == false) {
                 if (result.right == true) {
             //累计正确答案的数量
@@ -193,8 +192,8 @@ export default {
               "<hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>";
           } else {
             that.result +=
-              "<li>Task"+ taskNum  +": 我们希望得到的答案是:  " +
-              rightAnswer +
+              "<li>Task: 我们希望得到的答案是:  " +
+              task[i].taskAnswer +
               "</li>" +
               " <li style='color:#bb1b19'>您的答案是:  " +
               result.answer +
@@ -221,7 +220,11 @@ export default {
                     ]
                   }
                 ];
-                $("#error").treeview({ data: this.treeData });
+                $("#error").treeview({ data: this.treeData,expanded: true });
+               }
+               if (i == task.length - 1 || result.wrong == true) {
+                 $('.checkBtn').attr("disabled", false)
+               }
               }
 
 
@@ -229,14 +232,14 @@ export default {
             
             if (that.right == tasks.length) {
               that.cheked = false;
-           }
+            }
            
            console.oldLog(this.count);
             console.oldLog(tasks.length);
             this.count = this.count + 1
-           if (this.count == tasks.length) {
-             $('.checkBtn').attr("disabled", false)
-           }
+          //  if (this.count == tasks.length) {
+          //    $('.checkBtn').attr("disabled", false)
+          //  }
            
 })
     }
@@ -364,8 +367,8 @@ html {
   height: 280px;
   width: 100%;
   overflow: auto;
-  resize: none;  
-  font-size: 20px;
+  resize: none;
+  font-size: 18px;
 }
 
   ::-webkit-scrollbar {
