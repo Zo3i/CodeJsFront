@@ -145,15 +145,6 @@ export default {
       this.consoleRes = "";
       var editor = this.editor;
       var temp = "";
-
-      // for (let i in task) {
-      //     let func = task[i].taskQuestion
-      //     let answer = task[i].taskAnswer
-      //     var userAnswer = editor.getValue();
-      //     var isRight = ""
-      //     var questionId = this.randomQuestion.id
-          
-      // }
       var userAnswer = editor.getValue();
       var questionId = this.randomQuestion.id
        this.$nextTick(() => {
