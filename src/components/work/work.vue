@@ -200,13 +200,13 @@ export default {
                     text: "Catch Error(部分信息，可能因浏览器而异)",
                     nodes: [
                       {
-                        text: "Error message",
-                        nodes: [
-                          {
+                        // text: "Error message",
+                        // nodes: [
+                        //   {
                             text: result.answer,
                             color: "#bb1b19"
-                          }
-                        ]
+                        //   }
+                        // ]
                       }
                     ]
                   }
