@@ -133,9 +133,9 @@ export default {
     if (!IsPC()) {
         var e = confirm("请用电脑打开!"); 
         if (e) {
-         window.location.href = 'http://t.cn/E5H9KMC'
+         window.location.href = 'https://zxx.im'
         } else {
-          window.location.href = 'http://t.cn/E5H9KMC'
+          window.location.href = 'https://zxx.im'
         }
     }
   },
