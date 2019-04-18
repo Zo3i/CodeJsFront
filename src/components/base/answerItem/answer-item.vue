@@ -1,7 +1,7 @@
 <template>
   <div class="loading">
       <div style='font-size:18px;margin-bottom:10px;cursor: pointer;' >
-          <img :src="faceImage" @click="goCenter()" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{answer.user.name}}
+          <img :src="faceImage" @click="goCenter()" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{answer.name}}
       </div>
       <textarea :id = "'answer-item' + key"></textarea>
       <div style='padding:10px;font-size:20px;font-weight:bold'>
@@ -65,7 +65,7 @@ export default {
                 method: "post",
                 data: {
                     mobile: this.currentUser.mobile,
-                    authorid: this.author.id,
+                    authorid: this.authorId,
                     answerid: this.answer.id
                 }
             }).then(res => {
@@ -80,7 +80,7 @@ export default {
                 method: "post",
                 data: {
                     mobile: this.currentUser.mobile,
-                    authorid: this.author.id,
+                    authorid: this.authorId,
                     answerid: this.answer.id
                 }
             }).then(res => {
@@ -95,7 +95,7 @@ export default {
                 method: "post",
                 data: {
                     mobile: this.currentUser.mobile,
-                    authorid: this.author.id,
+                    authorid: this.authorId,
                     answerid: this.answer.id
                 }
             }).then(res => {
@@ -110,7 +110,7 @@ export default {
                 method: "post",
                 data: {
                     mobile: this.currentUser.mobile,
-                    authorid: this.author.id,
+                    authorid: this.authorId,
                     answerid: this.answer.id
                 }
             }).then(res => {
@@ -125,7 +125,7 @@ export default {
         },
         goCenter() {
             // console.log(this.answer)
-            this.$router.push('/user/zone?zoneId='+ this.answer.user.zoneId)
+            this.$router.push('/user/zone?zoneId='+ this.answer.zoneId)
         }
     },
     mounted() {
@@ -135,10 +135,10 @@ export default {
      this.totalCollect = this.answer.totalCollect
      this.totalLike = this.answer.totalLike
      this.currentUser = JSON.parse(localStorage.user)
-     this.author = this.answer.user
+     this.authorId = this.answer.userId
      this.questionId = this.answer.questionId
      this.faceImageId = localStorage.userFaceId
-     if (this.answer.user.mobile == this.currentUser.mobile) {
+     if (this.answer.mobile == this.currentUser.mobile) {
          this.faceImage = "../static/image/face/" + localStorage.userFaceId + ".png";
      } else {
          this.faceImage = "../static/image/face/" + Math.floor(Math.random() * 27 + 1) + ".png";

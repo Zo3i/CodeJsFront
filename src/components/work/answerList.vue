@@ -108,11 +108,18 @@ export default {
               floatMessage("别偷看答案哦!")
               $(".trigger-info").click()
           }
-          this.question = res.data[0].question;
           this.answerlist = res.data
           this.totle = res.data.length
         }).catch(err => {})
     })
+
+    this.$ajax({
+        method: "post",
+        url: "/api/getQuestion/" + this.$route.query.questionId,
+      }).then(res => {
+        console.log(res.data)
+          this.question = res.data
+        }).catch(err => {})
   },
   components: {
     AnswerItem
