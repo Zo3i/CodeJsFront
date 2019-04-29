@@ -138,7 +138,7 @@ export default {
      this.authorId = this.answer.userId
      this.questionId = this.answer.questionId
      this.faceImageId = localStorage.userFaceId
-     if (this.answer.mobile == this.currentUser.mobile) {
+     if (this.answer.userMobile == this.currentUser.mobile) {
          this.faceImage = "../static/image/face/" + localStorage.userFaceId + ".png";
      } else {
          this.faceImage = "../static/image/face/" + Math.floor(Math.random() * 27 + 1) + ".png";
