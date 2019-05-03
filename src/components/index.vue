@@ -195,7 +195,12 @@ export default {
           mobile: this.user.mobile
         }
       }).then(res => {
-        location.reload()
+        if (res.data == "小队创建成功!") {
+          location.reload();
+        } else {
+           floatMessage(res.data)
+           $(".trigger-info").click()
+        }
       });
     },
     createTeamBtn() {
