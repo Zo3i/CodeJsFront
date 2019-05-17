@@ -30,7 +30,7 @@ export default {
         }
     },
     mounted() {
-        if (this.teamMember.mobile == JSON.parse(localStorage.user).mobile) {
+        if (this.teamMember.zoneId == JSON.parse(localStorage.user).zoneId) {
            $('.member' + this.index).css('color', '#4bd5c4')
         }
     },

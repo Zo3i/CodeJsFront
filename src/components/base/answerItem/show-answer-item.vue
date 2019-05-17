@@ -1,7 +1,8 @@
 <template>
   <div class="loading">
       <div style='font-size:18px;margin-bottom:10px;cursor: pointer;' >
-          <img :src="faceImage" @click="goCenter()" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{answer.name}}
+<!--          <img :src="faceImage" @click="goCenter()" width='50px' height='50' style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> {{answer.name}}-->
+        <div class="question-des1">问题：{{answer.questionName}} | 分数：{{answer.score}} | 完成人数： {{answer.completeCount}}</div>
       </div>
       <textarea :id = "'answer-item' + key"></textarea>
       <div style='padding:10px;font-size:20px;font-weight:bold'>
@@ -129,7 +130,7 @@ export default {
         }
     },
     mounted() {
-     this.isLike = this.answer.like
+     this.isLike = this.answer.like 
      this.isCollect = this.answer.collect
      this.totalCollect = this.answer.totalCollect
      this.totalLike = this.answer.totalLike
@@ -179,5 +180,9 @@ export default {
     .discollect {
         cursor: pointer;
     }
+   .question-des1 {
+     font-size: 20px;
+     font-weight: bold;
+   }
 
 </style>

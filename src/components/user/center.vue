@@ -56,7 +56,7 @@
               <div class="answer">
                 <div v-if="answerlist.length > 0">
                   <div  v-for="(item, index) in answerlist" v-bind:key="index * 3">
-                    <answerItem v-if="index < (answerlistPage * 5)" :answer="item"  :key="item.id"></answerItem>
+                    <show-answer-item v-if="index < (answerlistPage * 5)" :answer="item"  :key="item.id"></show-answer-item>
                   </div>
                 </div>
                 <div v-else>
@@ -68,7 +68,7 @@
               <div class="collectanswer">
                 <div v-if="collectList.length > 0">
                   <div v-for="(item, index) in collectList" v-bind:key="index">
-                    <answerItem :answer="item" :key="item.id"></answerItem>
+                    <show-answer-item :answer="item" :key="item.id"></show-answer-item>
                   </div>
                 </div>
                 <div v-else>
@@ -80,7 +80,7 @@
               <div class="likeanswer">
                 <div v-if="likeList.length > 0">
                   <div v-for="(item, index) in likeList" v-bind:key="index">
-                    <answerItem :answer="item" :key="item.id"></answerItem>
+                    <show-answer-item :answer="item" :key="item.id"></show-answer-item>
                   </div>
                 </div>
                 <div v-else>
@@ -98,6 +98,7 @@
   import NProgress from 'NProgress'
   import AnswerItem from '@/components/base/answerItem/answer-item'
   import UserQuestion from '@/components/base/userQuestion/user-question'
+  import ShowAnswerItem from "@/components/base/answerItem/show-answer-item";
 export default {
   name: "Index",
   data() {
@@ -216,6 +217,7 @@ export default {
 
   },
   components: {
+    ShowAnswerItem,
     AnswerItem,
     UserQuestion,
   },
