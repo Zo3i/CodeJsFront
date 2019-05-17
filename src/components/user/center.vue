@@ -189,7 +189,6 @@ export default {
         method: "post",
         url: "/api/getAllQuestion",
       }).then(res => {
-          // this.questionList = res.data
           var data = res.data
           data.forEach(e => {
             e.time = e.createTime

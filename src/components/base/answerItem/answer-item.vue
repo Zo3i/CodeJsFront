@@ -11,7 +11,7 @@
         <img v-show="isCollect" :src="collectImage" @click="disCollect()"  class='collect' width='15px' height='15px'>
         <img  v-show="!isCollect" :src="discollectImage" @click="collect()" class='discollect' width='15px' height='15px'>
         <span style='padding:1px'>{{totalCollect}}</span>
-        <a :href="'#/work?id=' + questionId" class="question" @click="seeQuestion">查看问题</a> &nbsp;|&nbsp; <a :href="'#/work/answerList?questionId=' + questionId" class="question" @click="seeAnswer">所有答案</a>
+        <a :href="'#/work?id=' + questionId" class="question" target="_blank">查看问题</a> &nbsp;|&nbsp; <a :href="'#/work/answerList?questionId=' + questionId" class="question" target="_blank">所有答案</a>
       </div>
       <br><br><hr style='border-top: 1px solid #3c3c3c;margin-top:10px;margin-bottom: 25px;'/>
   </div>
