@@ -98,7 +98,6 @@ export default {
         url: "/api/getAllAnwser",
         data: {
           questionId: this.$route.query.questionId,
-          userMobile: data.mobile
         }
       }).then(res => {
           if (res.data.length == 0) {
