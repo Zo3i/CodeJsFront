@@ -120,7 +120,6 @@ export default {
     },
     load() {
       this.answerlistPage ++
-      console.log(this.answerlistTotle)
        this.$nextTick(() => {
          if (this.answerlistTotle > 5 && this.answerlistTotle > (this.answerlistPage * 5)) {
             this.isScroll = true
@@ -130,13 +129,10 @@ export default {
     handleScroll (){
       var that = this
       $('.el-main').scroll(function () {
-        console.log("滚动" + that.isScroll)
-        
         var st = this.scrollTop;
         var height = this.clientHeight;
         var sh = this.scrollHeight;
               if (st + height >= sh && that.isScroll == true){
-                  console.log("到底了..");
                   that.isScroll = false
                   st -= 300
                   that.load()
@@ -200,7 +196,6 @@ export default {
             e.content = '获得' + e.rank + '分'
             e.img = '../static/image/zone/' + Math.floor(Math.random() * 58 + 1) + '.png'
           });
-          console.log(data)
           this.questionList = data
         }).catch(err => {})    
    

@@ -58,13 +58,10 @@ export default {
     handleScroll (){
       var that = this
       $('.el-main').scroll(function () {
-        console.log("滚动" + that.isScroll)
-        
         var st = this.scrollTop;
         var height = this.clientHeight;
         var sh = this.scrollHeight;
               if (st + height >= sh && that.isScroll == true){
-                  console.log("到底了..");
                   that.isScroll = false
                   st -= 300 
                   that.load()
@@ -117,7 +114,6 @@ export default {
         method: "post",
         url: "/api/getQuestion/" + this.$route.query.questionId,
       }).then(res => {
-        console.log(res.data)
           this.question = res.data
         }).catch(err => {})
   },

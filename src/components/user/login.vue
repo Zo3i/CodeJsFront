@@ -67,7 +67,6 @@ export default {
       localStorage.userFaceId = null
       var mobile = $('#mobile').val()
       var password = $('#password').val()
-      console.log('密码'+ this.$md5(password))
       if(!/^1[34578]\d{9}$/.test(mobile)){
         floatMessage("手机号不正确!")
         $(".trigger-info").click()
@@ -84,7 +83,6 @@ export default {
               // mobile: mobile
             
           }).then(res => {
-            console.log(res)
             if (res.status ==200 && res.data != undefined && res.data != null && res.data != '') {
               floatMessage("Biu,登录成功!")
               $(".trigger-info").click()

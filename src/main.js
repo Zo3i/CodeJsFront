@@ -59,7 +59,6 @@ axios.interceptors.response.use(
           break
         case 500:
           err.message = '服务器端出错'
-          console.log(err.response)
           if (
             err.response.data.message === 'Header参数有误' ||
             err.response.data.message === '请重新登录!'
@@ -111,7 +110,6 @@ axios.interceptors.request.use(
 
 // 页面刷新时，重新赋值token
 if (window.localStorage.getItem('token')) {
-  console.log("flush")
   store.commit(types.LOGIN, window.localStorage.getItem('token'))
 }
 

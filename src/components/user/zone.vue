@@ -55,7 +55,6 @@ export default {
   },
   methods: {
       submit () {
-            // console.log($('#comment-form').serializeArray());
             var comment = $('#comment').val()
             var touser = $('#touser').val()
             this.$ajax({
@@ -69,10 +68,8 @@ export default {
                 }
             }).then(res => {
                 $('#comment').val('')
-                console.log(res)
                 floatMessage(res.data)
                 $(".trigger-info").click()
-                console.log(this.$route.query.zoneId)
                 //不刷新界面,重新读取数据
                 var url = this.$route.path + '?zoneId=' + this.$route.query.zoneId + '&rand=' + Math.random()
                 this.$router.push(url)
@@ -98,7 +95,6 @@ export default {
        }).then(res => {
         this.commentList = res.data
         this.totle = res.data.length
-        console.log(this.commentList)
       });
   },
   beforeCreate() {

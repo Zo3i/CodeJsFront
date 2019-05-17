@@ -69,7 +69,7 @@ export default {
                     answerid: this.answer.id
                 }
             }).then(res => {
-                console.log("succee")
+
             })
         },
         disCollect () {
@@ -84,7 +84,7 @@ export default {
                     answerid: this.answer.id
                 }
             }).then(res => {
-                console.log("succee")
+
             })
         },
         like () {
@@ -99,7 +99,6 @@ export default {
                     answerid: this.answer.id
                 }
             }).then(res => {
-                console.log("succee")
             })
         },
         dislike () {
@@ -114,7 +113,7 @@ export default {
                     answerid: this.answer.id
                 }
             }).then(res => {
-                console.log("succee")
+
             })
         },
         seeQuestion() {
@@ -124,12 +123,10 @@ export default {
             this.$router.push('/work/answerList?questionId=' + this.questionId)
         },
         goCenter() {
-            // console.log(this.answer)
             this.$router.push('/user/zone?zoneId='+ this.answer.zoneId)
         }
     },
     mounted() {
-     console.log(this.answer)
      this.isLike = this.answer.like 
      this.isCollect = this.answer.collect
      this.totalCollect = this.answer.totalCollect

@@ -122,7 +122,6 @@ export default {
         }
       })
         .then(res => {
-          console.oldLog(res);
           floatMessage(res.data);
           $(".trigger-info").click();
           if (res.status == 200) {
@@ -170,7 +169,6 @@ export default {
             async: false, //或false,是否异步
           }).then(res => {
               var resultList = res.data
-              console.oldLog(result)
               for (var i in resultList) {
                 var result =  resultList[i]
               if (result.wrong == false) {
@@ -224,14 +222,7 @@ export default {
             if (that.right == tasks.length) {
               that.cheked = false;
             }
-           
-           console.oldLog(this.count);
-            console.oldLog(tasks.length);
             this.count = this.count + 1
-          //  if (this.count == tasks.length) {
-          //    $('.checkBtn').attr("disabled", false)
-          //  }
-           
 })
     }
   },

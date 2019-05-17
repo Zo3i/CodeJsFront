@@ -229,7 +229,6 @@ export default {
           token: this.user.token
         }
       }).then(res => {
-        console.log(res)
         if (res.data == "已加入小队!") {
           location.reload();
         } else {
@@ -260,7 +259,6 @@ export default {
         if (res.data.length == 0) {
           res.data = {name: "恭喜,你已答完所有题目!"}
         } 
-        console.log(res.data)
         this.randomQuestion = res.data
       });
       //查询队伍
@@ -285,7 +283,6 @@ export default {
   },
   watch: {
     $route: function(to, from) {
-      console.log("检测跳转首页");
     }
   },
   beforeCreate() {},
