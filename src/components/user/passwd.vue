@@ -69,7 +69,7 @@ export default {
         method: 'post',
         url: '/api/code?mobile=' + $('#mobile').val(),
         }).then(res => {
-          console.log(res)
+
         })
     },
     sign() {

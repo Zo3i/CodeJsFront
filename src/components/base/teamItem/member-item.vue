@@ -25,7 +25,6 @@ export default {
     },
     methods: {
         zone() {
-            console.log(this.teamMember.zoneId)
             this.$router.push('/user/zone?zoneId=' + this.teamMember.zoneId)
         }
     },

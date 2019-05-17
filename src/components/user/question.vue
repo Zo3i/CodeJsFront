@@ -97,7 +97,6 @@ export default {
         score: 1
       }
     }).then(res => {
-      console.log(res)
       this.questionItem = res.data
       this.totle = res.data.length
     })
@@ -133,7 +132,6 @@ export default {
         score: 1
       }
     }).then(res => {
-      console.log(res)
       this.questionItem = res.data
       this.totle = res.data.length
     })

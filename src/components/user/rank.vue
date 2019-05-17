@@ -57,12 +57,10 @@ export default {
     handleScroll (){
       var that = this
       $('.el-main').scroll(function () {
-        console.log("滚动" + that.isScroll)
         var st = this.scrollTop;
         var height = this.clientHeight;
         var sh = this.scrollHeight;
               if (st + height >= sh && that.isScroll == true){
-                  console.log("到底了..");
                   that.isScroll = false
                   st -= 1000
                   that.load()
@@ -80,7 +78,6 @@ export default {
         method: 'get',
         url: '/api/rank',
     }).then (res => {
-        console.log(res)
         var team = res.data //.concat(res.data).concat(res.data).concat(res.data).concat(res.data).concat(res.data).concat(res.data)
         this.totle = team.length
         this.teamAll = team

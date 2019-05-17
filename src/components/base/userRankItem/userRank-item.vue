@@ -35,7 +35,6 @@ export default {
             colorVar = 53.8
         }
         $('.member' + this.index).css('color', "rgb(" + (253 - colorVar * 4) + ", " + (254 - 4 * colorVar) + " ,"+ (255 - 4 * colorVar) +")")
-        console.log($('.color' + this.index).css('color'))
     },
 
 }

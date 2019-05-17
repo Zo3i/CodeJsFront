@@ -101,7 +101,6 @@ export default {
   },
   watch: {
     '$route':function(to, from){
-        console.log("是否登录"+this.GLOBAL.isLogin)
           if (localStorage.user.indexOf("name") != -1 && localStorage.token != undefined && localStorage.token != "") {
             //获取用户信息
             this.$ajax({

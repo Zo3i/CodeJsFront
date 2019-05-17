@@ -59,7 +59,6 @@ export default {
                    token: this.fromToken,
                 }
             }).then(res => {
-                console.log(res)
                 floatMessage(res.data)
                 $(".trigger-info").click()
                 //不刷新界面,重新读取数据
