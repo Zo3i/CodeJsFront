@@ -14,6 +14,7 @@
            <span @click.prevent="userRank()"><a href="#" class="btn" >个人总榜</a></span>
            <span @click.prevent="rank()"><a href="#" class="btn" >团队总榜</a></span>
            <span @click.prevent="question()"><a href="#" class="btn" >问题搜索</a></span>
+           <span @click.prevent="createQuestion()"><a href="#" class="btn" >出个题咯</a></span>
 
            {{user.name}}
           <el-dropdown trigger="click"  size="medium" placement="bottom">
@@ -86,6 +87,9 @@ export default {
     },
     question () {
        this.$router.push('/user/question?mobile=' + this.user.mobile)
+    },
+    createQuestion () {
+      this.$router.push('/work/createQuestion')
     }
   },
   beforeMount() {

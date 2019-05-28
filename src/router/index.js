@@ -11,6 +11,7 @@ import Rank from './rank'
 import UserRank from './userRank'
 import Question from './question'
 import Passwd from './passwd'
+import CreateQuestion from './createQuestion'
 
 Vue.use(Router)
 
@@ -26,6 +27,7 @@ export default new Router({
     Rank,
     UserRank,
     Question,
-    Passwd
+    Passwd,
+    CreateQuestion
   ]
 })
