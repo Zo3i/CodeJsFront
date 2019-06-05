@@ -22,6 +22,7 @@
                             <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">题目</el-col>
                             <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">分数</el-col>
                             <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">完成人数</el-col>
+                            <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">是否完成</el-col>
                             <el-col :xs="22" :sm="24" :md="22" :lg="18" :xl="15">挑战</el-col>
                             </el-row>
                             <div v-for="(item, index) in questionItem" :key="item.id" class="rank-item">
@@ -132,6 +133,7 @@ export default {
         score: 1
       }
     }).then(res => {
+      console.table(res.data)
       this.questionItem = res.data
       this.totle = res.data.length
     })

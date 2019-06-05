@@ -3,15 +3,31 @@
     <el-row type="flex" justify="center">
       <el-col :xs="12" :sm="16" :md="14" :lg="12" :xl="10">
         <div class="main-left">
-
+          <el-col :xs="12" :sm="16" :md="14" :lg="12" :xl="10">
+            <div class="main-left-question-name">
+              <span>问题题目：</span>
+              <input type="text" class="name" id="name">
+            </div>
+            <div class="main-left-question-socre">
+              <span>问题分数：</span>
+              <input type="text" class="score" id="score">
+            </div>
+            <div class="main-left-question-des">
+              <span>问题简介：</span>
+              <textarea name="description" id="description" cols="30" rows="10"></textarea>
+            </div>
+            <div class="main-left-question-tasks"></div>
+          </el-col>
         </div>
       </el-col>
       <el-col :xs="12" :sm="16" :md="14" :lg="12" :xl="10">
         <div class="main-right">
+          <p>初始化问题代码：</p>
           <el-row type="flex" justify="center">
             <textarea id="precode" ref="precode"></textarea>
           </el-row>
           <br>
+          <p>正确代码：</p>
           <el-row type="flex" justify="center">
             <textarea id="result" ref="result"></textarea>
           </el-row>
@@ -117,6 +133,17 @@ export default {
 </script>
 
 <style>
+  body {
+    font: 14px "Oxygen Mono", "Helvetica Neue", "Helvetica", sans-serif;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #303133;
+  }
+  .CodeMirror {
+    font: 20px "Oxygen Mono", Helvetica, Arial, sans-serif;
+    height: auto;
+  }
   .main{
     height: 800px;
     background-color: #1f2020;
