@@ -68,7 +68,7 @@ export default {
      var highRank = ''
      switch (rank) {
        case "1" : 
-        lowRank = 0 
+        lowRank = 1
         highRank = 4
         break;
       case "2" : 
