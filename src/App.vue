@@ -5,9 +5,17 @@
         <el-row type="flex" :gutter="20" justify="space-between">
          <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="2" >
            <!-- <div> <img  @click="home()" src="../static/image/header.png" alt="" width="50px"></div> -->
-          <div   class="logo"><span @click="home()">&nbsp;&nbsp;Xcoding</span></div>
+           <div   class="logo">
+             <el-popover
+               placement="top-start"
+               title="小公告"
+               width="200"
+               trigger="hover"
+               content="如需学习交流请加QQ群：698963383">
+             <span slot="reference" @click="home()">&nbsp;&nbsp;Xcoding </span>
+             </el-popover>
+           </div>
          </el-col>
-         
 
          <el-col  v-if="GLOBAL.isLogin"  :xs="16" :sm="18" :md="15" :lg="15" :xl="15" class='users'>
 
@@ -113,7 +121,7 @@ export default {
               }).then (res => {
                 this.user = res.data
               })
-            this.GLOBAL.isLogin = true  
+            this.GLOBAL.isLogin = true
             this.faceImageId = localStorage.userFaceId
             this.faceImage = '../static/image/face/' + this.faceImageId + ".png"
           }
@@ -122,7 +130,7 @@ export default {
   created() {
     function IsPC() {
         var userAgentInfo = navigator.userAgent;
-        var Agents = ["Android", "iPhone","SymbianOS", 
+        var Agents = ["Android", "iPhone","SymbianOS",
                         "Windows Phone","iPad", "iPod"];
         var flag = true;
         for (var v = 0; v < Agents.length; v++) {
@@ -134,7 +142,7 @@ export default {
         return flag;
     }
     if (!IsPC()) {
-        var e = confirm("请用电脑打开!"); 
+        var e = confirm("请用电脑打开!");
         if (e) {
          window.location.href = 'https://zxx.im'
         } else {
@@ -143,7 +151,7 @@ export default {
     }
   },
   beforeCreate() {
-    
+
   },
   computed: {
     key() {
@@ -157,7 +165,7 @@ export default {
 
 <style>
 @import '../static/font/OxygenMono.css';
-  #app, #container { 
+  #app, #container {
     padding:0px;
     margin:0px;
     position:absolute;
@@ -197,7 +205,7 @@ export default {
     color: #333;
     text-align: left;
     min-height: calc(100vh - 160px);
-    padding: 0px; 
+    padding: 0px;
   }
 
   .users{
@@ -210,7 +218,7 @@ export default {
     font-weight: lighter;
     text-align: right;
     line-height: 60px;
-  } 
+  }
   .login, .regist{
     text-align: center;
     background-color: #efefef;
@@ -252,7 +260,11 @@ export default {
     overflow: hidden;
     border-radius: 4px;
 }
-a:hover  {
-  text-decoration: none
-}
+  a:hover  {
+    text-decoration: none
+  }
+
+  .chat {
+    font-size: 10px;
+  }
 </style>

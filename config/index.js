@@ -16,15 +16,15 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''   //需要rewrite重写的,
-        } 
+        }
       },
       '/otherApi': {
         target: 'https://api.gushi.ci/',
         changeOrigin: true,
         pathRewrite: {
           '^/otherApi': ''   //需要rewrite重写的,
-        } 
-      },
+        }
+      }
     },
 
     // Various Dev Server settings
@@ -35,7 +35,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */

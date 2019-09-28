@@ -25,26 +25,26 @@ Happy Coding.<span style="background-image:url(../../../static/image/Sign_of_the
                 <el-row type="flex" justify="center" class="body login-form-item">
                   <el-col :span=12>
                     <p style="text-align: left">电话:</p>
-                  <input type="text" name="user" class="user" id="mobile" placeholder="请输入手机号"/> 
-                  </el-col>  
+                  <input type="text" name="user" class="user" id="mobile" placeholder="请输入手机号"/>
+                  </el-col>
                 </el-row>
                 <el-row type="flex" justify="center" class="body login-form-item">
                   <el-col :span=12>
                     <p style="text-align: left">密码:</p>
-                  <input type="password" name="password" id="password" class="password" placeholder="请输入密码"/> 
-                  </el-col>  
+                  <input type="password" name="password" id="password" class="password" placeholder="请输入密码"/>
+                  </el-col>
                 </el-row>
                 <el-row type="flex" justify="space-around" class="body login-form-item">
                   <el-col :span=24>
-                  <input type="button" @click="login()" name="login" class="login" value="登录账户"/> 
+                  <input type="button" @click="login()" name="login" class="login" value="登录账户"/>
                   <input type="button" @click="passwd()" name="login" class="login" value="忘记密码"/>
-                  </el-col> 
+                  </el-col>
                 </el-row>
                </div>
              </div>
            </div>
-         </el-col>    
-      </el-row>     
+         </el-col>
+      </el-row>
     </div>
 </template>
 
@@ -78,10 +78,10 @@ export default {
           this.$ajax({
             method: 'post',
             url: '/api/login?mobile=' + mobile + '&password=' + this.$md5(password),
-              
+
               // password: this.$md5(password),
               // mobile: mobile
-            
+
           }).then(res => {
             if (res.status ==200 && res.data != undefined && res.data != null && res.data != '') {
               floatMessage("Biu,登录成功!")
@@ -96,8 +96,8 @@ export default {
                $(".trigger-info").click()
             }
           }).catch(err => {
-           
-          })          
+
+          })
         }
       }
     },
@@ -106,7 +106,7 @@ export default {
     }
   },
   mounted() {
-    this.key = Math.random() 
+    this.key = Math.random()
     $('#console').t({
     speed:50,
     typing:function(elm,chr,left,total){
@@ -145,7 +145,7 @@ html {
   float: left;
 }
 .body {
-  
+
 }
 .main {
   width: 100%;
