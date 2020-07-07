@@ -19,7 +19,7 @@ module.exports = {
         }
       },
       '/otherApi': {
-        target: 'https://api.gushi.ci/',
+        target: 'https://v1.jinrishici.com/',
         changeOrigin: true,
         pathRewrite: {
           '^/otherApi': ''   //需要rewrite重写的,
