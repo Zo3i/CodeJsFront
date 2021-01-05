@@ -10,7 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "babel-core": "^6.26.3",
     "element-ui": "^2.4.9",
     "gitment": "0.0.3",
